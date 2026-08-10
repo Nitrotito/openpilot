@@ -197,10 +197,28 @@ class Multilang:
       self.languages = json.load(f)
     self.codes = {v: k for k, v in self.languages.items()}
 
+    lang = None
     if self._params is not None:
-      lang = str(self._params.get("LanguageSetting")).removeprefix("main_")
-      if lang in self.codes:
-        self._language = lang
+      try:
+        raw = self._params.get("LanguageSetting")
+        if isinstance(raw, bytes):
+          raw = raw.decode("utf-8", "replace")
+        if raw:
+          lang = str(raw).strip().removeprefix("main_")
+      except Exception:
+        lang = None
+
+    # Fallback: read the param file directly. Some devices (comma four / mici) have no
+    # language selector in the UI, so this param is the only way to set the language.
+    if lang not in self.codes:
+      try:
+        with open("/data/params/d/LanguageSetting", encoding="utf-8") as f:
+          lang = f.read().strip().removeprefix("main_")
+      except OSError:
+        pass
+
+    if lang in self.codes:
+      self._language = lang
 
 
 multilang = Multilang()

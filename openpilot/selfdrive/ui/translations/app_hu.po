@@ -1,0 +1,792 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Search"
+msgstr "Keresés"
+
+msgid "Enter search query"
+msgstr "Keresett szöveg"
+
+msgid "Pair your GitHub account"
+msgstr "GitHub fiók párosítása"
+
+msgid "Early Access: Become a sunnypilot Sponsor"
+msgstr "Korai hozzáférés: legyél sunnypilot támogató"
+
+msgid "Scan the QR code to login to your GitHub account"
+msgstr "Olvasd be a QR kódot a GitHub belépéshez"
+
+msgid "Follow the prompts to complete the pairing process"
+msgstr "Kövesd a lépéseket a párosítás befejezéséhez"
+
+msgid "Re-enter the \"sunnylink\" panel to verify sponsorship status"
+msgstr "Lépj be újra a \"sunnylink\" panelbe a támogatói állapot ellenörzéséhez"
+
+msgid "If sponsorship status was not updated, please contact a moderator on the community forum at https://community.sunnypilot.ai"
+msgstr "Ha a támogatói állapot nem frissült, keress egy moderátort a https://community.sunnypilot.ai fórumon"
+
+msgid "Scan the QR code to visit sunnyhaibin's GitHub Sponsors page"
+msgstr "Olvasd be a QR kódot sunnyhaibin GitHub Sponsors oldalához"
+
+msgid "Choose your sponsorship tier and confirm your support"
+msgstr "Válaszd ki a támogatási szintet és erösítsd meg"
+
+msgid "Join our Community Forum at https://community.sunnypilot.ai and reach out to a moderator if you have issues"
+msgstr "Csatlakozz a https://community.sunnypilot.ai fórumhoz, és szólj egy moderátornak, ha gond van"
+
+msgid "Cancel"
+msgstr "Mégse"
+
+msgid "Advanced"
+msgstr "Haladó"
+
+msgid "Back"
+msgstr "Vissza"
+
+msgid "Enter APN"
+msgstr "APN megadása"
+
+msgid "leave blank for automatic configuration"
+msgstr "hagyd üresen az automatikus beállításhoz"
+
+msgid "Enter SSID"
+msgstr "SSID megadása"
+
+msgid "Enter new tethering password"
+msgstr "Új megosztási jelszó"
+
+msgid "Enable Tethering"
+msgstr "Net megosztása"
+
+msgid "EDIT"
+msgstr "SZERKESZT"
+
+msgid "Tethering Password"
+msgstr "Megosztási jelszó"
+
+msgid "Enable Roaming"
+msgstr "Roaming engedélyezése"
+
+msgid "Cellular Metered"
+msgstr "Mobilnet forgalomkorlátos"
+
+msgid "APN Setting"
+msgstr "APN beállítás"
+
+msgid "Wi-Fi Network Metered"
+msgstr "Wi-Fi forgalomkorlátos"
+
+msgid "Enter password"
+msgstr "Jelszó megadása"
+
+msgid "Scanning Wi-Fi networks..."
+msgstr "Wi-Fi hálózatok keresése..."
+
+msgid "CONNECTING..."
+msgstr "CSATLAKOZÁS..."
+
+msgid "Forget"
+msgstr "Elfelejt"
+
+msgid "Prevent large data uploads when on a metered cellular connection"
+msgstr "Ne töltsön fel nagy adatot forgalomkorlátos mobilneten"
+
+msgid "default"
+msgstr "alapértelmezett"
+
+msgid "metered"
+msgstr "korlátos"
+
+msgid "unmetered"
+msgstr "korlátlan"
+
+msgid "Prevent large data uploads when on a metered Wi-Fi connection"
+msgstr "Ne töltsön fel nagy adatot forgalomkorlátos Wi-Fin"
+
+msgid "IP Address"
+msgstr "IP cím"
+
+msgid "Hidden Network"
+msgstr "Rejtett hálózat"
+
+msgid "CONNECT"
+msgstr "CSATLAKOZÁS"
+
+msgid "Wrong password"
+msgstr "Hibás jelszó"
+
+msgid "FORGETTING..."
+msgstr "TÖRLÉS..."
+
+msgid "for \"{}\""
+msgstr "ehhez: \"{}\""
+
+msgid "Forget Wi-Fi Network \"{}\"?"
+msgstr "Törlöd a \"{}\" Wi-Fi hálózatot?"
+
+msgid "Error"
+msgstr "Hiba"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Select"
+msgstr "Kiválaszt"
+
+msgid "LOADING"
+msgstr "BETÖLTÉS"
+
+msgid "ADD"
+msgstr "HOZZÁAD"
+
+msgid "REMOVE"
+msgstr "TÖRÖL"
+
+msgid "Request timed out"
+msgstr "A kérés túllépte az idöt"
+
+msgid "Enter your GitHub username"
+msgstr "GitHub felhasználóneved"
+
+msgid "No SSH keys found for user '{}'"
+msgstr "Nincs SSH kulcs ehhez: '{}'"
+
+msgid "Close"
+msgstr "Bezárás"
+
+msgid "Snooze Update"
+msgstr "Frissítés halasztása"
+
+msgid "Acknowledge Excessive Actuation"
+msgstr "Túlzott beavatkozás tudomásul véve"
+
+msgid "Reboot and Update"
+msgstr "Újraindítás és frissítés"
+
+msgid "No release notes available."
+msgstr "Nincs elérhetö változásleírás."
+
+msgid "Pair your device with comma connect (connect.comma.ai) and claim your comma prime offer."
+msgstr "Párosítsd a készüléket a comma connect oldalon (connect.comma.ai), és vedd át a comma prime ajánlatot."
+
+msgid "Maximize your training data uploads to improve openpilot's driving models."
+msgstr "Tölts fel minél több tanítóadatot, hogy jobbak legyenek az openpilot modelljei."
+
+msgid "Finish Setup"
+msgstr "Beállítás befejezése"
+
+msgid "Pair device"
+msgstr "Készülék párosítása"
+
+msgid "Open"
+msgstr "Megnyitás"
+
+msgid "🔥 Firehose Mode 🔥"
+msgstr "🔥 Tüzcsap mód 🔥"
+
+msgid "Please connect to Wi-Fi to complete initial pairing"
+msgstr "Csatlakozz Wi-Fire az elsö párosításhoz"
+
+msgid "EXPERIMENTAL MODE ON"
+msgstr "KÍSÉRLETI MÓD BE"
+
+msgid "CHILL MODE ON"
+msgstr "NYUGODT MÓD BE"
+
+msgid "Upgrade Now"
+msgstr "Elöfizetés most"
+
+msgid "PRIME FEATURES:"
+msgstr "PRIME SZOLGÁLTATÁSOK:"
+
+msgid "Remote access"
+msgstr "Távoli elérés"
+
+msgid "24/7 LTE connectivity"
+msgstr "Folyamatos LTE kapcsolat"
+
+msgid "1 year of drive storage"
+msgstr "1 év felvétel tárolás"
+
+msgid "Remote snapshots"
+msgstr "Távoli pillanatképek"
+
+msgid "✓ SUBSCRIBED"
+msgstr "✓ ELÖFIZETVE"
+
+msgid "comma prime"
+msgstr "comma prime"
+
+msgid "Become a comma prime member at connect.comma.ai"
+msgstr "Legyél comma prime tag a connect.comma.ai oldalon"
+
+msgid "Pair your device to your comma account"
+msgstr "Párosítsd a készüléket a comma fiókodhoz"
+
+msgid "Go to https://connect.comma.ai on your phone"
+msgstr "Nyisd meg a https://connect.comma.ai oldalt a telefonodon"
+
+msgid "Click \"add new device\" and scan the QR code on the right"
+msgstr "Kattints az \"add new device\" gombra, és olvasd be a jobb oldali QR kódot"
+
+msgid "Bookmark connect.comma.ai to your home screen to use it like an app"
+msgstr "Tedd ki a connect.comma.ai oldalt a kezdöképernyöre, így alkalmazásként használhatod"
+
+msgid "QR Code Error"
+msgstr "QR kód hiba"
+
+msgid "UPDATE"
+msgstr "FRISSÍTÉS"
+
+msgid "{} ALERT"
+msgid_plural "{} ALERTS"
+msgstr[0] "{} FIGYELMEZTETÉS"
+msgstr[1] "{} FIGYELMEZTETÉS"
+
+msgid "--"
+msgstr "--"
+
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+msgid "ETH"
+msgstr "ETH"
+
+msgid "2G"
+msgstr "2G"
+
+msgid "3G"
+msgstr "3G"
+
+msgid "LTE"
+msgstr "LTE"
+
+msgid "5G"
+msgstr "5G"
+
+msgid "TEMP"
+msgstr "HÖM"
+
+msgid "GOOD"
+msgstr "JÓ"
+
+msgid "VEHICLE"
+msgstr "JÁRMÜ"
+
+msgid "ONLINE"
+msgstr "ONLINE"
+
+msgid "OFFLINE"
+msgstr "OFFLINE"
+
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+msgid "NO"
+msgstr "NINCS"
+
+msgid "PANDA"
+msgstr "PANDA"
+
+msgid "HIGH"
+msgstr "MAGAS"
+
+msgid "ERROR"
+msgstr "HIBA"
+
+msgid "Welcome to sunnypilot"
+msgstr "Üdv a sunnypilotban"
+
+msgid "You must accept the Terms of Service to use sunnypilot. Read the latest terms at https://sunnypilot.ai/terms before continuing."
+msgstr "A sunnypilot használatához el kell fogadnod a felhasználási feltételeket. Olvasd el öket a https://sunnypilot.ai/terms oldalon."
+
+msgid "Decline"
+msgstr "Elutasítom"
+
+msgid "Agree"
+msgstr "Elfogadom"
+
+msgid "You must accept the Terms of Service in order to use sunnypilot."
+msgstr "A sunnypilot használatához el kell fogadnod a felhasználási feltételeket."
+
+msgid "Decline, uninstall sunnypilot"
+msgstr "Elutasítom, sunnypilot eltávolítása"
+
+msgid "Device"
+msgstr "Készülék"
+
+msgid "Network"
+msgstr "Hálózat"
+
+msgid "Toggles"
+msgstr "Kapcsolók"
+
+msgid "Software"
+msgstr "Szoftver"
+
+msgid "Firehose"
+msgstr "Tüzcsap"
+
+msgid "Developer"
+msgstr "Fejlesztö"
+
+msgid "Preview the driver facing camera to ensure that driver monitoring has good visibility. (vehicle must be off)"
+msgstr "Nézd meg a vezetöt figyelö kamera képét, hogy jól lásson. (az autó legyen lekapcsolva)"
+
+msgid "sunnypilot requires the device to be mounted within 4° left or right and within 5° up or 9° down."
+msgstr "A sunnypilothoz a készüléknek 4°-on belül kell állnia balra vagy jobbra, és 5°-on belül felfelé, 9°-on belül lefelé."
+
+msgid "Review the rules, features, and limitations of sunnypilot"
+msgstr "Nézd át a sunnypilot szabályait, funkcióit és korlátait"
+
+msgid "Select a language"
+msgstr "Válassz nyelvet"
+
+msgid "Are you sure you want to reset calibration?"
+msgstr "Biztosan visszaállítod a kalibrációt?"
+
+msgid "Reset"
+msgstr "Visszaállítás"
+
+msgid "<br><br>Steering lag calibration is complete."
+msgstr "<br><br>A kormánykésleltetés kalibrációja kész."
+
+msgid "Are you sure you want to reboot?"
+msgstr "Biztosan újraindítod?"
+
+msgid "Reboot"
+msgstr "Újraindítás"
+
+msgid "Are you sure you want to power off?"
+msgstr "Biztosan kikapcsolod?"
+
+msgid "Power Off"
+msgstr "Kikapcsolás"
+
+msgid "Pair Device"
+msgstr "Készülék párosítása"
+
+msgid "PAIR"
+msgstr "PÁROSÍT"
+
+msgid "Reset Calibration"
+msgstr "Kalibráció visszaállítása"
+
+msgid "RESET"
+msgstr "VISSZAÁLLÍT"
+
+msgid "Dongle ID"
+msgstr "Dongle azonosító"
+
+msgid "Serial"
+msgstr "Sorozatszám"
+
+msgid "Driver Camera"
+msgstr "Vezetöt figyelö kamera"
+
+msgid "PREVIEW"
+msgstr "ELÖNÉZET"
+
+msgid "Review Training Guide"
+msgstr "Betanító útmutató"
+
+msgid "REVIEW"
+msgstr "MEGNÉZ"
+
+msgid "Regulatory"
+msgstr "Hatósági adatok"
+
+msgid "VIEW"
+msgstr "MEGNÉZ"
+
+msgid "Change Language"
+msgstr "Nyelv váltása"
+
+msgid "CHANGE"
+msgstr "VÁLTÁS"
+
+msgid "Disengage to Reset Calibration"
+msgstr "Kapcsold ki a kalibráció visszaállításához"
+
+msgid "<br><br>Steering lag calibration is {}% complete."
+msgstr "<br><br>A kormánykésleltetés kalibrációja {}%-nál tart."
+
+msgid "Disengage to Reboot"
+msgstr "Kapcsold ki az újraindításhoz"
+
+msgid "Disengage to Power Off"
+msgstr "Kapcsold ki a lekapcsoláshoz"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid " Steering torque response calibration is complete."
+msgstr " A kormánynyomaték kalibrációja kész."
+
+msgid " Your device is pointed {:.1f}° {} and {:.1f}° {}."
+msgstr " A készülék {:.1f}° {} és {:.1f}° {} irányba néz."
+
+msgid "down"
+msgstr "le"
+
+msgid "up"
+msgstr "fel"
+
+msgid "left"
+msgstr "balra"
+
+msgid "right"
+msgstr "jobbra"
+
+msgid " Steering torque response calibration is {}% complete."
+msgstr " A kormánynyomaték kalibrációja {}%-nál tart."
+
+msgid "Enable ADB"
+msgstr "ADB engedélyezése"
+
+msgid "Enable SSH"
+msgstr "SSH engedélyezése"
+
+msgid "SSH Keys"
+msgstr "SSH kulcsok"
+
+msgid "Joystick Debug Mode"
+msgstr "Joystick hibakeresö mód"
+
+msgid "Longitudinal Maneuver Mode"
+msgstr "Hosszanti manöver mód"
+
+msgid "Lateral Maneuver Mode"
+msgstr "Oldalirányú manöver mód"
+
+msgid "sunnypilot Longitudinal Control (Alpha)"
+msgstr "sunnypilot hosszanti vezérlés (alfa)"
+
+msgid "UI Debug Mode"
+msgstr "Felület hibakeresö mód"
+
+msgid "Enable"
+msgstr "Bekapcsolás"
+
+msgid "Firehose Mode"
+msgstr "Tüzcsap mód"
+
+msgid "{} segment of your driving is in the training dataset so far."
+msgid_plural "{} segments of your driving is in the training dataset so far."
+msgstr[0] "Eddig {} szakasz került be a vezetésedböl a tanítóadatba."
+msgstr[1] "Eddig {} szakasz került be a vezetésedböl a tanítóadatba."
+
+msgid "When enabled, pressing the accelerator pedal will disengage sunnypilot."
+msgstr "Bekapcsolva a gázpedál megnyomása kikapcsolja a sunnypilotot."
+
+msgid "Enable driver monitoring even when sunnypilot is not engaged."
+msgstr "A vezetöfigyelés akkor is müködjön, amikor a sunnypilot nincs bekapcsolva."
+
+msgid "Upload data from the driver facing camera and help improve the driver monitoring algorithm."
+msgstr "Töltsd fel a vezetöt figyelö kamera adatait, ezzel javítod a vezetöfigyelést."
+
+msgid "Display speed in km/h instead of mph."
+msgstr "A sebesség km/h-ban jelenjen meg mph helyett."
+
+msgid "Record and store microphone audio while driving. The audio will be included in the dashcam video in comma connect."
+msgstr "Hang rögzítése vezetés közben. A hang bekerül a comma connect felvételeibe."
+
+msgid "Driving Personality"
+msgstr "Vezetési stílus"
+
+msgid "Changing this setting will restart sunnypilot if the car is powered on."
+msgstr "Ennek átállítása újraindítja a sunnypilotot, ha az autó be van kapcsolva."
+
+msgid "Experimental mode is currently unavailable on this car since the car's stock ACC is used for longitudinal control."
+msgstr "A kísérleti mód ezen az autón nem elérhetö, mert a gyári tempomat végzi a hosszanti vezérlést."
+
+msgid "Enable sunnypilot"
+msgstr "sunnypilot bekapcsolása"
+
+msgid "Experimental Mode"
+msgstr "Kísérleti mód"
+
+msgid "Disengage on Accelerator Pedal"
+msgstr "Kikapcsolás gázpedálra"
+
+msgid "Enable Lane Departure Warnings"
+msgstr "Sávelhagyás jelzése"
+
+msgid "Always-On Driver Monitoring"
+msgstr "Folyamatos vezetöfigyelés"
+
+msgid "Record and Upload Driver Camera"
+msgstr "Vezetökamera rögzítése és feltöltése"
+
+msgid "Record and Upload Microphone Audio"
+msgstr "Hang rögzítése és feltöltése"
+
+msgid "Use Metric System"
+msgstr "Metrikus mértékegységek"
+
+msgid "sunnypilot longitudinal control may come in a future update."
+msgstr "A sunnypilot hosszanti vezérlése egy késöbbi frissítésben jöhet."
+
+msgid "Aggressive"
+msgstr "Dinamikus"
+
+msgid "Standard"
+msgstr "Normál"
+
+msgid "Relaxed"
+msgstr "Nyugodt"
+
+msgid "Enable the sunnypilot longitudinal control (alpha) toggle to allow Experimental mode."
+msgstr "Kapcsold be a sunnypilot hosszanti vezérlést (alfa) a kísérleti módhoz."
+
+msgid "checking..."
+msgstr "ellenörzés..."
+
+msgid "downloading..."
+msgstr "letöltés..."
+
+msgid "finalizing update..."
+msgstr "frissítés véglegesítése..."
+
+msgid "never"
+msgstr "soha"
+
+msgid "now"
+msgstr "most"
+
+msgid "CHECK"
+msgstr "ELLENÖRZÉS"
+
+msgid "Are you sure you want to uninstall?"
+msgstr "Biztosan eltávolítod?"
+
+msgid "Uninstall"
+msgstr "Eltávolítás"
+
+msgid "Select a branch"
+msgstr "Válassz ágat"
+
+msgid "{} minute ago"
+msgid_plural "{} minutes ago"
+msgstr[0] "{} perce"
+msgstr[1] "{} perce"
+
+msgid "{} hour ago"
+msgid_plural "{} hours ago"
+msgstr[0] "{} órája"
+msgstr[1] "{} órája"
+
+msgid "{} day ago"
+msgid_plural "{} days ago"
+msgstr[0] "{} napja"
+msgstr[1] "{} napja"
+
+msgid "Updates are only downloaded while the car is off."
+msgstr "A frissítés csak lekapcsolt autónál töltödik le."
+
+msgid "Current Version"
+msgstr "Jelenlegi verzió"
+
+msgid "Download"
+msgstr "Letöltés"
+
+msgid "Install Update"
+msgstr "Frissítés telepítése"
+
+msgid "INSTALL"
+msgstr "TELEPÍT"
+
+msgid "Target Branch"
+msgstr "Cél ág"
+
+msgid "SELECT"
+msgstr "KIVÁLASZT"
+
+msgid "failed to check for update"
+msgstr "a frissítés ellenörzése nem sikerült"
+
+msgid "UNINSTALL"
+msgstr "ELTÁVOLÍT"
+
+msgid "update available"
+msgstr "elérhetö frissítés"
+
+msgid "DOWNLOAD"
+msgstr "LETÖLTÉS"
+
+msgid "up to date, last checked never"
+msgstr "naprakész, még nem volt ellenörizve"
+
+msgid "up to date, last checked {}"
+msgstr "naprakész, utoljára ellenörizve {}"
+
+msgid "sunnypilot Unavailable"
+msgstr "A sunnypilot nem érhetö el"
+
+msgid "Waiting to start"
+msgstr "Várakozás az indulásra"
+
+msgid "TAKE CONTROL IMMEDIATELY"
+msgstr "VEDD ÁT AZ IRÁNYÍTÁST"
+
+msgid "System Unresponsive"
+msgstr "A rendszer nem válaszol"
+
+msgid "Reboot Device"
+msgstr "Készülék újraindítása"
+
+msgid "MAX"
+msgstr "MAX"
+
+msgid "km/h"
+msgstr "km/h"
+
+msgid "mph"
+msgstr "mph"
+
+msgid "camera starting"
+msgstr "kamera indul"
+
+
+# comma 4 (mici) felulet, 2026-08-10
+msgid "driving personality"
+msgstr "vezetési stílus"
+
+msgid "aggressive"
+msgstr "dinamikus"
+
+msgid "standard"
+msgstr "normál"
+
+msgid "relaxed"
+msgstr "nyugodt"
+
+msgid "experimental mode"
+msgstr "kísérleti mód"
+
+msgid "use metric units"
+msgstr "metrikus egységek"
+
+msgid "lane departure warnings"
+msgstr "sávelhagyás-figyelmeztetés"
+
+msgid "always-on driver monitor"
+msgstr "mindig aktív vezetöfigyelés"
+
+msgid "record & upload driver camera"
+msgstr "vezetökamera rögzítése"
+
+msgid "record & upload mic audio"
+msgstr "mikrofon rögzítése"
+
+msgid "enable sunnypilot"
+msgstr "sunnypilot engedélyezése"
+
+msgid "toggles"
+msgstr "kapcsolók"
+
+msgid "network"
+msgstr "hálózat"
+
+msgid "device"
+msgstr "készülék"
+
+msgid "developer"
+msgstr "fejlesztöi"
+
+msgid "manual"
+msgstr "kézikönyv"
+
+
+# comma 4 (mici): keszulek + fejlesztoi menu, 2026-08-10
+msgid "device ID"
+msgstr "készülék azonosító"
+
+msgid "serial"
+msgstr "sorozatszám"
+
+msgid "pair"
+msgstr "párosítás"
+
+msgid "paired"
+msgstr "párosítva"
+
+msgid "subscribed"
+msgstr "elöfizetve"
+
+msgid "upgrade to prime"
+msgstr "prime elöfizetés"
+
+msgid "update sunnypilot"
+msgstr "sunnypilot frissítése"
+
+msgid "update now"
+msgstr "frissítés most"
+
+msgid "updater failed\nto respond"
+msgstr "a frissítö nem\nválaszol"
+
+msgid "failed to update"
+msgstr "a frissítés nem sikerült"
+
+msgid "download update"
+msgstr "frissítés letöltése"
+
+msgid "up to date"
+msgstr "naprakész"
+
+msgid "reset calibration"
+msgstr "kalibráció törlése"
+
+msgid "uninstall sunnypilot"
+msgstr "sunnypilot eltávolítása"
+
+msgid "reboot"
+msgstr "újraindítás"
+
+msgid "power off"
+msgstr "kikapcsolás"
+
+msgid "regulatory info"
+msgstr "hatósági információk"
+
+msgid "driver\ncamera preview"
+msgstr "vezetökamera\nelönézet"
+
+msgid "review\ntraining guide"
+msgstr "betanító\nútmutató"
+
+msgid "terms &\nconditions"
+msgstr "felhasználási\nfeltételek"
+
+msgid "enter GitHub username..."
+msgstr "GitHub felhasználónév..."
+
+msgid "joystick debug mode"
+msgstr "joystick hibakeresö mód"
+
+msgid "longitudinal maneuver mode"
+msgstr "hosszirányú manöver mód"
+
+msgid "lateral maneuver mode"
+msgstr "oldalirányú manöver mód"
+
+msgid "alpha longitudinal"
+msgstr "alpha hosszirányú"
+
+msgid "ui debug mode"
+msgstr "felület hibakeresö mód"
+
+
+# comma 4 (mici): uj felso-repo cimkek, 2026-08-11
+msgid "software"
+msgstr "szoftver"
+
+msgid "enable alpha\nlongitudinal"
+msgstr "alpha hosszirányú\nbekapcsolása"
+
+msgid "enabling alpha longitudinal"
+msgstr "alpha hosszirányú bekapcsolása"
