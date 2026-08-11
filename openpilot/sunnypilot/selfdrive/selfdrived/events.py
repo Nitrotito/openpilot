@@ -12,6 +12,7 @@ from openpilot.sunnypilot.selfdrive.selfdrived.events_base import EventsBase, Pr
   NoEntryAlert, ImmediateDisableAlert, EngagementAlert, NormalPermanentAlert, AlertCallbackType, wrong_car_mode_alert
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit import PCM_LONG_REQUIRED_MAX_SET_SPEED, CONFIRM_SPEED_THRESHOLD
 from openpilot.common.hardware import HARDWARE
+from openpilot.system.ui.lib.multilang import tr
 
 AlertSize = log.SelfdriveState.AlertSize
 AlertStatus = log.SelfdriveState.AlertStatus
@@ -30,7 +31,7 @@ IS_MICI = HARDWARE.get_device_type() == 'mici'
 def speed_limit_adjust_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int, personality) -> Alert:
   speedLimit = sm['longitudinalPlanSP'].speedLimit.resolver.speedLimit
   speed = round(speedLimit * (CV.MS_TO_KPH if metric else CV.MS_TO_MPH))
-  message = f'Adjusting to {speed} {"km/h" if metric else "mph"} speed limit'
+  message = tr("Adjusting to {} {} speed limit").format(speed, "km/h" if metric else "mph")
   return Alert(
     message,
     "",
@@ -56,13 +57,13 @@ def speed_limit_pre_active_alert(CP: car.CarParams, CS: car.CarState, sm: messag
     pcm_long_required_max_set_speed_conv = round(pcm_long_required_max * speed_conv)
     speed_unit = "km/h" if metric else "mph"
 
-    alert_1_str = f"Speed Limit Assist: set to {pcm_long_required_max_set_speed_conv} {speed_unit} to engage"
+    alert_1_str = tr("Speed Limit Assist: set to {} {} to engage").format(pcm_long_required_max_set_speed_conv, speed_unit)
   else:
     if IS_MICI:
       if set_speed_conv < speed_limit_final_last_conv:
-        alert_1_str = "Press + to confirm speed limit"
+        alert_1_str = tr("Press + to confirm speed limit")
       elif set_speed_conv > speed_limit_final_last_conv:
-        alert_1_str = "Press - to confirm speed limit"
+        alert_1_str = tr("Press - to confirm speed limit")
     else:
       alert_size = AlertSize.none
 
@@ -211,7 +212,7 @@ EVENTS_SP: dict[int, dict[str, Alert | AlertCallbackType]] = {
 
   EventNameSP.speedLimitActive: {
     ET.WARNING: Alert(
-      "Auto adjusting to speed limit",
+      tr("Auto adjusting to speed limit"),
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlertSP.promptSingleHigh, 5.),
@@ -219,7 +220,7 @@ EVENTS_SP: dict[int, dict[str, Alert | AlertCallbackType]] = {
 
   EventNameSP.speedLimitChanged: {
     ET.WARNING: Alert(
-      "Set speed changed",
+      tr("Set speed changed"),
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlertSP.promptSingleHigh, 5.),
@@ -231,7 +232,7 @@ EVENTS_SP: dict[int, dict[str, Alert | AlertCallbackType]] = {
 
   EventNameSP.speedLimitPending: {
     ET.WARNING: Alert(
-      "Auto adjusting to last speed limit",
+      tr("Auto adjusting to last speed limit"),
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlertSP.promptSingleHigh, 5.),

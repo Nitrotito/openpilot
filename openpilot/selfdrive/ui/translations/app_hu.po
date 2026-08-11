@@ -790,3 +790,24 @@ msgstr "alpha hosszirányú\nbekapcsolása"
 
 msgid "enabling alpha longitudinal"
 msgstr "alpha hosszirányú bekapcsolása"
+
+msgid "Adjusting to {} {} speed limit"
+msgstr "Igazodás a {} {} sebességkorláthoz"
+
+msgid "Speed Limit Assist: set to {} {} to engage"
+msgstr "Sebességkorlát-asszisztens: állítsd {} {} értékre a bekapcsoláshoz"
+
+msgid "Press + to confirm speed limit"
+msgstr "Nyomd meg a + gombot a sebességkorlát jóváhagyásához"
+
+msgid "Press - to confirm speed limit"
+msgstr "Nyomd meg a - gombot a sebességkorlát jóváhagyásához"
+
+msgid "Auto adjusting to speed limit"
+msgstr "Automatikus igazodás a sebességkorláthoz"
+
+msgid "Auto adjusting to last speed limit"
+msgstr "Automatikus igazodás az utolsó sebességkorláthoz"
+
+msgid "Set speed changed"
+msgstr "A beállított sebesség megváltozott"
