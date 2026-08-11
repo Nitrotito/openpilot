@@ -2035,3 +2035,117 @@ msgstr "Csak {} {} felett működik."
 
 msgid "Warning: May experience steering oscillations below {} {} during turns, recommend disabling this feature if you experience these."
 msgstr "Figyelem: {} {} alatt kanyarodáskor a kormány billeghet, ilyenkor érdemes kikapcsolni ezt a funkciót."
+
+msgid "<b>WARNING: sunnypilot longitudinal control is in alpha for this car and may disable Automatic Emergency Braking (AEB).</b><br><br>On this car, sunnypilot defaults to the car's built-in ACC instead of sunnypilot's longitudinal control. Enable this to switch to sunnypilot longitudinal control. Enabling Experimental mode is recommended when enabling sunnypilot longitudinal control alpha. Changing this setting will restart sunnypilot if the car is powered on."
+msgstr "<b>FIGYELEM: a sunnypilot hosszanti vezérlése ennél az autónál alfa állapotú, és kikapcsolhatja az automatikus vészfékezést (AEB).</b><br><br>Ennél az autónál a sunnypilot alapból a gyári adaptív tempomatot használja a saját hosszanti vezérlése helyett. Kapcsold be ezt, ha átváltanál a sunnypilot hosszanti vezérlésére. Ilyenkor ajánlott a kísérleti mód bekapcsolása is. A beállítás megváltoztatása újraindítja a sunnypilotot, ha az autó áram alatt van."
+
+msgid "A beautiful rainbow effect on the path the model wants to take. It does not affect driving in any way."
+msgstr "Szivárványos színezés azon az úton, amerre a modell menne. A vezetésre semmilyen hatással nincs."
+
+msgid "A chime and on-screen alert will play when the traffic light you are waiting for turns green and you have no vehicle in front of you.<br>Note: This chime is only designed as a notification. It is the driver's responsibility to observe their environment and make decisions accordingly."
+msgstr "Hangjelzés és képernyős üzenet jelez, amikor a lámpa, amire vársz, zöldre vált, és nincs előtted autó.<br>Megjegyzés: ez csak értesítés. A környezet figyelése és a döntés továbbra is a vezető felelőssége."
+
+msgid "A chime and on-screen alert will play when you are stopped, and the vehicle in front of you start moving.<br>Note: This chime is only designed as a notification. It is the driver's responsibility to observe their environment and make decisions accordingly."
+msgstr "Hangjelzés és képernyős üzenet jelez, ha állsz, és az előtted lévő autó elindul.<br>Megjegyzés: ez csak értesítés. A környezet figyelése és a döntés továbbra is a vezető felelőssége."
+
+msgid "ADB (Android Debug Bridge) allows connecting to your device over USB or over the network. See https://docs.comma.ai/how-to/connect-to-comma for more info."
+msgstr "Az ADB (Android Debug Bridge) USB-n vagy hálózaton keresztüli csatlakozást tesz lehetővé. Bővebben: https://docs.comma.ai/how-to/connect-to-comma"
+
+msgid "An alpha version of sunnypilot longitudinal control can be tested, along with Experimental mode, on non-release branches."
+msgstr "A sunnypilot hosszanti vezérlésének alfa változata kipróbálható, a kísérleti móddal együtt, a nem végleges ágakon."
+
+msgid "Apply a custom timeout for settings UI.<br>This is the time after which settings UI closes automatically if user is not interacting with the screen."
+msgstr "Egyéni időkorlát a beállítások képernyőhöz.<br>Ennyi idő után a beállítások maguktól bezáródnak, ha nem nyúlsz a képernyőhöz."
+
+msgid "Display useful metrics below the chevron that tracks the lead car only applicable to cars with sunnypilot longitudinal control."
+msgstr "Hasznos adatok az előtted lévő autót követő jel alatt. Csak a sunnypilot hosszanti vezérlésével működő autóknál."
+
+msgid "Displays the name of the road the car is traveling on.<br>The OpenStreetMap database of the location must be downloaded from the OSM panel to fetch the road name."
+msgstr "Megjeleníti annak az útnak a nevét, amelyen az autó halad.<br>Ehhez le kell tölteni az adott terület OpenStreetMap adatbázisát az OSM panelen."
+
+msgid "Enable the beloved MADS feature. Disable toggle to revert back to stock sunnypilot engagement/disengagement."
+msgstr "A közkedvelt MADS bekapcsolása. Kikapcsolva a sunnypilot gyári be- és kikapcsolási módja tér vissza."
+
+msgid "Enable this for the car to learn and adapt its steering response time. Disable to use a fixed steering response time. Keeping this on provides the stock openpilot experience."
+msgstr "Bekapcsolva az autó tanulja és igazítja a kormányzás válaszidejét. Kikapcsolva rögzített válaszidőt használ. Bekapcsolva kapod a gyári openpilot élményt."
+
+msgid "Enables custom tuning for Torque lateral control. Modifying Lateral Acceleration Factor and Friction below will override the offline values indicated in the YAML files within \"opendbc/car/torque_data\". The values will also be used live when \"Manual Real-Time Tuning\" toggle is enabled."
+msgstr "Egyéni hangolás a nyomaték-alapú kormányzáshoz. Az alábbi oldalgyorsulási tényező és súrlódás módosítása felülírja az \"opendbc/car/torque_data\" YAML fájljaiban lévő értékeket. A rendszer menet közben is ezeket használja, ha a \"Kézi valós idejű hangolás\" be van kapcsolva."
+
+msgid "Enables self-tune for Torque lateral control for platforms that do not use Torque lateral control by default."
+msgstr "Önhangolás a nyomaték-alapú kormányzáshoz azokon a platformokon, amelyek alapból nem ezt használják."
+
+msgid "Enabling this will display warnings when a vehicle is detected in your blind spot as long as your car has BSM supported."
+msgstr "Bekapcsolva figyelmeztetést kapsz, ha járművet észlel a holtteredben, feltéve hogy az autód támogatja a holttérfigyelést (BSM)."
+
+msgid "Enforces the torque lateral controller to use the fixed values instead of the learned values from Self-Tune. Enabling this toggle overrides Self-Tune values."
+msgstr "A nyomaték-alapú kormányzás a rögzített értékeket használja az önhangolás tanult értékei helyett. Bekapcsolva felülírja az önhangolás értékeit."
+
+msgid "Experimental feature to enable stop and go for Subaru Global models with manual handbrake. Models with electric parking brake should keep this disabled. Thanks to martinl for this implementation!"
+msgstr "Kísérleti funkció: megállás-elindulás kézifékes Subaru Global modellekhez. Elektromos rögzítőfékes modelleknél hagyd kikapcsolva. Köszönet martinl-nek a megvalósításért!"
+
+msgid "For maximum effectiveness, bring your device inside and connect to a good USB-C adapter and Wi-Fi weekly.\n\nFirehose Mode can also work while you're driving if connected to a hotspot or unlimited SIM card."
+msgstr "A legjobb eredményhez hetente vidd be a készüléket, és csatlakoztasd jó USB-C töltőre és Wi-Fi hálózatra.\n\nAz adatgyűjtő mód menet közben is működik, ha mobil hotspotra vagy korlátlan SIM-re csatlakozol."
+
+msgid "For maximum effectiveness, bring your device inside and connect to a good USB-C adapter and Wi-Fi weekly.\n\nFirehose Mode can also work while you're driving if connected to a hotspot or unlimited SIM card.\n\n\nFrequently Asked Questions\n\nDoes it matter how or where I drive? Nope, just drive as you normally would.\n\nDo all of my segments get pulled in Firehose Mode? No, we selectively pull a subset of your segments.\n\nWhat's a good USB-C adapter? Any fast phone or laptop charger should be fine.\n\nDoes it matter which software I run? Yes, only upstream openpilot (and particular forks) are able to be used for training."
+msgstr "A legjobb eredményhez hetente vidd be a készüléket, és csatlakoztasd jó USB-C töltőre és Wi-Fi hálózatra.\n\nAz adatgyűjtő mód menet közben is működik, ha mobil hotspotra vagy korlátlan SIM-re csatlakozol.\n\n\nGyakori kérdések\n\nSzámít, hogyan vagy hol vezetek? Nem, vezess úgy, ahogy szoktál.\n\nAz összes felvételemet elviszik adatgyűjtő módban? Nem, a felvételeidnek csak egy válogatott részét visszük el.\n\nMilyen a jó USB-C töltő? Bármelyik gyors telefon- vagy laptoptöltő megfelel.\n\nSzámít, milyen szoftvert futtatok? Igen, csak a gyári openpilot (és bizonyos forkok) adatait használjuk tanításra."
+
+msgid "If you're driving at 20 mph (32 km/h) or below and have your blinker on, the car will plan a turn in that direction at the nearest drivable path. This prevents situations (like at red lights) where the car might plan the wrong turn direction."
+msgstr "Ha 20 mph (32 km/h) alatt haladsz és be van kapcsolva az index, az autó a legközelebbi járható útvonalon abba az irányba tervez kanyart. Ez megelőzi azokat a helyzeteket (például piros lámpánál), amikor rossz irányba tervezne kanyart."
+
+msgid "Less strict settings when using Self-Tune. This allows torqued to be more forgiving when learning values."
+msgstr "Megengedőbb beállítások az önhangoláshoz. Így a torqued elnézőbb az értékek tanulásakor."
+
+msgid "Looks ahead at planned steering to reduce sudden corrections, so the wheel moves more smoothly through turns. Works with Self-Tune and custom tuning. Thanks to @twilsonco for the implementation."
+msgstr "Előretekint a tervezett kormányzásra, hogy kevesebb legyen a hirtelen korrekció, így a kormány simábban mozog a kanyarokban. Működik önhangolással és egyéni hangolással is. Köszönet @twilsonco-nak a megvalósításért."
+
+msgid "Receive alerts to steer back into the lane when your vehicle drifts over a detected lane line without a turn signal activated while driving over 31 mph (50 km/h)."
+msgstr "Figyelmeztetést kapsz, hogy kormányozz vissza a sávba, ha az autó index nélkül áthalad a felismert sávhatáron 31 mph (50 km/h) felett."
+
+msgid "Set a timer to delay the auto lane change operation when the blinker is used. No nudge on the steering wheel is required to auto lane change if a timer is set. Default is Nudge.<br>Please use caution when using this feature. Only use the blinker when traffic and road conditions permit."
+msgstr "Késleltetés beállítása az automata sávváltáshoz, amikor indexelsz. Beállított késleltetéssel nem kell megmozdítanod a kormányt a sávváltáshoz. Alapérték: kormánymozdítás.<br>Óvatosan használd. Csak akkor indexelj, ha a forgalom és az útviszonyok megengedik."
+
+msgid "Show an indicator on the left side of the screen to display real-time vehicle acceleration and deceleration. This displays what the car is currently doing, not what the planner is requesting."
+msgstr "Jelzés a képernyő bal oldalán az autó gyorsulásáról és lassulásáról. Azt mutatja, amit az autó éppen csinál, nem azt, amit a tervező kér."
+
+msgid "Standard is recommended. In aggressive mode, sunnypilot will follow lead cars closer and be more aggressive with the gas and brake. In relaxed mode sunnypilot will stay further away from lead cars. On supported cars, you can cycle through these personalities with your steering wheel distance button."
+msgstr "A Normál ajánlott. Dinamikus módban a sunnypilot közelebb követi az előtted lévő autót, és határozottabban gázol és fékez. Nyugodt módban nagyobb távolságot tart. A támogatott autóknál a kormányon lévő követési távolság gombbal válthatsz köztük."
+
+msgid "Toggle to enable a delay timer for seamless lane changes when blind spot monitoring (BSM) detects a obstructing vehicle, ensuring safe maneuvering."
+msgstr "Bekapcsolva késleltetés segíti a zökkenőmentes sávváltást, amikor a holttérfigyelés (BSM) akadályozó járművet észlel."
+
+msgid "Toggle visibility of advanced sunnypilot controls.<br>This only changes the visibility of the toggles; it does not change the actual enabled/disabled state."
+msgstr "A haladó sunnypilot beállítások megjelenítése.<br>Ez csak a kapcsolók láthatóságát változtatja meg, a tényleges be- vagy kikapcsolt állapotukat nem."
+
+msgid "Use the sunnypilot system for adaptive cruise control and lane keep driver assistance. Your attention is required at all times to use this feature."
+msgstr "A sunnypilot rendszer adaptív tempomatként és sávtartó asszisztensként működik. A használatához folyamatos figyelem szükséges."
+
+msgid "Warning: This grants SSH access to all public keys in your GitHub settings. Never enter a GitHub username other than your own. A comma employee will NEVER ask you to add their GitHub username."
+msgstr "Figyelem: ez SSH hozzáférést ad a GitHub fiókodban lévő összes nyilvános kulcshoz. Soha ne adj meg más GitHub felhasználónevet, csak a sajátodat. A comma munkatársa SOHA nem fogja kérni, hogy vedd fel az ő nevét."
+
+msgid "When enabled, sunnypilot will attempt to manage the built-in cruise control buttons by emulating button presses for limited longitudinal control."
+msgstr "Bekapcsolva a sunnypilot megpróbálja kezelni a gyári tempomatgombokat, gombnyomásokat utánozva, korlátozott hosszanti vezérléshez."
+
+msgid "When toggled on, this creates a prebuilt file to allow accelerated boot times. When toggled off, it removes the prebuilt file so compilation of locally edited cpp files can be made."
+msgstr "Bekapcsolva előre lefordított fájl készül a gyorsabb indításhoz. Kikapcsolva törli ezt a fájlt, így a helyben módosított cpp fájlok lefordíthatók."
+
+msgid "copyparty is a very capable file server, you can use it to download your routes, view your logs and even make some edits on some files from your browser. Requires you to connect to your comma locally via its IP address."
+msgstr "A copyparty egy sokoldalú fájlszerver: letöltheted vele a menetfelvételeket, megnézheted a naplókat, sőt böngészőből néhány fájlt szerkeszthetsz is. Ehhez helyben, IP cím alapján kell csatlakoznod a commához."
+
+msgid "sunnylink enables secured remote access to your comma device from anywhere, including settings management, remote monitoring, real-time dashboard, etc."
+msgstr "A sunnylink biztonságos távoli hozzáférést ad a comma készülékedhez bárhonnan: beállítások kezelése, távoli figyelés, valós idejű műszerfal és így tovább."
+
+msgid "sunnylink is designed to be enabled as part of sunnypilot's core functionality. If sunnylink is disabled, features such as settings management, remote monitoring, real-time dashboards will be unavailable."
+msgstr "A sunnylink a sunnypilot alapfunkcióinak része. Ha kikapcsolod, nem lesz elérhető a beállítások kezelése, a távoli figyelés és a valós idejű műszerfal."
+
+msgid "sunnypilot defaults to driving in chill mode. Experimental mode enables alpha-level features that aren't ready for chill mode. Experimental features are listed below:<br><h4>End-to-End Longitudinal Control</h4><br>Let the driving model control the gas and brakes. sunnypilot will drive as it thinks a human would, including stopping for red lights and stop signs. Since the driving model decides the speed to drive, the set speed will only act as an upper bound. This is an alpha quality feature; mistakes should be expected.<br><h4>New Driving Visualization</h4><br>The driving visualization will transition to the road-facing wide-angle camera at low speeds to better show some turns. The Experimental mode logo will also be shown in the top right corner."
+msgstr "A sunnypilot alapból nyugodt módban vezet. A kísérleti mód olyan alfa szintű funkciókat kapcsol be, amelyek még nem érettek a nyugodt módhoz. A kísérleti funkciók:<br><h4>Végponttól végpontig hosszanti vezérlés</h4><br>A vezetési modell kezeli a gázt és a féket. A sunnypilot úgy vezet, ahogy szerinte egy ember tenné, beleértve a piros lámpánál és a stoptáblánál való megállást. Mivel a sebességet a modell dönti el, a beállított sebesség csak felső korlát lesz. Ez alfa minőségű funkció, számíts hibákra.<br><h4>Új menetábrázolás</h4><br>A menetábrázolás kis sebességnél átvált az útra néző nagylátószögű kamerára, hogy jobban látszódjanak a kanyarok. A jobb felső sarokban megjelenik a kísérleti mód jele."
+
+msgid "sunnypilot is continuously calibrating, resetting is rarely required. Resetting calibration will restart sunnypilot if the car is powered on."
+msgstr "A sunnypilot folyamatosan kalibrál, visszaállításra ritkán van szükség. A kalibráció visszaállítása újraindítja a sunnypilotot, ha az autó áram alatt van."
+
+msgid "sunnypilot learns to drive by watching humans, like you, drive.\n\nFirehose Mode allows you to maximize your training data uploads to improve openpilot's driving models. More data means bigger models, which means better Experimental Mode."
+msgstr "A sunnypilot úgy tanul vezetni, hogy embereket figyel vezetés közben, például téged.\n\nAz adatgyűjtő móddal minél több tanítóadatot tölthetsz fel, hogy jobbak legyenek az openpilot vezetési modelljei. Több adat nagyobb modelleket jelent, ami jobb kísérleti módot."
+
+msgid "sunnypilot will allow some Toyota/Lexus cars to auto resume during stop and go traffic. This feature is only applicable to certain models that are able to use longitudinal control. This is an alpha feature. Use at your own risk."
+msgstr "Egyes Toyota és Lexus autóknál a sunnypilot magától elindul torlódásban. Csak azoknál a modelleknél működik, amelyek használni tudják a hosszanti vezérlést. Ez alfa funkció, saját felelősségre használd."
