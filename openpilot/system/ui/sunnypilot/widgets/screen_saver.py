@@ -11,7 +11,8 @@ import pyray as rl
 
 from openpilot.common.hardware import HARDWARE
 from openpilot.common.params import Params
-from openpilot.system.ui.lib.application import gui_app
+from openpilot.system.ui.lib.application import gui_app, FontWeight
+from openpilot.system.ui.lib.text_measure import measure_text_cached
 from openpilot.system.ui.widgets import Widget
 
 
@@ -34,6 +35,15 @@ class ScreenSaverSP(Widget):
     # so pass both. The mark is 401x400, i.e. square for practical purposes.
     self.logo_render_height = 120 if self._is_mici else 400
     self.logo_render_width = round(self.logo_render_height * 401 / 400)
+
+    # license plate under the mark, bounces along with it
+    self.plate_text = "TSLA 520"
+    self.plate_font_size = 34 if self._is_mici else 80
+    self.plate_gap = 10 if self._is_mici else 28
+    # fonts are only loaded once the window exists, so resolve them lazily
+    self._plate_font = None
+    self._plate_size = rl.Vector2(0, 0)
+
     self._start_time = None
     self._dismiss = False
     self._screensaver_timeout = 300
@@ -71,6 +81,14 @@ class ScreenSaverSP(Widget):
     self.logo_width = self._logo.width
     self.logo_height = self._logo.height
 
+    if self._plate_font is None:
+      self._plate_font = gui_app.font(FontWeight.BOLD)
+      self._plate_size = measure_text_cached(self._plate_font, self.plate_text, self.plate_font_size)
+
+    # logo and plate travel together as one block
+    self.block_width = max(self.logo_width, self._plate_size.x)
+    self.block_height = self.logo_height + self.plate_gap + self._plate_size.y
+
     if self._start_time and time.monotonic() - self._start_time > self._screensaver_timeout:
       self._dismiss = True
       self._start_time = None
@@ -81,18 +99,18 @@ class ScreenSaverSP(Widget):
     self.y += self.vy * dt
 
     hit_x = hit_y = False
-    if self.x + self.logo_width > self.rect.width:
+    if self.x + self.block_width > self.rect.width:
       self.vx *= -1
-      self.x = self.rect.width - self.logo_width
+      self.x = self.rect.width - self.block_width
       hit_x = True
     elif self.x < 0:
       self.vx *= -1
       self.x = 0
       hit_x = True
 
-    if self.y + self.logo_height > self.rect.height:
+    if self.y + self.block_height > self.rect.height:
       self.vy *= -1
-      self.y = self.rect.height - self.logo_height
+      self.y = self.rect.height - self.block_height
       hit_y = True
     elif self.y < 0:
       self.vy *= -1
@@ -104,5 +122,10 @@ class ScreenSaverSP(Widget):
   def _render(self, rect: rl.Rectangle):
     self.set_rect(rect)
     rl.clear_background(rl.BLACK)
-    rl.draw_texture(self._logo, int(self.x), int(self.y), self.color)
+    logo_x = self.x + (self.block_width - self.logo_width) / 2
+    rl.draw_texture(self._logo, int(logo_x), int(self.y), self.color)
+
+    plate_pos = rl.Vector2(self.x + (self.block_width - self._plate_size.x) / 2,
+                           self.y + self.logo_height + self.plate_gap)
+    rl.draw_text_ex(self._plate_font, self.plate_text, plate_pos, self.plate_font_size, 0, self.color)
     return -1
