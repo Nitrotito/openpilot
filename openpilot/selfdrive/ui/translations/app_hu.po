@@ -813,10 +813,19 @@ msgid "Set speed changed"
 msgstr "A beállított sebesség megváltozott"
 
 msgid "start the car to\nuse sunnypilot"
-msgstr "indítsd el a kocsit\na sunnypilot használatához"
+msgstr "indítsd el a Teslát\na sunnypilot használatához"
 
 msgid "system booting"
 msgstr "a rendszer indul"
 
 msgid "openpilot can't start\ncheck alerts"
 msgstr "az openpilot nem indul\nnézd meg a jelzéseket"
+
+msgid "Models"
+msgstr "Modellek"
+
+msgid "Firehose"
+msgstr "Adatgyűjtés"
+
+msgid "Firehose Mode"
+msgstr "Adatgyűjtő mód"
