@@ -49,17 +49,20 @@ if TICI:
     uniform int engaged;
     uniform int enhance_driver;
 
+    // Display-only gamma lift. camerad exposes for the model, not for the eye, so the
+    // preview looks dark on the device -- exactly the correction the TODO below asks for.
+    // Higher = brighter. 1.0 disables it. Tune this one number.
+    const float DISPLAY_GAMMA = 1.45;
+
     void main() {
       vec4 color = texture(texture0, fragTexCoord);
       if (engaged == 1) {
         float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));  // Luma
         color.rgb = mix(vec3(gray), color.rgb, 0.2);  // 20% saturation
         color.rgb = clamp((color.rgb - 0.5) * 1.2 + 0.5, 0.0, 1.0);  // +20% contrast
-        color.rgb = pow(color.rgb, vec3(1.0/1.28));
-        fragColor = vec4(color.rgb, color.a);
-      } else {
-        color.rgb *= 0.85;  // 85% opacity
       }
+      // Single place that controls preview brightness, so engaged and disengaged match.
+      color.rgb = pow(clamp(color.rgb, 0.0, 1.0), vec3(1.0 / DISPLAY_GAMMA));
       if (enhance_driver == 1) {
         float brightness = 1.1;
         color.rgb = color.rgb + 0.15;
