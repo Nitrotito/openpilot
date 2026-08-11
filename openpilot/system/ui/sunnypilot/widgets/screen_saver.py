@@ -11,8 +11,7 @@ import pyray as rl
 
 from openpilot.common.hardware import HARDWARE
 from openpilot.common.params import Params
-from openpilot.system.ui.lib.application import gui_app, FontWeight
-from openpilot.system.ui.lib.text_measure import measure_text_cached
+from openpilot.system.ui.lib.application import gui_app
 from openpilot.system.ui.widgets import Widget
 
 
@@ -27,11 +26,11 @@ class ScreenSaverSP(Widget):
     self.y = 100.0
     self.vx = 120.0 if self._is_mici else 300.0
     self.vy = 70.0 if self._is_mici else 200.0
-    self._hue = 150
-    self.color = rl.color_from_hsv(self._hue, 1, 1)
+    self.color = rl.WHITE
 
-    self.text = "sunnypilot"
-    self.font_size = 50 if self._is_mici else 200
+    # sunnypilot wordmark -> Tesla mark (white, no hue cycling)
+    self.logo_asset = "icons/tesla_mark.png"
+    self.logo_render_height = 150 if self._is_mici else 500
     self._start_time = None
     self._dismiss = False
     self._screensaver_timeout = 300
@@ -65,10 +64,9 @@ class ScreenSaverSP(Widget):
   def _update_state(self):
     super()._update_state()
 
-    self.font = gui_app.font(FontWeight.AUDIOWIDE)
-    text_size = measure_text_cached(self.font, self.text, self.font_size, 0)
-    self.logo_width = text_size.x
-    self.logo_height = text_size.y
+    self._logo = gui_app.texture(self.logo_asset, None, self.logo_render_height)
+    self.logo_width = self._logo.width
+    self.logo_height = self._logo.height
 
     if self._start_time and time.monotonic() - self._start_time > self._screensaver_timeout:
       self._dismiss = True
@@ -98,21 +96,10 @@ class ScreenSaverSP(Widget):
       self.y = 0
       hit_y = True
 
-    hit = hit_x or hit_y
-    if hit and not self._hit_last_frame:
-      while self._hue_dist((new_hue := rl.get_random_value(0, 360)), self._hue) < 120:
-        pass
-      self._hue = new_hue
-      self.color = rl.color_from_hsv(self._hue, 1, 1)
-    self._hit_last_frame = hit
-
-  @staticmethod
-  def _hue_dist(a, b):
-    d = abs(a - b)
-    return min(d, 360 - d)
+    self._hit_last_frame = hit_x or hit_y
 
   def _render(self, rect: rl.Rectangle):
     self.set_rect(rect)
     rl.clear_background(rl.BLACK)
-    rl.draw_text_ex(self.font, self.text, rl.Vector2(int(self.x), int(self.y)), self.font_size, 0, self.color)
+    rl.draw_texture(self._logo, int(self.x), int(self.y), self.color)
     return -1
