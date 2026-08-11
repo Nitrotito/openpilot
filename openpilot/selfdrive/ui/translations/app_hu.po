@@ -2157,10 +2157,10 @@ msgid "firehose"
 msgstr "adatgyűjtés"
 
 msgid "set speed offset"
-msgstr "sebesség-eltolás"
+msgstr "sebesség eltolás"
 
 msgid "preview brightness"
-msgstr "kép világosítása"
+msgstr "kép fényereje"
 
 msgid "original"
 msgstr "eredeti"
@@ -2174,8 +2174,8 @@ msgstr "közepes"
 msgid "strong"
 msgstr "erős"
 
-msgid "The dash keeps showing the speed you set. Only the speed the car actually holds moves."
-msgstr "A műszerfalon továbbra is az látszik, amit beállítottál. Csak a ténylegesen tartott sebesség változik."
+msgid "The set speed on the screen stays, only the speed held moves."
+msgstr "A beállított sebesség marad a kijelzőn, csak a tartott lesz kevesebb."
 
 msgid "Only the camera image on the screen changes, never what the car sees."
 msgstr "Csak a képernyőn látszó kamerakép változik, nem az, amit az autó lát."

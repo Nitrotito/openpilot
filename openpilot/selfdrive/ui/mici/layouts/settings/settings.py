@@ -9,12 +9,24 @@ from openpilot.selfdrive.ui.mici.layouts.settings.software import SoftwareLayout
 from openpilot.selfdrive.ui.mici.layouts.settings.firehose import FirehoseLayout
 from openpilot.selfdrive.ui.mici.layouts.settings.own_settings import OwnSettingsLayoutMici
 from openpilot.system.ui.lib.application import gui_app, FontWeight
+from openpilot.system.ui.lib.text_measure import measure_text_cached
 from openpilot.system.ui.lib.multilang import tr
 
 
 class SettingsBigButton(BigButton):
+  # Translated labels are longer than the English ones: "firehose" fits at 64, "adatgyujtes"
+  # does not, and a single word that overruns the label box wraps mid-word and lands under
+  # the icon. Step the size down until the widest word fits on one line.
+  FONT_SIZES = (64, 56, 48, 42)
+
   def _get_label_font_size(self):
-    return 64
+    budget = self._rect.width - self.LABEL_HORIZONTAL_PADDING * 2
+    font = gui_app.font(FontWeight.BOLD)
+    words = self.text.split() or [self.text]
+    for size in self.FONT_SIZES:
+      if all(measure_text_cached(font, word, size).x <= budget for word in words):
+        return size
+    return self.FONT_SIZES[-1]
 
 
 class SettingsLayout(NavScroller):

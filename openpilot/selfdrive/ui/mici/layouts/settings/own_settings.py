@@ -68,7 +68,7 @@ class OwnSettingsLayoutMici(NavScroller):
 
     self._scroller.add_widgets([
       speed_offset,
-      GreyBigButton("", tr("The dash keeps showing the speed you set. Only the speed the car actually holds moves.")),
+      GreyBigButton("", tr("The set speed on the screen stays, only the speed held moves.")),
       preview_brightness,
       GreyBigButton("", tr("Only the camera image on the screen changes, never what the car sees.")),
     ])
