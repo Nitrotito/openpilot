@@ -811,3 +811,12 @@ msgstr "Automatikus igazodás az utolsó sebességkorláthoz"
 
 msgid "Set speed changed"
 msgstr "A beállított sebesség megváltozott"
+
+msgid "start the car to\nuse sunnypilot"
+msgstr "indítsd el a kocsit\na sunnypilot használatához"
+
+msgid "system booting"
+msgstr "a rendszer indul"
+
+msgid "openpilot can't start\ncheck alerts"
+msgstr "az openpilot nem indul\nnézd meg a jelzéseket"
