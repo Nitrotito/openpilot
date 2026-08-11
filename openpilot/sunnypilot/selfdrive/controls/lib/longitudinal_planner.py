@@ -8,6 +8,9 @@ See the LICENSE.md file in the root directory for more details.
 from openpilot.cereal import messaging, custom
 from opendbc.car import structs
 from openpilot.common.constants import CV
+from openpilot.common.params import Params
+from openpilot.common.realtime import DT_MDL
+from openpilot.sunnypilot import PARAMS_UPDATE_PERIOD
 from openpilot.selfdrive.car.cruise import V_CRUISE_MAX
 from openpilot.sunnypilot.selfdrive.controls.lib.dec.dec import DynamicExperimentalController
 from openpilot.sunnypilot.selfdrive.controls.lib.e2e_alerts_helper import E2EAlertsHelper
@@ -19,6 +22,16 @@ from openpilot.sunnypilot.models.helpers import get_active_bundle
 
 DecState = custom.LongitudinalPlanSP.DynamicExperimentalControl.DynamicExperimentalControlState
 LongitudinalPlanSource = custom.LongitudinalPlanSP.LongitudinalPlanSource
+
+# Constant offset applied to the MANUALLY set cruise speed only (not to the speed limit
+# assist, which has its own SpeedLimitValueOffset). The set speed shown on screen and on
+# the dash is unchanged; only the speed the car actually holds moves by this much.
+#
+# Read from a plain file instead of a Params key on purpose: params_keys.h is compiled
+# into params_pyx.so, so a new key would need a full rebuild on the device.
+# Units follow IsMetric (km/h, or mph when imperial). Empty/missing/invalid file = 0.
+CRUISE_SPEED_OFFSET_PATH = "/data/cruise_speed_offset"
+CRUISE_SPEED_OFFSET_LIMIT = 5.0  # sanity clamp, both directions
 
 
 class LongitudinalPlannerSP:
@@ -36,6 +49,26 @@ class LongitudinalPlannerSP:
     self.output_v_target = 0.
     self.output_a_target = 0.
 
+    self.params = Params()
+    self.frame = 0
+    self.cruise_speed_offset = 0.  # m/s, signed
+
+  def _read_cruise_speed_offset(self) -> float:
+    """Signed offset in m/s for the manual set speed. 0 on any problem."""
+    try:
+      with open(CRUISE_SPEED_OFFSET_PATH) as f:
+        raw = float(f.read().strip())
+    except (OSError, ValueError):
+      return 0.
+    raw = max(-CRUISE_SPEED_OFFSET_LIMIT, min(CRUISE_SPEED_OFFSET_LIMIT, raw))
+    conv = CV.KPH_TO_MS if self.params.get_bool("IsMetric") else CV.MPH_TO_MS
+    return raw * conv
+
+  def update_params(self) -> None:
+    if self.frame % int(PARAMS_UPDATE_PERIOD / DT_MDL) == 0:
+      self.cruise_speed_offset = self._read_cruise_speed_offset()
+    self.frame += 1
+
   def is_e2e(self, sm: messaging.SubMaster) -> bool:
     experimental_mode = sm['selfdriveState'].experimentalMode
     if not self.dec.active():
@@ -44,6 +77,7 @@ class LongitudinalPlannerSP:
     return experimental_mode and self.dec.mode() == "blended"
 
   def update_targets(self, sm: messaging.SubMaster, v_ego: float, a_ego: float, v_cruise: float) -> tuple[float, float]:
+    self.update_params()
     CS = sm['carState']
     v_cruise_cluster_kph = min(CS.vCruiseCluster, V_CRUISE_MAX)
     v_cruise_cluster = v_cruise_cluster_kph * CV.KPH_TO_MS
@@ -63,7 +97,7 @@ class LongitudinalPlannerSP:
                     self.resolver.speed_limit_final_last, has_speed_limit, self.resolver.distance, self.events_sp)
 
     targets = {
-      LongitudinalPlanSource.cruise: (v_cruise, a_ego),
+      LongitudinalPlanSource.cruise: (max(0., v_cruise + self.cruise_speed_offset), a_ego),
       LongitudinalPlanSource.sccVision: (self.scc.vision.output_v_target, self.scc.vision.output_a_target),
       LongitudinalPlanSource.sccMap: (self.scc.map.output_v_target, self.scc.map.output_a_target),
       LongitudinalPlanSource.speedLimitAssist: (self.sla.output_v_target, self.sla.output_a_target),
