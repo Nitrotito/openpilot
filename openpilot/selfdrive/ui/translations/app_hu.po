@@ -2149,3 +2149,33 @@ msgstr "A sunnypilot úgy tanul vezetni, hogy embereket figyel vezetés közben,
 
 msgid "sunnypilot will allow some Toyota/Lexus cars to auto resume during stop and go traffic. This feature is only applicable to certain models that are able to use longitudinal control. This is an alpha feature. Use at your own risk."
 msgstr "Egyes Toyota és Lexus autóknál a sunnypilot magától elindul torlódásban. Csak azoknál a modelleknél működik, amelyek használni tudják a hosszanti vezérlést. Ez alfa funkció, saját felelősségre használd."
+
+msgid "my settings"
+msgstr "saját beállítások"
+
+msgid "firehose"
+msgstr "adatgyűjtés"
+
+msgid "set speed offset"
+msgstr "sebesség-eltolás"
+
+msgid "preview brightness"
+msgstr "kép világosítása"
+
+msgid "original"
+msgstr "eredeti"
+
+msgid "light"
+msgstr "enyhe"
+
+msgid "medium"
+msgstr "közepes"
+
+msgid "strong"
+msgstr "erős"
+
+msgid "The dash keeps showing the speed you set. Only the speed the car actually holds moves."
+msgstr "A műszerfalon továbbra is az látszik, amit beállítottál. Csak a ténylegesen tartott sebesség változik."
+
+msgid "Only the camera image on the screen changes, never what the car sees."
+msgstr "Csak a képernyőn látszó kamerakép változik, nem az, amit az autó lát."
