@@ -8,6 +8,7 @@ from openpilot.common.hardware import TICI
 from openpilot.system.ui.lib.application import gui_app
 from openpilot.system.ui.lib.egl import init_egl, create_egl_image, destroy_egl_image, bind_egl_image_to_texture, EGLImage
 from openpilot.system.ui.widgets import Widget
+from openpilot.sunnypilot.owner_files import DISPLAY_GAMMA_PATH, DISPLAY_GAMMA_DEFAULT, DISPLAY_GAMMA_MIN, DISPLAY_GAMMA_MAX
 from openpilot.selfdrive.ui.ui_state import ui_state, UIStatus
 
 CONNECTION_RETRY_INTERVAL = 0.2  # seconds between connection attempts
@@ -51,8 +52,8 @@ if TICI:
 
     // Display-only gamma lift. camerad exposes for the model, not for the eye, so the
     // preview looks dark on the device -- exactly the correction the TODO below asks for.
-    // Higher = brighter. 1.0 disables it. Tune this one number.
-    const float DISPLAY_GAMMA = 1.45;
+    // Higher = brighter, 1.0 disables it. Set from the owner settings panel while driving.
+    uniform float display_gamma;
 
     void main() {
       vec4 color = texture(texture0, fragTexCoord);
@@ -62,7 +63,7 @@ if TICI:
         color.rgb = clamp((color.rgb - 0.5) * 1.2 + 0.5, 0.0, 1.0);  // +20% contrast
       }
       // Single place that controls preview brightness, so engaged and disengaged match.
-      color.rgb = pow(clamp(color.rgb, 0.0, 1.0), vec3(1.0 / DISPLAY_GAMMA));
+      color.rgb = pow(clamp(color.rgb, 0.0, 1.0), vec3(1.0 / max(display_gamma, 0.1)));
       if (enhance_driver == 1) {
         float brightness = 1.1;
         color.rgb = color.rgb + 0.15;
@@ -129,6 +130,10 @@ class CameraView(Widget):
     self._engaged_val = rl.ffi.new("int[1]", [1])
     self._enhance_driver_loc = rl.get_shader_location(self.shader, "enhance_driver")
     self._enhance_driver_val = rl.ffi.new("int[1]", [1 if stream_type == VisionStreamType.VISION_STREAM_DRIVER else 0])
+    # owner setting, re-read from disk so a change in the settings panel shows up while driving
+    self._display_gamma_loc = rl.get_shader_location(self.shader, "display_gamma")
+    self._display_gamma_val = rl.ffi.new("float[1]", [DISPLAY_GAMMA_DEFAULT])
+    self._display_gamma_frame = 0
 
     self.frame: VisionBuf | None = None
     self.texture_y: rl.Texture | None = None
@@ -151,6 +156,19 @@ class CameraView(Widget):
       rl.unload_image(temp_image)
 
     ui_state.add_offroad_transition_callback(self._offroad_transition)
+
+  def _update_display_gamma(self):
+    """Pick up a new value from the settings panel about once a second."""
+    self._display_gamma_frame += 1
+    if self._display_gamma_frame % 20 != 1:
+      return
+    gamma = DISPLAY_GAMMA_DEFAULT
+    try:
+      with open(DISPLAY_GAMMA_PATH) as f:
+        gamma = float(f.read().strip())
+    except (OSError, ValueError):
+      pass
+    self._display_gamma_val[0] = max(DISPLAY_GAMMA_MIN, min(DISPLAY_GAMMA_MAX, gamma))
 
   def _offroad_transition(self):
     # Drain queued SubSocket messages to prevent old frames from showing when going
@@ -326,6 +344,9 @@ class CameraView(Widget):
     self._engaged_val[0] = 1 if ui_state.status != UIStatus.DISENGAGED else 0
     rl.set_shader_value(self.shader, self._engaged_loc, self._engaged_val, rl.ShaderUniformDataType.SHADER_UNIFORM_INT)
     rl.set_shader_value(self.shader, self._enhance_driver_loc, self._enhance_driver_val, rl.ShaderUniformDataType.SHADER_UNIFORM_INT)
+    if self._display_gamma_loc != -1:
+      self._update_display_gamma()
+      rl.set_shader_value(self.shader, self._display_gamma_loc, self._display_gamma_val, rl.ShaderUniformDataType.SHADER_UNIFORM_FLOAT)
 
   def _ensure_connection(self) -> bool:
     if not self.client.is_connected():

@@ -19,6 +19,7 @@ from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_assist 
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_resolver import SpeedLimitResolver
 from openpilot.sunnypilot.selfdrive.selfdrived.events import EventsSP
 from openpilot.sunnypilot.models.helpers import get_active_bundle
+from openpilot.sunnypilot.owner_files import CRUISE_SPEED_OFFSET_PATH, CRUISE_SPEED_OFFSET_LIMIT
 
 DecState = custom.LongitudinalPlanSP.DynamicExperimentalControl.DynamicExperimentalControlState
 LongitudinalPlanSource = custom.LongitudinalPlanSP.LongitudinalPlanSource
@@ -30,8 +31,8 @@ LongitudinalPlanSource = custom.LongitudinalPlanSP.LongitudinalPlanSource
 # Read from a plain file instead of a Params key on purpose: params_keys.h is compiled
 # into params_pyx.so, so a new key would need a full rebuild on the device.
 # Units follow IsMetric (km/h, or mph when imperial). Empty/missing/invalid file = 0.
-CRUISE_SPEED_OFFSET_PATH = "/data/cruise_speed_offset"
-CRUISE_SPEED_OFFSET_LIMIT = 5.0  # sanity clamp, both directions
+# The path and the clamp live in owner_files, so the settings panel writes exactly what
+# this reads.
 
 
 class LongitudinalPlannerSP:
