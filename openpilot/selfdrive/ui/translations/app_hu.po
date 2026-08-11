@@ -457,7 +457,7 @@ msgid "Joystick Debug Mode"
 msgstr "Joystick hibakereső mód"
 
 msgid "Longitudinal Maneuver Mode"
-msgstr "Hosszanti manőver mód"
+msgstr "Hosszirányú manőver mód"
 
 msgid "Lateral Maneuver Mode"
 msgstr "Oldalirányú manőver mód"
