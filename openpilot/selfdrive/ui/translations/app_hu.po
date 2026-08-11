@@ -792,7 +792,7 @@ msgid "enabling alpha longitudinal"
 msgstr "alpha hosszirányú bekapcsolása"
 
 msgid "Adjusting to {} {} speed limit"
-msgstr "Igazodás a {} {} sebességkorláthoz"
+msgstr "Igazodás a sebességkorláthoz: {} {}"
 
 msgid "Speed Limit Assist: set to {} {} to engage"
 msgstr "Sebességkorlát-asszisztens: állítsd {} {} értékre a bekapcsoláshoz"
