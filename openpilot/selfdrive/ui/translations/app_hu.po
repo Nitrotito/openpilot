@@ -23,7 +23,7 @@ msgid "Follow the prompts to complete the pairing process"
 msgstr "Kövesd a lépéseket a párosítás befejezéséhez"
 
 msgid "Re-enter the \"sunnylink\" panel to verify sponsorship status"
-msgstr "Lépj be újra a \"sunnylink\" panelbe a támogatói állapot ellenörzéséhez"
+msgstr "Lépj be újra a \"sunnylink\" panelbe a támogatói állapot ellenőrzéséhez"
 
 msgid "If sponsorship status was not updated, please contact a moderator on the community forum at https://community.sunnypilot.ai"
 msgstr "Ha a támogatói állapot nem frissült, keress egy moderátort a https://community.sunnypilot.ai fórumon"
@@ -32,7 +32,7 @@ msgid "Scan the QR code to visit sunnyhaibin's GitHub Sponsors page"
 msgstr "Olvasd be a QR kódot sunnyhaibin GitHub Sponsors oldalához"
 
 msgid "Choose your sponsorship tier and confirm your support"
-msgstr "Válaszd ki a támogatási szintet és erösítsd meg"
+msgstr "Válaszd ki a támogatási szintet és erősítsd meg"
 
 msgid "Join our Community Forum at https://community.sunnypilot.ai and reach out to a moderator if you have issues"
 msgstr "Csatlakozz a https://community.sunnypilot.ai fórumhoz, és szólj egy moderátornak, ha gond van"
@@ -146,7 +146,7 @@ msgid "REMOVE"
 msgstr "TÖRÖL"
 
 msgid "Request timed out"
-msgstr "A kérés túllépte az idöt"
+msgstr "A kérés túllépte az időt"
 
 msgid "Enter your GitHub username"
 msgstr "GitHub felhasználóneved"
@@ -167,7 +167,7 @@ msgid "Reboot and Update"
 msgstr "Újraindítás és frissítés"
 
 msgid "No release notes available."
-msgstr "Nincs elérhetö változásleírás."
+msgstr "Nincs elérhető változásleírás."
 
 msgid "Pair your device with comma connect (connect.comma.ai) and claim your comma prime offer."
 msgstr "Párosítsd a készüléket a comma connect oldalon (connect.comma.ai), és vedd át a comma prime ajánlatot."
@@ -185,10 +185,10 @@ msgid "Open"
 msgstr "Megnyitás"
 
 msgid "🔥 Firehose Mode 🔥"
-msgstr "🔥 Tüzcsap mód 🔥"
+msgstr "🔥 Tűzcsap mód 🔥"
 
 msgid "Please connect to Wi-Fi to complete initial pairing"
-msgstr "Csatlakozz Wi-Fire az elsö párosításhoz"
+msgstr "Csatlakozz Wi-Fire az első párosításhoz"
 
 msgid "EXPERIMENTAL MODE ON"
 msgstr "KÍSÉRLETI MÓD BE"
@@ -197,7 +197,7 @@ msgid "CHILL MODE ON"
 msgstr "NYUGODT MÓD BE"
 
 msgid "Upgrade Now"
-msgstr "Elöfizetés most"
+msgstr "Előfizetés most"
 
 msgid "PRIME FEATURES:"
 msgstr "PRIME SZOLGÁLTATÁSOK:"
@@ -233,7 +233,7 @@ msgid "Click \"add new device\" and scan the QR code on the right"
 msgstr "Kattints az \"add new device\" gombra, és olvasd be a jobb oldali QR kódot"
 
 msgid "Bookmark connect.comma.ai to your home screen to use it like an app"
-msgstr "Tedd ki a connect.comma.ai oldalt a kezdöképernyöre, így alkalmazásként használhatod"
+msgstr "Tedd ki a connect.comma.ai oldalt a kezdőképernyőre, így alkalmazásként használhatod"
 
 msgid "QR Code Error"
 msgstr "QR kód hiba"
@@ -301,7 +301,7 @@ msgid "Welcome to sunnypilot"
 msgstr "Üdv a sunnypilotban"
 
 msgid "You must accept the Terms of Service to use sunnypilot. Read the latest terms at https://sunnypilot.ai/terms before continuing."
-msgstr "A sunnypilot használatához el kell fogadnod a felhasználási feltételeket. Olvasd el öket a https://sunnypilot.ai/terms oldalon."
+msgstr "A sunnypilot használatához el kell fogadnod a felhasználási feltételeket. Olvasd el őket a https://sunnypilot.ai/terms oldalon."
 
 msgid "Decline"
 msgstr "Elutasítom"
@@ -328,13 +328,13 @@ msgid "Software"
 msgstr "Szoftver"
 
 msgid "Firehose"
-msgstr "Tüzcsap"
+msgstr "Tűzcsap"
 
 msgid "Developer"
-msgstr "Fejlesztö"
+msgstr "Fejlesztő"
 
 msgid "Preview the driver facing camera to ensure that driver monitoring has good visibility. (vehicle must be off)"
-msgstr "Nézd meg a vezetöt figyelö kamera képét, hogy jól lásson. (az autó legyen lekapcsolva)"
+msgstr "Nézd meg a vezetőt figyelő kamera képét, hogy jól lásson. (az autó legyen lekapcsolva)"
 
 msgid "sunnypilot requires the device to be mounted within 4° left or right and within 5° up or 9° down."
 msgstr "A sunnypilothoz a készüléknek 4°-on belül kell állnia balra vagy jobbra, és 5°-on belül felfelé, 9°-on belül lefelé."
@@ -385,7 +385,7 @@ msgid "Serial"
 msgstr "Sorozatszám"
 
 msgid "Driver Camera"
-msgstr "Vezetöt figyelö kamera"
+msgstr "Vezetőt figyelő kamera"
 
 msgid "PREVIEW"
 msgstr "ELÖNÉZET"
@@ -454,39 +454,39 @@ msgid "SSH Keys"
 msgstr "SSH kulcsok"
 
 msgid "Joystick Debug Mode"
-msgstr "Joystick hibakeresö mód"
+msgstr "Joystick hibakereső mód"
 
 msgid "Longitudinal Maneuver Mode"
-msgstr "Hosszanti manöver mód"
+msgstr "Hosszanti manőver mód"
 
 msgid "Lateral Maneuver Mode"
-msgstr "Oldalirányú manöver mód"
+msgstr "Oldalirányú manőver mód"
 
 msgid "sunnypilot Longitudinal Control (Alpha)"
 msgstr "sunnypilot hosszanti vezérlés (alfa)"
 
 msgid "UI Debug Mode"
-msgstr "Felület hibakeresö mód"
+msgstr "Felület hibakereső mód"
 
 msgid "Enable"
 msgstr "Bekapcsolás"
 
 msgid "Firehose Mode"
-msgstr "Tüzcsap mód"
+msgstr "Tűzcsap mód"
 
 msgid "{} segment of your driving is in the training dataset so far."
 msgid_plural "{} segments of your driving is in the training dataset so far."
-msgstr[0] "Eddig {} szakasz került be a vezetésedböl a tanítóadatba."
-msgstr[1] "Eddig {} szakasz került be a vezetésedböl a tanítóadatba."
+msgstr[0] "Eddig {} szakasz került be a vezetésedből a tanítóadatba."
+msgstr[1] "Eddig {} szakasz került be a vezetésedből a tanítóadatba."
 
 msgid "When enabled, pressing the accelerator pedal will disengage sunnypilot."
 msgstr "Bekapcsolva a gázpedál megnyomása kikapcsolja a sunnypilotot."
 
 msgid "Enable driver monitoring even when sunnypilot is not engaged."
-msgstr "A vezetöfigyelés akkor is müködjön, amikor a sunnypilot nincs bekapcsolva."
+msgstr "A vezetőfigyelés akkor is működjön, amikor a sunnypilot nincs bekapcsolva."
 
 msgid "Upload data from the driver facing camera and help improve the driver monitoring algorithm."
-msgstr "Töltsd fel a vezetöt figyelö kamera adatait, ezzel javítod a vezetöfigyelést."
+msgstr "Töltsd fel a vezetőt figyelő kamera adatait, ezzel javítod a vezetőfigyelést."
 
 msgid "Display speed in km/h instead of mph."
 msgstr "A sebesség km/h-ban jelenjen meg mph helyett."
@@ -501,7 +501,7 @@ msgid "Changing this setting will restart sunnypilot if the car is powered on."
 msgstr "Ennek átállítása újraindítja a sunnypilotot, ha az autó be van kapcsolva."
 
 msgid "Experimental mode is currently unavailable on this car since the car's stock ACC is used for longitudinal control."
-msgstr "A kísérleti mód ezen az autón nem elérhetö, mert a gyári tempomat végzi a hosszanti vezérlést."
+msgstr "A kísérleti mód ezen az autón nem elérhető, mert a gyári tempomat végzi a hosszanti vezérlést."
 
 msgid "Enable sunnypilot"
 msgstr "sunnypilot bekapcsolása"
@@ -516,10 +516,10 @@ msgid "Enable Lane Departure Warnings"
 msgstr "Sávelhagyás jelzése"
 
 msgid "Always-On Driver Monitoring"
-msgstr "Folyamatos vezetöfigyelés"
+msgstr "Folyamatos vezetőfigyelés"
 
 msgid "Record and Upload Driver Camera"
-msgstr "Vezetökamera rögzítése és feltöltése"
+msgstr "Vezetőkamera rögzítése és feltöltése"
 
 msgid "Record and Upload Microphone Audio"
 msgstr "Hang rögzítése és feltöltése"
@@ -528,7 +528,7 @@ msgid "Use Metric System"
 msgstr "Metrikus mértékegységek"
 
 msgid "sunnypilot longitudinal control may come in a future update."
-msgstr "A sunnypilot hosszanti vezérlése egy késöbbi frissítésben jöhet."
+msgstr "A sunnypilot hosszanti vezérlése egy későbbi frissítésben jöhet."
 
 msgid "Aggressive"
 msgstr "Dinamikus"
@@ -543,7 +543,7 @@ msgid "Enable the sunnypilot longitudinal control (alpha) toggle to allow Experi
 msgstr "Kapcsold be a sunnypilot hosszanti vezérlést (alfa) a kísérleti módhoz."
 
 msgid "checking..."
-msgstr "ellenörzés..."
+msgstr "ellenőrzés..."
 
 msgid "downloading..."
 msgstr "letöltés..."
@@ -585,7 +585,7 @@ msgstr[0] "{} napja"
 msgstr[1] "{} napja"
 
 msgid "Updates are only downloaded while the car is off."
-msgstr "A frissítés csak lekapcsolt autónál töltödik le."
+msgstr "A frissítés csak lekapcsolt autónál töltődik le."
 
 msgid "Current Version"
 msgstr "Jelenlegi verzió"
@@ -606,25 +606,25 @@ msgid "SELECT"
 msgstr "KIVÁLASZT"
 
 msgid "failed to check for update"
-msgstr "a frissítés ellenörzése nem sikerült"
+msgstr "a frissítés ellenőrzése nem sikerült"
 
 msgid "UNINSTALL"
 msgstr "ELTÁVOLÍT"
 
 msgid "update available"
-msgstr "elérhetö frissítés"
+msgstr "elérhető frissítés"
 
 msgid "DOWNLOAD"
 msgstr "LETÖLTÉS"
 
 msgid "up to date, last checked never"
-msgstr "naprakész, még nem volt ellenörizve"
+msgstr "naprakész, még nem volt ellenőrizve"
 
 msgid "up to date, last checked {}"
-msgstr "naprakész, utoljára ellenörizve {}"
+msgstr "naprakész, utoljára ellenőrizve {}"
 
 msgid "sunnypilot Unavailable"
-msgstr "A sunnypilot nem érhetö el"
+msgstr "A sunnypilot nem érhető el"
 
 msgid "Waiting to start"
 msgstr "Várakozás az indulásra"
@@ -674,10 +674,10 @@ msgid "lane departure warnings"
 msgstr "sávelhagyás-figyelmeztetés"
 
 msgid "always-on driver monitor"
-msgstr "mindig aktív vezetöfigyelés"
+msgstr "mindig aktív vezetőfigyelés"
 
 msgid "record & upload driver camera"
-msgstr "vezetökamera rögzítése"
+msgstr "vezetőkamera rögzítése"
 
 msgid "record & upload mic audio"
 msgstr "mikrofon rögzítése"
@@ -695,7 +695,7 @@ msgid "device"
 msgstr "készülék"
 
 msgid "developer"
-msgstr "fejlesztöi"
+msgstr "fejlesztői"
 
 msgid "manual"
 msgstr "kézikönyv"
@@ -715,10 +715,10 @@ msgid "paired"
 msgstr "párosítva"
 
 msgid "subscribed"
-msgstr "elöfizetve"
+msgstr "előfizetve"
 
 msgid "upgrade to prime"
-msgstr "prime elöfizetés"
+msgstr "prime előfizetés"
 
 msgid "update sunnypilot"
 msgstr "sunnypilot frissítése"
@@ -727,7 +727,7 @@ msgid "update now"
 msgstr "frissítés most"
 
 msgid "updater failed\nto respond"
-msgstr "a frissítö nem\nválaszol"
+msgstr "a frissítő nem\nválaszol"
 
 msgid "failed to update"
 msgstr "a frissítés nem sikerült"
@@ -754,7 +754,7 @@ msgid "regulatory info"
 msgstr "hatósági információk"
 
 msgid "driver\ncamera preview"
-msgstr "vezetökamera\nelönézet"
+msgstr "vezetőkamera\nelőnézet"
 
 msgid "review\ntraining guide"
 msgstr "betanító\nútmutató"
@@ -766,19 +766,19 @@ msgid "enter GitHub username..."
 msgstr "GitHub felhasználónév..."
 
 msgid "joystick debug mode"
-msgstr "joystick hibakeresö mód"
+msgstr "joystick hibakereső mód"
 
 msgid "longitudinal maneuver mode"
-msgstr "hosszirányú manöver mód"
+msgstr "hosszirányú manőver mód"
 
 msgid "lateral maneuver mode"
-msgstr "oldalirányú manöver mód"
+msgstr "oldalirányú manőver mód"
 
 msgid "alpha longitudinal"
 msgstr "alpha hosszirányú"
 
 msgid "ui debug mode"
-msgstr "felület hibakeresö mód"
+msgstr "felület hibakereső mód"
 
 
 # comma 4 (mici): uj felso-repo cimkek, 2026-08-11
@@ -829,3 +829,1209 @@ msgstr "Adatgyűjtés"
 
 msgid "Firehose Mode"
 msgstr "Adatgyűjtő mód"
+
+msgid "%"
+msgstr "%"
+
+msgid "h"
+msgstr "ó"
+
+msgid "m"
+msgstr "p"
+
+msgid "s"
+msgstr "mp"
+
+msgid "KM"
+msgstr "KM"
+
+msgid "No"
+msgstr "Nem"
+
+msgid "All"
+msgstr "Mind"
+
+msgid "OSM"
+msgstr "OSM"
+
+msgid "Off"
+msgstr "Ki"
+
+msgid "Yes"
+msgstr "Igen"
+
+msgid "Info"
+msgstr "Infó"
+
+msgid "Near"
+msgstr "Közeli"
+
+msgid "None"
+msgstr "Nincs"
+
+msgid "Scan"
+msgstr "Keresés"
+
+msgid "Time"
+msgstr "Idő"
+
+msgid "CLEAR"
+msgstr "TÖRLÉS"
+
+msgid "FAULT"
+msgstr "HIBA"
+
+msgid "Fixed"
+msgstr "Fix"
+
+msgid "Hours"
+msgstr "Óra"
+
+msgid "Miles"
+msgstr "Mérföld"
+
+msgid "Nudge"
+msgstr "Bökés"
+
+msgid "Pause"
+msgstr "Szünet"
+
+msgid "Right"
+msgstr "Jobb"
+
+msgid "Speed"
+msgstr "Sebesség"
+
+msgid "State"
+msgstr "Állam"
+
+msgid "Trips"
+msgstr "Utak"
+
+msgid "error"
+msgstr "hiba"
+
+msgid "ready"
+msgstr "kész"
+
+msgid "ACTIVE"
+msgstr "AKTÍV"
+
+msgid "Assist"
+msgstr "Asszisztens"
+
+msgid "Bottom"
+msgstr "Alul"
+
+msgid "Cruise"
+msgstr "Tempomat"
+
+msgid "DELETE"
+msgstr "TÖRLÉS"
+
+msgid "Drives"
+msgstr "Menetek"
+
+msgid "Paired"
+msgstr "Párosítva"
+
+msgid "backup"
+msgstr "mentés"
+
+msgid "failed"
+msgstr "sikertelen"
+
+msgid "models"
+msgstr "modellek"
+
+msgid "thanks"
+msgstr "köszönjük"
+
+msgid "Confirm"
+msgstr "Jóváhagyás"
+
+msgid "Country"
+msgstr "Ország"
+
+msgid "Default"
+msgstr "Alap"
+
+msgid "Disable"
+msgstr "Kikapcsolás"
+
+msgid "Display"
+msgstr "Kijelző"
+
+msgid "Dynamic"
+msgstr "Dinamikus"
+
+msgid "Offroad"
+msgstr "Álló"
+
+msgid "REFRESH"
+msgstr "FRISSÍTÉS"
+
+msgid "SPONSOR"
+msgstr "TÁMOGATÓ"
+
+msgid "Vehicle"
+msgstr "Jármű"
+
+msgid "Visuals"
+msgstr "Megjelenítés"
+
+msgid "Warning"
+msgstr "Figyelmeztetés"
+
+msgid "restore"
+msgstr "visszaállítás"
+
+msgid "sponsor"
+msgstr "támogató"
+
+msgid "3-Finger"
+msgstr "3 ujj"
+
+msgid "4-Finger"
+msgstr "4 ujj"
+
+msgid "5-Finger"
+msgstr "5 ujj"
+
+msgid "ALL TIME"
+msgstr "MINDEN IDŐK"
+
+msgid "Car Only"
+msgstr "Csak autó"
+
+msgid "Combined"
+msgstr "Kombinált"
+
+msgid "DISABLED"
+msgstr "KIKAPCSOLVA"
+
+msgid "Distance"
+msgstr "Távolság"
+
+msgid "Friction"
+msgstr "Súrlódás"
+
+msgid "Map Only"
+msgstr "Csak térkép"
+
+msgid "Steering"
+msgstr "Kormányzás"
+
+msgid "THANKS ♥"
+msgstr "KÖSZÖNJÜK ♥"
+
+msgid "progress"
+msgstr "folyamat"
+
+msgid "Always On"
+msgstr "Mindig be"
+
+msgid "Car First"
+msgstr "Autó előbb"
+
+msgid "Disengage"
+msgstr "Kikapcsol"
+
+msgid "Error Log"
+msgstr "Hibanapló"
+
+msgid "Map First"
+msgstr "Térkép előbb"
+
+msgid "Nudgeless"
+msgstr "Bökés nélkül"
+
+msgid "PAST WEEK"
+msgstr "ELMÚLT HÉT"
+
+msgid "REGIST..."
+msgstr "REGISZT..."
+
+msgid "SUNNYLINK"
+msgstr "SUNNYLINK"
+
+msgid "Self-Tune"
+msgstr "Önhangolás"
+
+msgid "device id"
+msgstr "eszközazonosító"
+
+msgid "no alerts"
+msgstr "nincs jelzés"
+
+msgid "restoring"
+msgstr "visszaállítás"
+
+msgid "sunnylink"
+msgstr "sunnylink"
+
+msgid " (Default)"
+msgstr " (alap)"
+
+msgid "Navigation"
+msgstr "Navigáció"
+
+msgid "Not Paired"
+msgstr "Nincs párosítva"
+
+msgid "Predictive"
+msgstr "Előrejelző"
+
+msgid "Quiet Mode"
+msgstr "Csendes mód"
+
+msgid "Screen Off"
+msgstr "Képernyő ki"
+
+msgid "backing up"
+msgstr "mentés folyamatban"
+
+msgid "cache size"
+msgstr "gyorsítótár mérete"
+
+msgid "from cache"
+msgstr "gyorsítótárból"
+
+msgid "Auto (Dark)"
+msgstr "Automata (sötét)"
+
+msgid "Clear Cache"
+msgstr "Gyorsítótár törlése"
+
+msgid "FETCHING..."
+msgstr "LEKÉRÉS..."
+
+msgid "Not Sponsor"
+msgstr "Nem támogató"
+
+msgid "Scanning..."
+msgstr "Keresés..."
+
+msgid "Speed Limit"
+msgstr "Sebességkorlát"
+
+msgid "downloading"
+msgstr "letöltés"
+
+msgid "no internet"
+msgstr "nincs internet"
+
+msgid "Developer UI"
+msgstr "Fejlesztői kijelző"
+
+msgid "Mapd Version"
+msgstr "Térkép verzió"
+
+msgid "Offline Only"
+msgstr "Csak offline"
+
+msgid "Policy Model"
+msgstr "Döntési modell"
+
+msgid "Screen Saver"
+msgstr "Képernyőkímélő"
+
+msgid "Steering Arc"
+msgstr "Kormány-ív"
+
+msgid "Total Delay:"
+msgstr "Teljes késleltetés:"
+
+msgid "Vision Model"
+msgstr "Látó modell"
+
+msgid "active model"
+msgstr "aktív modell"
+
+msgid "select model"
+msgstr "modell választása"
+
+msgid "sponsor tier"
+msgstr "támogatói szint"
+
+msgid "Backup Failed"
+msgstr "A mentés nem sikerült"
+
+msgid "Current Model"
+msgstr "Jelenlegi modell"
+
+msgid "Driving Model"
+msgstr "Vezetési modell"
+
+msgid "Remain Active"
+msgstr "Aktív marad"
+
+msgid "Auto (Default)"
+msgstr "Automata (alap)"
+
+msgid "Customize MADS"
+msgstr "MADS testreszabása"
+
+msgid "Onroad Uploads"
+msgstr "Feltöltés menet közben"
+
+msgid "Quickboot Mode"
+msgstr "Gyorsindítás"
+
+msgid "Reset Settings"
+msgstr "Beállítások alaphelyzetbe"
+
+msgid "Restore Failed"
+msgstr "A visszaállítás nem sikerült"
+
+msgid "Right & Bottom"
+msgstr "Jobbra és alul"
+
+msgid "Select a Model"
+msgstr "Válassz modellt"
+
+msgid "Sponsor Status"
+msgstr "Támogatói állapot"
+
+msgid "Start Download"
+msgstr "Letöltés indítása"
+
+msgid "Training Guide"
+msgstr "Oktatóanyag"
+
+msgid "Actuator Delay:"
+msgstr "Beavatkozó késleltetés:"
+
+msgid "Backup Settings"
+msgstr "Beállítások mentése"
+
+msgid "Cancel Download"
+msgstr "Letöltés megszakítása"
+
+msgid "Database Update"
+msgstr "Adatbázis frissítés"
+
+msgid "Disable Updates"
+msgstr "Frissítések kikapcsolása"
+
+msgid "Downloaded Maps"
+msgstr "Letöltött térképek"
+
+msgid "Downloading Map"
+msgstr "Térkép letöltése"
+
+msgid "Last checked {}"
+msgstr "Utoljára ellenőrizve: {}"
+
+msgid "None: No Offset"
+msgstr "Nincs: nincs eltolás"
+
+msgid "On-Policy Model"
+msgstr "On-policy modell"
+
+msgid "Software Delay:"
+msgstr "Szoftveres késleltetés:"
+
+msgid "backup settings"
+msgstr "beállítások mentése"
+
+msgid "cancel download"
+msgstr "letöltés megszakítása"
+
+msgid "download failed"
+msgstr "a letöltés nem sikerült"
+
+msgid "slide to backup"
+msgstr "húzd el a mentéshez"
+
+msgid "Customize Source"
+msgstr "Forrás testreszabása"
+
+msgid "Enable sunnylink"
+msgstr "sunnylink bekapcsolása"
+
+msgid "Max Time Offroad"
+msgstr "Maximum állóidő"
+
+msgid "Off-Policy Model"
+msgstr "Off-policy modell"
+
+msgid "Restore Settings"
+msgstr "Beállítások visszaállítása"
+
+msgid "Select a vehicle"
+msgstr "Válassz járművet"
+
+msgid "Wake Up Behavior"
+msgstr "Ébredési viselkedés"
+
+msgid "enable sunnylink"
+msgstr "sunnylink bekapcsolása"
+
+msgid "restore settings"
+msgstr "beállítások visszaállítása"
+
+msgid "slide to restore"
+msgstr "húzd el a visszaállításhoz"
+
+msgid "Clear Model Cache"
+msgstr "Modell-gyorsítótár törlése"
+
+msgid "Display Road Name"
+msgstr "Utcanév kijelzése"
+
+msgid "Live Steer Delay:"
+msgstr "Élő kormány-késleltetés:"
+
+msgid "Onroad Brightness"
+msgstr "Fényerő vezetés közben"
+
+msgid "copyparty Service"
+msgstr "copyparty fájlszerver"
+
+msgid "unable to restore"
+msgstr "nem sikerült visszaállítani"
+
+msgid "Post-Blinker Delay"
+msgstr "Index utáni késleltetés"
+
+msgid "Refresh Model List"
+msgstr "Modell-lista frissítése"
+
+msgid "Speed Limit Offset"
+msgstr "Sebességkorlát eltolás"
+
+msgid "Speed Limit Source"
+msgstr "Sebességkorlát forrása"
+
+msgid "Stop and Go (Beta)"
+msgstr "Megállás és indulás (béta)"
+
+msgid "settings backed up"
+msgstr "a beállítások elmentve"
+
+msgid "sunnylink uploader"
+msgstr "sunnylink feltöltő"
+
+msgid "Downloading Maps..."
+msgstr "Térképek letöltése..."
+
+msgid "Exit Always Offroad"
+msgstr "Kilépés az állandó álló módból"
+
+msgid "No vehicle selected"
+msgstr "Nincs kiválasztott jármű"
+
+msgid "Pair GitHub Account"
+msgstr "GitHub fiók párosítása"
+
+msgid "Real-Time & Offline"
+msgstr "Valós idejű és offline"
+
+msgid "Search your vehicle"
+msgstr "Keresd meg a járműved"
+
+msgid "pair with sunnylink"
+msgstr "párosítás a sunnylinkkel"
+
+msgid "Adjust Camera Offset"
+msgstr "Kamera-eltolás beállítása"
+
+msgid "All states (~6.0 GB)"
+msgstr "Minden állam (kb. 6,0 GB)"
+
+msgid "Display Turn Signals"
+msgstr "Index kijelzése"
+
+msgid "Enable Custom Tuning"
+msgstr "Kézi hangolás engedélyezése"
+
+msgid "Long Press Increment"
+msgstr "Hosszú nyomás lépésköze"
+
+msgid "Unrecognized Vehicle"
+msgstr "Ismeretlen jármű"
+
+msgid "Yes, delete all maps"
+msgstr "Igen, töröld az összes térképet"
+
+msgid "Adjust Software Delay"
+msgstr "Szoftveres késleltetés beállítása"
+
+msgid "Customize Lane Change"
+msgstr "Sávváltás testreszabása"
+
+msgid "Driver Camera Preview"
+msgstr "Belső kamera előnézete"
+
+msgid "Enable Always Offroad"
+msgstr "Állandó álló mód bekapcsolása"
+
+msgid "GitHub Runner Service"
+msgstr "GitHub futtató szolgáltatás"
+
+msgid "Interactivity Timeout"
+msgstr "Menü bezárása magától"
+
+msgid "Screen Saver Duration"
+msgstr "Képernyőkímélő hossza"
+
+msgid "Short Press Increment"
+msgstr "Rövid nyomás lépésköze"
+
+msgid "Use Lane Turn Desires"
+msgstr "Kanyarodási szándék használata"
+
+msgid "Adjust Lane Turn Speed"
+msgstr "Kanyarodási sebesség beállítása"
+
+msgid "Fetching Latest Models"
+msgstr "Legfrissebb modellek lekérése"
+
+msgid "MADS Screen Activation"
+msgstr "MADS képernyős bekapcsolás"
+
+msgid "Show Advanced Controls"
+msgstr "Haladó beállítások mutatása"
+
+msgid "slide to force offroad"
+msgstr "húzd el az álló módhoz"
+
+msgid "Customize Torque Params"
+msgstr "Nyomaték-paraméterek testreszabása"
+
+msgid "Enable Standstill Timer"
+msgstr "Állásidő-óra bekapcsolása"
+
+msgid "Manual Real-Time Tuning"
+msgstr "Valós idejű kézi hangolás"
+
+msgid "Onroad Brightness Delay"
+msgstr "Elsötétedés ideje"
+
+msgid "Toggle with Main Cruise"
+msgstr "Kapcsolás a fő tempomattal"
+
+msgid "Show Blind Spot Warnings"
+msgstr "Holttér-figyelmeztetés"
+
+msgid "Stop and Go Hack (Alpha)"
+msgstr "Megállás és indulás trükk (alfa)"
+
+msgid "Enable Tesla Rainbow Mode"
+msgstr "Tesla szivárvány mód"
+
+msgid "Live Learning Steer Delay"
+msgstr "Kormány-késleltetés tanulása"
+
+msgid "please reboot & try again"
+msgstr "indítsd újra, és próbáld meg újra"
+
+msgid "Custom Longitudinal Tuning"
+msgstr "Egyedi hosszirányú hangolás"
+
+msgid "Frequently Asked Questions"
+msgstr "Gyakori kérdések"
+
+msgid "Real-time Acceleration Bar"
+msgstr "Valós idejű gyorsulás-sáv"
+
+msgid "Settings backup completed."
+msgstr "A beállítások mentése kész."
+
+msgid "Smart Cruise Control - Map"
+msgstr "Okos tempomat, térkép"
+
+msgid "Auto Lane Change by Blinker"
+msgstr "Automata sávváltás indexre"
+
+msgid "Cooperative Steering (Beta)"
+msgstr "Együttműködő kormányzás (béta)"
+
+msgid "Custom ACC Speed Increments"
+msgstr "Egyedi tempomat-lépésköz"
+
+msgid "Fingerprinted automatically"
+msgstr "Automatikusan felismerve"
+
+msgid "Lateral Acceleration Factor"
+msgstr "Oldalgyorsulási tényező"
+
+msgid "Lead Departure Alert (Beta)"
+msgstr "Elindult az előtted lévő (béta)"
+
+msgid "Torque Control Tune Version"
+msgstr "Nyomaték-hangolás verziója"
+
+msgid "become a sunnypilot sponsor"
+msgstr "légy sunnypilot támogató"
+
+msgid "Please reboot and try again."
+msgstr "Indítsd újra, és próbáld meg újra."
+
+msgid "Steering Mode on Brake Pedal"
+msgstr "Kormány viselkedése fékezéskor"
+
+msgid "What's a good USB-C adapter?"
+msgstr "Milyen a jó USB-C töltő?"
+
+msgid "slide to exit always offroad"
+msgstr "húzd el a kilépéshez"
+
+msgid "Display Metrics Below Chevron"
+msgstr "Adatok az előtted lévő autónál"
+
+msgid "Manually selected fingerprint"
+msgstr "Kézzel kiválasztott jármű"
+
+msgid "Smart Cruise Control - Vision"
+msgstr "Okos tempomat, kamera"
+
+msgid "Unified Engagement Mode (UEM)"
+msgstr "Egyesített bekapcsolás (UEM)"
+
+msgid "sunnylink dongle id not found"
+msgstr "nincs meg a sunnylink azonosító"
+
+msgid "Enforce Torque Lateral Control"
+msgstr "Nyomaték-alapú kormányzás kényszerítése"
+
+msgid "Lateral Jerk Torque Controller"
+msgstr "Előretekintő nyomaték-simítás"
+
+msgid "Error: Invalid download. Retry."
+msgstr "Hiba: hibás letöltés. Próbáld újra."
+
+msgid "sunnylink Dongle ID not found. "
+msgstr "Nincs meg a sunnylink azonosító. "
+
+msgid "Green Traffic Light Alert (Beta)"
+msgstr "Zöld lámpa jelzés (béta)"
+
+msgid "Enable the beloved MADS feature. "
+msgstr "A közkedvelt MADS bekapcsolása. "
+
+msgid "Pause Lateral Control with Blinker"
+msgstr "Index szünetelteti a kormányzást"
+
+msgid "Please connect to Wi-Fi to update."
+msgstr "Csatlakozz wifire a frissítéshez."
+
+msgid "Select Torque Control Tune Version"
+msgstr "Válassz nyomaték-hangolás verziót"
+
+msgid "Would you like to delete this log?"
+msgstr "Törlöd ezt a naplót?"
+
+msgid "disengage to enable always offroad"
+msgstr "kapcsold ki a vezérlést az állandó álló módhoz"
+
+msgid "please connect to WiFi & try again"
+msgstr "csatlakozz wifire, és próbáld meg újra"
+
+msgid "Enable Dynamic Experimental Control"
+msgstr "Dinamikus kísérleti vezérlés"
+
+msgid "Does it matter how or where I drive?"
+msgstr "Számít, hogyan vagy hol vezetek?"
+
+msgid "Does it matter which software I run?"
+msgstr "Számít, melyik szoftvert futtatom?"
+
+msgid "Enforce Factory Longitudinal Control"
+msgstr "Gyári hosszirányú vezérlés kényszerítése"
+
+msgid "Speedometer: Hide from Onroad Screen"
+msgstr "Sebességmérő elrejtése"
+
+msgid "Neural Network Lateral Control (NNLC)"
+msgstr "Neurális kormányvezérlés (NNLC)"
+
+msgid "Disengage to Enter Always Offroad Mode"
+msgstr "Kapcsold ki a vezérlést az állandó álló módhoz"
+
+msgid "Minimum Speed to Pause Lateral Control"
+msgstr "Kormányzás szüneteltetésének alsó sebességhatára"
+
+msgid "Not fingerprinted or manually selected"
+msgstr "Nincs felismerve és nincs kézzel kiválasztva"
+
+msgid "Speedometer: Always Display True Speed"
+msgstr "Sebességmérő: mindig a valódi sebesség"
+
+msgid "Apply a custom timeout for settings UI."
+msgstr "Egyedi idő a beállítások menü bezárásához."
+
+msgid "Auto Lane Change: Delay with Blind Spot"
+msgstr "Sávváltás késleltetése holttérnél"
+
+msgid "Modular Assistive Driving System (MADS)"
+msgstr "Moduláris vezetéstámogató rendszer (MADS)"
+
+msgid "Nope, just drive as you normally would."
+msgstr "Nem, csak vezess úgy, ahogy szoktál."
+
+msgid "Off: Disables the Speed Limit functions."
+msgstr "Ki: kikapcsolja a sebességkorlát funkciókat."
+
+msgid "Click the Sponsor button for more details"
+msgstr "Részletekért kattints a Támogató gombra"
+
+msgid "INACTIVE: connect to an unmetered network"
+msgstr "INAKTÍV: csatlakozz korlátlan hálózatra"
+
+msgid "This platform supports all MADS settings."
+msgstr "Ez a platform minden MADS beállítást támogat."
+
+msgid "This setting will take effect immediately."
+msgstr "Ez a beállítás azonnal érvénybe lép."
+
+msgid "View the error log for sunnypilot crashes."
+msgstr "A sunnypilot összeomlásainak hibanaplója."
+
+msgid "Less Restrict Settings for Self-Tune (Beta)"
+msgstr "Megengedőbb beállítások az önhangoláshoz (béta)"
+
+msgid "Stop and Go for Manual Parking Brake (Beta)"
+msgstr "Megállás-elindulás kézifékes autóhoz (béta)"
+
+msgid "Car Only: Use Speed Limit data only from Car"
+msgstr "Csak autó: a sebességkorlát csak az autótól"
+
+msgid "Colors represent vehicle fingerprint status:"
+msgstr "A színek a jármű felismerésének állapotát jelzik:"
+
+msgid "Select vehicle to force fingerprint manually."
+msgstr "Válaszd ki a járművet a kézi felismeréshez."
+
+msgid "This platform supports limited MADS settings."
+msgstr "Ez a platform csak korlátozott MADS beállításokat támogat."
+
+msgid "Controls state of the device after boot/sleep."
+msgstr "A készülék állapota indítás vagy ébredés után."
+
+msgid "Enables or disables the GitHub runner service."
+msgstr "A GitHub runner szolgáltatás be- vagy kikapcsolása."
+
+msgid "Enable sunnylink uploader (infrastructure test)"
+msgstr "sunnylink feltöltő bekapcsolása (infrastruktúra-teszt)"
+
+msgid "Any fast phone or laptop charger should be fine."
+msgstr "Bármelyik gyors telefon- vagy laptoptöltő megfelel."
+
+msgid "Unable to restore the settings, try again later."
+msgstr "A beállítások visszaállítása nem sikerült, próbáld később."
+
+msgid "Fixed: Adds a fixed offset [Speed Limit + Offset]"
+msgstr "Fix: állandó eltolás [sebességkorlát + eltolás]"
+
+msgid "Start the vehicle to check vehicle compatibility."
+msgstr "Indítsd el az autót a kompatibilitás ellenőrzéséhez."
+
+msgid "The reset cannot be undone. You have been warned."
+msgstr "A visszaállítás nem vonható vissza. Szóltunk."
+
+msgid "Are you sure you want to exit Always Offroad mode?"
+msgstr "Biztosan kilépsz az állandó álló módból?"
+
+msgid "Do all of my segments get pulled in Firehose Mode?"
+msgstr "Az összes felvételemet elviszik adatgyűjtő módban?"
+
+msgid "Enables custom tuning for Torque lateral control. "
+msgstr "Egyéni hangolás a nyomaték-alapú kormányzáshoz. "
+
+msgid "No, we selectively pull a subset of your segments."
+msgstr "Nem, a felvételeidnek csak egy válogatott részét visszük el."
+
+msgid ", but we'll be here when you're ready to come back."
+msgstr ", de itt leszünk, ha úgy döntesz, hogy visszatérsz."
+
+msgid "Are you sure you want to enter Always Offroad mode?"
+msgstr "Biztosan belépsz az állandó álló módba?"
+
+msgid "Intelligent Cruise Button Management (ICBM) (Alpha)"
+msgstr "Intelligens tempomatgomb-kezelés (ICBM) (alfa)"
+
+msgid "Sponsorship isn't required for basic backup/restore"
+msgstr "Az alap mentéshez és visszaállításhoz nem kell támogatói tagság"
+
+msgid "For secure backup, restore, and remote configuration"
+msgstr "Biztonságos mentés, visszaállítás és távoli beállítás"
+
+msgid "Please connect to Wi-Fi to complete initial pairing."
+msgstr "Csatlakozz Wi-Fi hálózatra a párosítás befejezéséhez."
+
+msgid "Settings restored. Confirm to restart the interface."
+msgstr "A beállítások visszaálltak. Hagyd jóvá a felület újraindítását."
+
+msgid "This feature is unavailable while the car is onroad."
+msgstr "Ez a funkció menet közben nem érhető el."
+
+msgid "Information: Displays the current road's speed limit."
+msgstr "Tájékoztatás: megjeleníti az adott út sebességkorlátját."
+
+msgid "Displays the name of the road the car is traveling on."
+msgstr "Megjeleníti annak az útnak a nevét, amelyen az autó halad."
+
+msgid "Pause: ALC will pause when the brake pedal is pressed."
+msgstr "Szünet: a sávtartás szünetel a fékpedál megnyomásakor."
+
+msgid "Your vehicle will use the Default longitudinal tuning."
+msgstr "Az autód az alapértelmezett hosszanti hangolást használja."
+
+msgid "Your vehicle will use the Dynamic longitudinal tuning."
+msgstr "Az autód a dinamikus hosszanti hangolást használja."
+
+msgid "Map Only: Use Speed Limit data only from OpenStreetMaps"
+msgstr "Csak térkép: a sebességkorlát csak az OpenStreetMapsból"
+
+msgid "Not going to lie, it's sad to see you disabled sunnylink"
+msgstr "Nem szépítem: szomorú, hogy kikapcsoltad a sunnylinket"
+
+msgid "Show a timer on the HUD when the car is at a standstill."
+msgstr "Állás közben időmérő megjelenítése a kijelzőn."
+
+msgid "Enter model year (e.g., 2021) and model (Toyota Corolla):"
+msgstr "Add meg az évjáratot (pl. 2021) és a típust (Toyota Corolla):"
+
+msgid "This feature is currently not available on this platform."
+msgstr "Ez a funkció jelenleg nem érhető el ezen a platformon."
+
+msgid "Your vehicle will use the Predictive longitudinal tuning."
+msgstr "Az autód az előrejelző hosszanti hangolást használja."
+
+msgid "When enabled, visual turn indicators are drawn on the HUD."
+msgstr "Bekapcsolva a kanyarodási jelzések megjelennek a kijelzőn."
+
+msgid "How long the screen saver runs before the screen turns off."
+msgstr "Meddig fut a képernyőkímélő, mielőtt a kijelző lekapcsol."
+
+msgid "Device must be registered with the comma.ai backend to pair."
+msgstr "A párosításhoz a készüléknek regisztrálva kell lennie a comma.ai rendszerében."
+
+msgid "This allows the use of full MADS functionality when enabled."
+msgstr "Bekapcsolva a MADS teljes tudása elérhető."
+
+msgid "Disengage: ALC will disengage when the brake pedal is pressed."
+msgstr "Kikapcsolás: a sávtartás kikapcsol a fékpedál megnyomásakor."
+
+msgid "Display real-time parameters and metrics from various sources."
+msgstr "Valós idejű paraméterek és adatok megjelenítése több forrásból."
+
+msgid "System reboot required for changes to take effect. Reboot now?"
+msgstr "A változások érvénybe lépéséhez újraindítás kell. Újraindítsam most?"
+
+msgid "Set the maximum speed for lane turn desires. Default is 19 mph."
+msgstr "A kanyarodási sebesség felső határa. Alapérték: 19 mph."
+
+msgid "A beautiful rainbow effect on the path the model wants to take. "
+msgstr "Szivárványos színezés azon az úton, amerre a modell menne. "
+
+msgid "Delay before lateral control resumes after the turn signal ends."
+msgstr "Késleltetés, mielőtt a kormányzás az index kikapcsolása után folytatódik."
+
+msgid "Only available when vehicle is off, or always offroad mode is on"
+msgstr "Csak kikapcsolt autónál vagy állandó álló módban érhető el"
+
+msgid "Are you sure you want to backup your current sunnypilot settings?"
+msgstr "Biztosan mented a jelenlegi sunnypilot beállításokat?"
+
+msgid "Combined: Use combined Speed Limit data from Car & OpenStreetMaps"
+msgstr "Vegyes: sebességkorlát az autótól és az OpenStreetMapsból együtt"
+
+msgid "Display useful metrics below the chevron that tracks the lead car "
+msgstr "Hasznos adatok az előtted lévő autót követő jel alatt "
+
+msgid "Offroad: Device will be in Always Offroad mode after boot/wake-up."
+msgstr "Álló: a készülék indítás vagy ébredés után állandó álló módban lesz."
+
+msgid "Selecting a higher finger count may reduce accidental activations."
+msgstr "Több ujj kiválasztása csökkenti a véletlen bekapcsolást."
+
+msgid "Note: Setting this to Off will reset your MADS settings to default."
+msgstr "Megjegyzés: kikapcsolva a MADS beállítások alaphelyzetbe állnak."
+
+msgid "This setting will take effect once the device enters offroad state."
+msgstr "Ez a beállítás akkor lép érvénybe, amikor a készülék álló módba kerül."
+
+msgid "Use a multi-finger press on the infotainment screen to toggle MADS."
+msgstr "Több ujjal érintsd meg a fedélzeti kijelzőt a MADS kapcsolásához."
+
+msgid "Welcome back!! We're excited to see you've enabled sunnylink again!"
+msgstr "Üdv újra!! Örülünk, hogy visszakapcsoltad a sunnylinket!"
+
+msgid "sunnypilot learns to drive by watching humans, like you, drive.\n\n"
+msgstr "A sunnypilot úgy tanul vezetni, hogy embereket figyel vezetés közben, például téged.\n\n"
+
+msgid "When enabled, the speedometer on the onroad screen is not displayed."
+msgstr "Bekapcsolva a menet közbeni képernyőn nem látszik a sebességmérő."
+
+msgid "Default: Device will boot/wake-up normally & will be ready to engage."
+msgstr "Alap: a készülék normálisan indul, és készen áll a bekapcsolásra."
+
+msgid "Percent: Adds a percent offset [Speed Limit + (Offset % Speed Limit)]"
+msgstr "Százalék: százalékos eltolás [sebességkorlát + (eltolás % sebességkorlát)]"
+
+msgid "Remain Active: ALC will remain active when the brake pedal is pressed."
+msgstr "Marad aktív: a sávtartás a fékpedál megnyomásakor is aktív marad."
+
+msgid "This feature requires sunnypilot longitudinal control to be available."
+msgstr "Ehhez a funkcióhoz a sunnypilot hosszanti vezérlése szükséges."
+
+msgid "This platform only supports Disengage mode due to vehicle limitations."
+msgstr "A jármű korlátai miatt ez a platform csak a kikapcsolás módot támogatja."
+
+msgid "sunnypilot is continuously calibrating, resetting is rarely required. "
+msgstr "A sunnypilot folyamatosan kalibrál, visszaállításra ritkán van szükség. "
+
+msgid "Enable this to enforce sunnypilot to steer with Torque lateral control."
+msgstr "Bekapcsolva a sunnypilot a nyomaték-alapú kormányzást használja."
+
+msgid "Enabling this will display warnings when a vehicle is detected in your "
+msgstr "Bekapcsolva figyelmeztetést kapsz, ha járművet észlel a "
+
+msgid "Engage lateral and longitudinal control with cruise control engagement."
+msgstr "A kormányzás és a hosszanti vezérlés a tempomattal együtt kapcsol be."
+
+msgid "Are you sure you want to restore the last backed up sunnypilot settings?"
+msgstr "Biztosan visszaállítod a legutóbb mentett sunnypilot beállításokat?"
+
+msgid "If you're driving at 20 mph (32 km/h) or below and have your blinker on,"
+msgstr "Ha 20 mph (32 km/h) alatt haladsz és be van kapcsolva az index,"
+
+msgid "Enable \"Always Offroad\" in Device panel, or turn vehicle off to change."
+msgstr "Kapcsold be az \"állandó álló módot\" a Készülék panelen, vagy állítsd le az autót a módosításhoz."
+
+msgid "Enable \"Always Offroad\" in Device panel, or turn vehicle off to toggle."
+msgstr "Kapcsold be az \"állandó álló módot\" a Készülék panelen, vagy állítsd le az autót a kapcsoláshoz."
+
+msgid "Less strict settings when using Self-Tune. This allows torqued to be more "
+msgstr "Megengedőbb beállítások az önhangoláshoz. Ettől a torqued "
+
+msgid "This feature is not supported on this platform due to vehicle limitations."
+msgstr "A jármű korlátai miatt ez a funkció nem támogatott ezen a platformon."
+
+msgid "Warning: Provides a warning when exceeding the current road's speed limit."
+msgstr "Figyelmeztetés: jelez, ha átléped az út sebességkorlátját."
+
+msgid "Display steering arc on the driving screen when lateral control is enabled."
+msgstr "Kormányzási ív megjelenítése a menet képernyőn, ha a kormányzás be van kapcsolva."
+
+msgid "Enables self-tune for Torque lateral control for platforms that do not use "
+msgstr "Önhangolás a nyomaték-alapú kormányzáshoz azokon a platformokon, amelyek nem "
+
+msgid "This feature can only be used with sunnypilot longitudinal control enabled."
+msgstr "Ez a funkció csak bekapcsolt sunnypilot hosszanti vezérléssel használható."
+
+msgid "This will start the download process and it might take a while to complete."
+msgstr "Ezzel elindul a letöltés, ami eltarthat egy ideig."
+
+msgid "Use map data to estimate the appropriate speed to drive through turns ahead."
+msgstr "Térképadatok alapján becsli meg az előttünk lévő kanyarok biztonságos sebességét."
+
+msgid "sunnylink enables secured remote access to your comma device from anywhere, "
+msgstr "A sunnylink biztonságos távoli hozzáférést ad a comma készülékedhez bárhonnan, "
+
+msgid "This may be due to weak internet connection or sunnylink registration issue. "
+msgstr "Ennek gyenge internetkapcsolat vagy sunnylink regisztrációs hiba lehet az oka. "
+
+msgid "An alpha version of sunnypilot longitudinal control can be tested, along with "
+msgstr "A sunnypilot hosszanti vezérlésének alfa változata kipróbálható, együtt "
+
+msgid "Set a timer to delay the auto lane change operation when the blinker is used. "
+msgstr "Késleltetés beállítása az automata sávváltáshoz, amikor indexelsz. "
+
+msgid "Allows the driver to provide limited steering input while openpilot is engaged."
+msgstr "A vezető korlátozottan kormányozhat, miközben az openpilot be van kapcsolva."
+
+msgid "Enable custom Short & Long press increments for cruise speed increase/decrease."
+msgstr "Egyéni lépésköz rövid és hosszú gombnyomásra a tempomat sebességének állításához."
+
+msgid "Intelligent Cruise Button Management is currently unavailable on this platform."
+msgstr "Az intelligens tempomatgomb-kezelés jelenleg nem érhető el ezen a platformon."
+
+msgid "sunnylink is designed to be enabled as part of sunnypilot's core functionality. "
+msgstr "A sunnylink a sunnypilot alapfunkcióinak része, alapból bekapcsolva. "
+
+msgid "A chime and on-screen alert will play when the traffic light you are waiting for "
+msgstr "Hangjelzés és képernyős üzenet jelez, amikor a lámpa, amire vársz, "
+
+msgid "Looks ahead at planned steering to reduce sudden corrections, so the wheel moves "
+msgstr "Előretekint a tervezett kormányzásra, hogy kevesebb legyen a hirtelen korrekció, így a kormány "
+
+msgid "This will delete ALL downloaded maps\n\nAre you sure you want to delete all maps?"
+msgstr "Ez MINDEN letöltött térképet töröl\n\nBiztosan törlöd az összes térképet?"
+
+msgid "Car First: Use Speed Limit data from Car if available, else use from OpenStreetMaps"
+msgstr "Autó elsőbbséggel: a sebességkorlát az autótól, ha nincs, akkor az OpenStreetMapsból"
+
+msgid "Map First: Use Speed Limit data from OpenStreetMaps if available, else use from Car"
+msgstr "Térkép elsőbbséggel: a sebességkorlát az OpenStreetMapsból, ha nincs, akkor az autótól"
+
+msgid "Pause lateral control with blinker when traveling below the desired speed selected."
+msgstr "Az index szünetelteti a kormányzást a megadott sebesség alatt."
+
+msgid "Toggle to enable a delay timer for seamless lane changes when blind spot monitoring "
+msgstr "Bekapcsolva késleltetés segíti a zökkenőmentes sávváltást, amikor a holttérfigyelés "
+
+msgid "When enabled, sunnypilot will attempt to manage the built-in cruise control buttons "
+msgstr "Bekapcsolva a sunnypilot megpróbálja kezelni a gyári tempomatgombokat "
+
+msgid "This feature defaults to ON, and does not allow selection due to vehicle limitations."
+msgstr "Ez a funkció alapból BE van kapcsolva, és a jármű korlátai miatt nem módosítható."
+
+msgid "Yes, only upstream openpilot (and particular forks) are able to be used for training."
+msgstr "Igen, csak a gyári openpilot (és bizonyos forkok) adatait használjuk tanításra."
+
+msgid "Enforces the torque lateral controller to use the fixed values instead of the learned "
+msgstr "A nyomaték-alapú kormányzás a rögzített értékeket használja a tanult "
+
+msgid "Please enable \"Always Offroad\" mode or turn off the vehicle to adjust these toggles."
+msgstr "Kapcsold be az \"állandó álló módot\", vagy állítsd le az autót ezeknek a kapcsolóknak az állításához."
+
+msgid "This feature defaults to OFF, and does not allow selection due to vehicle limitations."
+msgstr "Ez a funkció alapból KI van kapcsolva, és a jármű korlátai miatt nem módosítható."
+
+msgid "sunnypilot Longitudinal Control is the default longitudinal control for this platform."
+msgstr "Ezen a platformon a sunnypilot hosszanti vezérlése az alapértelmezett."
+
+msgid "Use the sunnypilot system for adaptive cruise control and lane keep driver assistance. "
+msgstr "A sunnypilot rendszer adaptív tempomatként és sávtartó asszisztensként működik. "
+
+msgid "sunnypilot will allow some Toyota/Lexus cars to auto resume during stop and go traffic. "
+msgstr "Egyes Toyota és Lexus autóknál a sunnypilot magától elindul torlódásban. "
+
+msgid "ADB (Android Debug Bridge) allows connecting to your device over USB or over the network. "
+msgstr "Az ADB (Android Debug Bridge) USB-n vagy hálózaton keresztüli csatlakozást tesz lehetővé. "
+
+msgid "Experimental feature to enable stop and go for Subaru Global models with manual handbrake. "
+msgstr "Kísérleti funkció: megállás-elindulás kézifékes Subaru Global modellekhez. "
+
+msgid "Show a screen saver when the device is offroad and idle, instead of turning the screen off."
+msgstr "Képernyőkímélő megjelenítése álló, tétlen állapotban a kijelző lekapcsolása helyett."
+
+msgid "This feature is unavailable because sunnypilot Longitudinal Control (Alpha) is not enabled."
+msgstr "Ez a funkció nem érhető el, mert a sunnypilot hosszanti vezérlés (alfa) nincs bekapcsolva."
+
+msgid "Use vision path predictions to estimate the appropriate speed to drive through turns ahead."
+msgstr "A kamera útvonal-előrejelzése alapján becsli meg az előttünk lévő kanyarok biztonságos sebességét."
+
+msgid "Receive alerts to steer back into the lane when your vehicle drifts over a detected lane line "
+msgstr "Figyelmeztetést kapsz, hogy kormányozz vissza a sávba, ha az autó áthalad a felismert sávhatáron "
+
+msgid "For applicable vehicles, always display the true vehicle current speed from wheel speed sensors."
+msgstr "Ahol lehetséges, mindig a kerékfordulat alapján mért valós sebesség látszik."
+
+msgid "copyparty is a very capable file server, you can use it to download your routes, view your logs "
+msgstr "A copyparty egy sokoldalú fájlszerver: letöltheted vele a menetfelvételeket, megnézheted a naplókat "
+
+msgid "Enable sunnylink uploader to allow sunnypilot to upload your driving data to sunnypilot servers. "
+msgstr "A sunnylink feltöltő engedélyezi, hogy a sunnypilot feltöltse a menetadataidat a sunnypilot szervereire. "
+
+msgid "Virtually shift camera's perspective to move model's center to Left(+ values) or Right (- values)"
+msgstr "A kamera nézőpontjának eltolása: a modell középpontja balra (+ érték) vagy jobbra (- érték)"
+
+msgid "Pair your GitHub account to grant your device sponsor benefits, including API access on sunnylink."
+msgstr "Párosítsd a GitHub fiókodat, hogy a készülék megkapja a támogatói előnyöket, köztük a sunnylink API-hozzáférést."
+
+msgid "Note: For vehicles without LFA/LKAS button, disabling this will prevent lateral control engagement."
+msgstr "Megjegyzés: LFA/LKAS gomb nélküli autóknál kikapcsolva nem lehet bekapcsolni a kormányzást."
+
+msgid "sunnypilot Longitudinal Control must be available and enabled for your vehicle to use this feature."
+msgstr "Ehhez a funkcióhoz a sunnypilot hosszanti vezérlésének elérhetőnek és bekapcsoltnak kell lennie."
+
+msgid "Become a sponsor of sunnypilot to get early access to sunnylink features when they become available."
+msgstr "Legyél sunnypilot támogató, hogy elsőként férj hozzá az új sunnylink funkciókhoz."
+
+msgid "When toggled on, this creates a prebuilt file to allow accelerated boot times. When toggled off, it "
+msgstr "Bekapcsolva előre lefordított fájl készül a gyorsabb indításhoz. Kikapcsolva "
+
+msgid "(Only for highest tiers, and does NOT bring ANY benefit to you yet. We are just testing data volume.)"
+msgstr "(Csak a legmagasabb szinteken, és egyelőre SEMMILYEN előnyt nem jelent. Csak az adatmennyiséget teszteljük.)"
+
+msgid "Experimental feature to enable auto-resume during stop-and-go for certain supported Subaru platforms."
+msgstr "Kísérleti funkció: automatikus elindulás torlódásban egyes támogatott Subaru platformokon."
+
+msgid "Device will automatically shutdown after set time once the engine is turned off.\n(30h is the default)"
+msgstr "A készülék a motor leállítása után a megadott idővel magától lekapcsol.\n(alapérték: 30 óra)"
+
+msgid "This will delete ALL downloaded models from the cache except the currently active model. Are you sure?"
+msgstr "Ez MINDEN letöltött modellt töröl a gyorsítótárból, kivéve az éppen aktívat. Biztos vagy benne?"
+
+msgid "When enabled, automatic software updates will be off.<br><b>This requires a reboot to take effect.</b>"
+msgstr "Bekapcsolva az automatikus szoftverfrissítés kikapcsol.<br><b>Ehhez újraindítás kell.</b>"
+
+msgid "Toggle visibility of advanced sunnypilot controls.<br>This only changes the visibility of the toggles; "
+msgstr "A haladó sunnypilot beállítások megjelenítése.<br>Ez csak a kapcsolók láthatóságát változtatja meg; "
+
+msgid "Quickboot mode requires updates to be disabled.<br>Enable 'Disable Updates' in the Software panel first."
+msgstr "A gyorsindításhoz ki kell kapcsolni a frissítéseket.<br>Előbb kapcsold be a 'Frissítések kikapcsolása' opciót a Szoftver panelen."
+
+msgid "A chime and on-screen alert will play when you are stopped, and the vehicle in front of you start moving."
+msgstr "Hangjelzés és képernyős üzenet jelez, ha állsz, és az előtted lévő autó elindul."
+
+msgid "Disable the sunnypilot Longitudinal Control (alpha) toggle to allow Intelligent Cruise Button Management."
+msgstr "Kapcsold ki a sunnypilot hosszanti vezérlést (alfa) az intelligens tempomatgomb-kezeléshez."
+
+msgid "This is the master switch, it will allow you to cutoff any sunnylink requests should you want to do that."
+msgstr "Ez a főkapcsoló: ezzel bármikor elzárhatod az összes sunnylink kérést."
+
+msgid "Choose how Automatic Lane Centering (ALC) behaves after the brake pedal is manually pressed in sunnypilot."
+msgstr "Válaszd ki, hogyan viselkedjen a sávtartás (ALC), miután kézzel megnyomtad a fékpedált."
+
+msgid "Warning: This grants SSH access to all public keys in your GitHub settings. Never enter a GitHub username "
+msgstr "Figyelem: ez SSH hozzáférést ad a GitHub fiókodban lévő összes nyilvános kulcshoz. Soha ne adj meg olyan GitHub felhasználónevet, "
+
+msgid "sunnypilot will not take over control of gas and brakes. Factory Toyota longitudinal control will be used."
+msgstr "A sunnypilot nem veszi át a gáz és a fék vezérlését. A gyári Toyota hosszanti vezérlés marad."
+
+msgid "For maximum effectiveness, bring your device inside and connect to a good USB-C adapter and Wi-Fi weekly.\n\n"
+msgstr "A legjobb eredményhez hetente vidd be a készüléket, és csatlakoztasd jó USB-C töltőre és Wi-Fi hálózatra.\n\n"
+
+msgid "Show an indicator on the left side of the screen to display real-time vehicle acceleration and deceleration. "
+msgstr "Jelzés a képernyő bal oldalán az autó gyorsulásáról és lassulásáról. "
+
+msgid "Model download has started in the background. We suggest resetting calibration. Would you like to do that now?"
+msgstr "A modell letöltése elindult a háttérben. Javasoljuk a kalibráció visszaállítását. Megtegyük most?"
+
+msgid "Enable toggle to allow the model to determine when to use sunnypilot ACC or sunnypilot End to End Longitudinal."
+msgstr "Bekapcsolva a modell dönti el, mikor használja a sunnypilot ACC-t és mikor a végponttól végpontig hosszanti vezérlést."
+
+msgid "Adjust the software delay when Live Learning Steer Delay is toggled off. The default software delay value is 0.2"
+msgstr "A szoftveres késleltetés beállítása, ha a kormány-késleltetés tanulása ki van kapcsolva. Az alapérték 0.2"
+
+msgid "Assist: Adjusts the vehicle's cruise speed based on the current road's speed limit when operating the +/- buttons."
+msgstr "Asszisztens: a +/- gombok használatakor az út sebességkorlátjához igazítja a tempomat sebességét."
+
+msgid "Enable this for the car to learn and adapt its steering response time. Disable to use a fixed steering response time. "
+msgstr "Bekapcsolva az autó tanulja és igazítja a kormányzás válaszidejét. Kikapcsolva rögzített válaszidőt használ. "
+
+msgid "Are you sure you want to reset all sunnypilot settings to default? Once the settings are reset, there is no going back."
+msgstr "Biztosan visszaállítod az összes sunnypilot beállítást alaphelyzetbe? A visszaállítás után nincs visszaút."
+
+msgid "sunnypilot defaults to driving in chill mode. Experimental mode enables alpha-level features that aren't ready for chill mode. "
+msgstr "A sunnypilot alapból nyugodt módban vezet. A kísérleti mód olyan alfa szintű funkciókat kapcsol be, amelyek még nem érettek a nyugodt módhoz. "
+
+msgid "<b>WARNING: sunnypilot longitudinal control is in alpha for this car and may disable Automatic Emergency Braking (AEB).</b><br><br>"
+msgstr "<b>FIGYELEM: a sunnypilot hosszanti vezérlése ennél az autónál alfa állapotú, és kikapcsolhatja az automatikus vészfékezést (AEB).</b><br><br>"
+
+msgid "Standard is recommended. In aggressive mode, sunnypilot will follow lead cars closer and be more aggressive with the gas and brake. "
+msgstr "A Normál ajánlott. Dinamikus módban a sunnypilot közelebb követi az előtted lévő autót, és határozottabban gázol és fékez. "
+
+msgid "Note: Once lateral control is engaged via UEM, it will remain engaged until it is manually disabled via the MADS button or car shut off."
+msgstr "Megjegyzés: ha a kormányzás az UEM-en keresztül kapcsolt be, bekapcsolva marad, amíg a MADS gombbal kézzel ki nem kapcsolod, vagy le nem állítod az autót."
+
+msgid "Backing up {}%"
+msgstr "Mentés {}%"
+
+msgid "Restoring {}%"
+msgstr "Visszaállítás {}%"
+
+msgid "Select {}"
+msgstr "{} kiválasztása"
+
+msgid "Only works above {} {}."
+msgstr "Csak {} {} felett működik."
+
+msgid "Warning: May experience steering oscillations below {} {} during turns, recommend disabling this feature if you experience these."
+msgstr "Figyelem: {} {} alatt kanyarodáskor a kormány billeghet, ilyenkor érdemes kikapcsolni ezt a funkciót."
