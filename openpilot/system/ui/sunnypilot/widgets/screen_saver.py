@@ -30,7 +30,10 @@ class ScreenSaverSP(Widget):
 
     # sunnypilot wordmark -> Tesla mark (white, no hue cycling)
     self.logo_asset = "icons/tesla_mark.png"
-    self.logo_render_height = 150 if self._is_mici else 500
+    # NOTE: gui_app.texture() only resizes when BOTH width and height are given,
+    # so pass both. The mark is 401x400, i.e. square for practical purposes.
+    self.logo_render_height = 120 if self._is_mici else 400
+    self.logo_render_width = round(self.logo_render_height * 401 / 400)
     self._start_time = None
     self._dismiss = False
     self._screensaver_timeout = 300
@@ -64,7 +67,7 @@ class ScreenSaverSP(Widget):
   def _update_state(self):
     super()._update_state()
 
-    self._logo = gui_app.texture(self.logo_asset, None, self.logo_render_height)
+    self._logo = gui_app.texture(self.logo_asset, self.logo_render_width, self.logo_render_height)
     self.logo_width = self._logo.width
     self.logo_height = self._logo.height
 
