@@ -2179,3 +2179,12 @@ msgstr "A beállított sebesség marad a kijelzőn, csak a tartott lesz kevesebb
 
 msgid "Only the camera image on the screen changes, never what the car sees."
 msgstr "Csak a képernyőn látszó kamerakép változik, nem az, amit az autó lát."
+
+msgid "Block Lane Change: Road Edge Detection"
+msgstr "Sávváltás tiltása útszélnél"
+
+msgid "Blocks the lane change if the model sees a road edge on your signaled side."
+msgstr "Letiltja a sávváltást, ha a modell útszélt lát azon az oldalon, amerre indexelsz."
+
+msgid "Lane Change Unavailable: Road Edge"
+msgstr "Sávváltás nem lehetséges: útszél"
