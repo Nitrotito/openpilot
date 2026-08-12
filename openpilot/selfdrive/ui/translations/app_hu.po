@@ -2188,3 +2188,15 @@ msgstr "Letiltja a sávváltást, ha a modell útszélt lát azon az oldalon, am
 
 msgid "Lane Change Unavailable: Road Edge"
 msgstr "Sávváltás nem lehetséges: útszél"
+
+msgid "road edge lane change"
+msgstr "sávváltás útszélnél"
+
+msgid "off"
+msgstr "ki"
+
+msgid "on"
+msgstr "be"
+
+msgid "On: no lane change towards a road edge on the signaled side."
+msgstr "Bekapcsolva: nincs sávváltás az útszél felé azon az oldalon, amerre indexelsz."

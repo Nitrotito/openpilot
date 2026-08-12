@@ -8,6 +8,7 @@ it. Both are re-read while driving, no restart needed.
 """
 import os
 
+from openpilot.common.params import Params
 from openpilot.system.ui.widgets.scroller import NavScroller
 from openpilot.selfdrive.ui.mici.widgets.button import BigMultiToggle, GreyBigButton
 from openpilot.system.ui.lib.multilang import tr
@@ -53,6 +54,25 @@ class BigMultiFileToggle(BigMultiToggle):
       pass
 
 
+class BigMultiParamToggle(BigMultiToggle):
+  """Two option toggle persisted to a Params boolean.
+
+  The sunnypilot settings tree has toggles that the mici UI never shows, so a key that
+  only lives there is unreachable on this device. This mirrors one into the owner panel.
+  """
+
+  def __init__(self, text: str, param: str, labels: list[str]):
+    assert len(labels) == 2
+    super().__init__(text, labels)
+    self._param = param
+    self._params = Params()
+    self.set_value(self._options[1 if self._params.get_bool(param) else 0])
+
+  def _handle_mouse_release(self, mouse_pos):
+    super()._handle_mouse_release(mouse_pos)
+    self._params.put_bool(self._param, self._options.index(self.value) == 1)
+
+
 class OwnSettingsLayoutMici(NavScroller):
   def __init__(self):
     super().__init__()
@@ -66,9 +86,15 @@ class OwnSettingsLayoutMici(NavScroller):
       [tr("original"), tr("light"), tr("medium"), tr("strong")], ["1.0", "1.2", "1.45", "1.7"], 2,
     )
 
+    road_edge = BigMultiParamToggle(
+      tr("road edge lane change"), "RoadEdgeLaneChangeEnabled", [tr("off"), tr("on")],
+    )
+
     self._scroller.add_widgets([
       speed_offset,
       GreyBigButton("", tr("The set speed on the screen stays, only the speed held moves.")),
       preview_brightness,
       GreyBigButton("", tr("Only the camera image on the screen changes, never what the car sees.")),
+      road_edge,
+      GreyBigButton("", tr("On: no lane change towards a road edge on the signaled side.")),
     ])
