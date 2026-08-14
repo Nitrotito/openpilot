@@ -63,7 +63,6 @@ class SettingsLayout(NavScroller):
     own_btn.set_click_callback(lambda: gui_app.push_widget(own_panel))
 
     self._scroller.add_widgets([
-      own_btn,
       toggles_btn,
       network_btn,
       device_btn,
@@ -72,6 +71,7 @@ class SettingsLayout(NavScroller):
       #BigDialogButton(tr("manual"), "", "icons_mici/settings/manual_icon.png", "Check out the mici user\nmanual at comma.ai/setup"),
       firehose_btn,
       developer_btn,
+      own_btn,
     ])
 
     self._font_medium = gui_app.font(FontWeight.MEDIUM)
