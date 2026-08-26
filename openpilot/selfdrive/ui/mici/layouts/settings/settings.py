@@ -68,7 +68,6 @@ class SettingsLayout(NavScroller):
       device_btn,
       software_btn,
       PairBigButton(),
-      #BigDialogButton(tr("manual"), "", "icons_mici/settings/manual_icon.png", "Check out the mici user\nmanual at comma.ai/setup"),
       firehose_btn,
       developer_btn,
       own_btn,
