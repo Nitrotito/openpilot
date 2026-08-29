@@ -2257,3 +2257,363 @@ msgstr "ki"
 
 msgid "Model Status"
 msgstr "Modell állapota"
+
+# --- openpilot selfdrived alert-szovegek (hozzaadva 2026-08-29) ---
+# Ezek eddig nyersen, angolul jutottak a kijelzore, mert az alert_renderer nem hivott tr()-t.
+
+msgid "WARNING: This branch is not tested"
+msgstr "FIGYELEM: ez az ág nincs tesztelve"
+
+msgid "Pay Attention to Engage"
+msgstr "Figyelj az útra a bekapcsoláshoz"
+
+msgid "Out of Storage"
+msgstr "Elfogyott a tárhely"
+
+msgid "Posenet Speed Invalid"
+msgstr "Posenet sebesség érvénytelen"
+
+msgid "Process Not Running"
+msgstr "Egy folyamat nem fut"
+
+msgid "Communication Issue Between Processes"
+msgstr "Kommunikációs hiba a folyamatok között"
+
+msgid "Camera Malfunction"
+msgstr "Kamerahiba"
+
+msgid "Calibration Invalid"
+msgstr "Érvénytelen kalibráció"
+
+msgid "System Overheated"
+msgstr "A rendszer túlmelegedett"
+
+msgid "Low Memory"
+msgstr "Kevés a memória"
+
+msgid "Driving Model Lagging"
+msgstr "A vezetési modell lemarad"
+
+msgid "Joystick Mode"
+msgstr "Joystick mód"
+
+msgid "Invalid LKAS setting"
+msgstr "Érvénytelen LKAS beállítás"
+
+msgid "Too Distracted"
+msgstr "Túl figyelmetlen"
+
+msgid "Ensure road ahead is clear"
+msgstr "Győződj meg róla, hogy szabad az út"
+
+msgid "Big Model Loading"
+msgstr "Nagy modell betöltése"
+
+msgid "Big Model Failed"
+msgstr "A nagy modell hibára futott"
+
+msgid "Big Model Failed "
+msgstr "A nagy modell hibára futott "
+
+msgid "Restart the car to retry,\nsmall model is still available"
+msgstr "Indítsd újra a kocsit,\na kis modell közben elérhető"
+
+msgid "System Initializing"
+msgstr "A rendszer indul"
+
+msgid "Be ready to take over at any time"
+msgstr "Bármikor készülj az átvételre"
+
+msgid "Dashcam mode"
+msgstr "Fedélzeti kamera mód"
+
+msgid "Dashcam mode for unsupported car"
+msgstr "Fedélzeti kamera mód, nem támogatott autó"
+
+msgid "Dashcam Mode"
+msgstr "Fedélzeti kamera mód"
+
+msgid "Security Key Not Available"
+msgstr "A biztonsági kulcs nem érhető el"
+
+msgid "Car Unrecognized"
+msgstr "Ismeretlen autó"
+
+msgid "BRAKE!"
+msgstr "FÉKEZZ!"
+
+msgid "Emergency Braking: Risk of Collision"
+msgstr "Vészfékezés: ütközésveszély"
+
+msgid "AEB: Risk of Collision"
+msgstr "AEB: ütközésveszély"
+
+msgid "Stock AEB: Risk of Collision"
+msgstr "Gyári AEB: ütközésveszély"
+
+msgid "Stock LKAS: Lane Departure Detected"
+msgstr "Gyári LKAS: sávelhagyás"
+
+msgid "Risk of Collision"
+msgstr "Ütközésveszély"
+
+msgid "Lane Departure Detected"
+msgstr "Sávelhagyás"
+
+msgid "Steering Assist Temporarily Unavailable"
+msgstr "A kormányrásegítés átmenetileg nem érhető el"
+
+msgid "Pay Attention"
+msgstr "Figyelj az útra"
+
+msgid "Driver Distracted"
+msgstr "A vezető figyelmetlen"
+
+msgid "DISENGAGE IMMEDIATELY"
+msgstr "AZONNAL KAPCSOLD KI"
+
+msgid "Touch Steering Wheel: No Face Detected"
+msgstr "Fogd meg a kormányt: nem látom az arcod"
+
+msgid "Touch Steering Wheel"
+msgstr "Fogd meg a kormányt"
+
+msgid "Driver Unresponsive"
+msgstr "A vezető nem reagál"
+
+msgid "TAKE CONTROL"
+msgstr "VEDD ÁT AZ IRÁNYÍTÁST"
+
+msgid "Resume Driving Manually"
+msgstr "Vezess tovább kézzel"
+
+msgid "Press Resume to Exit Standstill"
+msgstr "Nyomd meg a Resume gombot az elinduláshoz"
+
+msgid "Steer Left to Start Lane Change Once Safe"
+msgstr "Kormányozz balra a sávváltáshoz, ha biztonságos"
+
+msgid "Steer Right to Start Lane Change Once Safe"
+msgstr "Kormányozz jobbra a sávváltáshoz, ha biztonságos"
+
+msgid "Car Detected in Blindspot"
+msgstr "Autó a holttérben"
+
+msgid "Changing Lanes"
+msgstr "Sávváltás"
+
+msgid "Take Control"
+msgstr "Vedd át az irányítást"
+
+msgid "Turn Exceeds Steering Limit"
+msgstr "A kanyar meghaladja a kormányzási határt"
+
+msgid "Fan Malfunction"
+msgstr "Ventilátorhiba"
+
+msgid "Contact comma.ai/support"
+msgstr "Írj a comma.ai/support címre"
+
+msgid "Camera Malfunction: Reboot Your Device"
+msgstr "Kamerahiba: indítsd újra az eszközt"
+
+msgid "Camera Frame Rate Low"
+msgstr "Alacsony kamera képkockaszám"
+
+msgid "Reboot your Device"
+msgstr "Indítsd újra az eszközt"
+
+msgid "Camera Frame Rate Low: Reboot Your Device"
+msgstr "Alacsony képkockaszám: indítsd újra az eszközt"
+
+msgid "locationd Temporary Error"
+msgstr "locationd átmeneti hiba"
+
+msgid "locationd Permanent Error"
+msgstr "locationd tartós hiba"
+
+msgid "paramsd Temporary Error"
+msgstr "paramsd átmeneti hiba"
+
+msgid "paramsd Permanent Error"
+msgstr "paramsd tartós hiba"
+
+msgid "Cancel Pressed"
+msgstr "Cancel megnyomva"
+
+msgid "Press Resume to Exit Brake Hold"
+msgstr "Nyomd meg a Resume gombot a fékbentartás feloldásához"
+
+msgid "Parking Brake Engaged"
+msgstr "Behúzott kézifék"
+
+msgid "Pedal Pressed"
+msgstr "Pedál lenyomva"
+
+msgid "Steering Pressed"
+msgstr "Kormány mozgatva"
+
+msgid "Release Brake to Engage"
+msgstr "Engedd fel a féket a bekapcsoláshoz"
+
+msgid "Press Set to Engage"
+msgstr "Nyomd meg a Set gombot a bekapcsoláshoz"
+
+msgid "Car Not Ready"
+msgstr "Az autó nem áll készen"
+
+msgid "Adaptive Cruise Disabled"
+msgstr "Az adaptív tempomat ki van kapcsolva"
+
+msgid "Steering Temporarily Unavailable"
+msgstr "A kormányzás átmenetileg nem érhető el"
+
+msgid "Vehicle Steering Time Limit"
+msgstr "Kormányzási időkorlát"
+
+msgid "Sensor Data Invalid"
+msgstr "Érvénytelen szenzoradat"
+
+msgid "Excessive Actuation"
+msgstr "Túl erős beavatkozás"
+
+msgid "Gear not D"
+msgstr "A váltó nincs D-ben"
+
+msgid "Calibration Invalid: Remount Device & Recalibrate"
+msgstr "Érvénytelen kalibráció: helyezd fel újra az eszközt és kalibrálj"
+
+msgid "Calibration Incomplete"
+msgstr "A kalibráció nincs kész"
+
+msgid "Calibration in Progress"
+msgstr "Kalibrálás folyamatban"
+
+msgid "Device Remount Detected: Recalibrating"
+msgstr "Az eszköz elmozdult: újrakalibrálás"
+
+msgid "Remount Detected: Recalibrating"
+msgstr "Elmozdulás: újrakalibrálás"
+
+msgid "Door Open"
+msgstr "Nyitott ajtó"
+
+msgid "Seatbelt Unlatched"
+msgstr "Nincs bekötve a biztonsági öv"
+
+msgid "Electronic Stability Control Disabled"
+msgstr "A menetstabilizátor ki van kapcsolva"
+
+msgid "Low Communication Rate Between Processes"
+msgstr "Lassú kommunikáció a folyamatok között"
+
+msgid "System Lagging"
+msgstr "A rendszer lemarad"
+
+msgid "Selfdrive Process Lagging: Reboot Your Device"
+msgstr "A vezérlő folyamat lemarad: indítsd újra az eszközt"
+
+msgid "Radar Error: Restart the Car"
+msgstr "Radarhiba: indítsd újra a kocsit"
+
+msgid "Radar Temporarily Unavailable"
+msgstr "A radar átmenetileg nem érhető el"
+
+msgid "Low Memory: Reboot Your Device"
+msgstr "Kevés a memória: indítsd újra az eszközt"
+
+msgid "Cruise Fault: Restart the Car"
+msgstr "Tempomat hiba: indítsd újra a kocsit"
+
+msgid "Cruise Fault: Restart the car to engage"
+msgstr "Tempomat hiba: a bekapcsoláshoz indítsd újra a kocsit"
+
+msgid "Electronic Stability Control Active"
+msgstr "A menetstabilizátor beavatkozik"
+
+msgid "Controls Mismatch"
+msgstr "Vezérlési eltérés"
+
+msgid "Unknown Vehicle Variant"
+msgstr "Ismeretlen autóváltozat"
+
+msgid "CAN Bus Disconnected"
+msgstr "A CAN busz nincs csatlakoztatva"
+
+msgid "CAN Bus Disconnected: Likely Faulty Cable"
+msgstr "A CAN busz nincs csatlakoztatva: valószínűleg hibás kábel"
+
+msgid "CAN Bus Disconnected: Check Connections"
+msgstr "A CAN busz nincs csatlakoztatva: ellenőrizd a csatlakozásokat"
+
+msgid "LKAS Fault: Restart the Car"
+msgstr "LKAS hiba: indítsd újra a kocsit"
+
+msgid "LKAS Fault: Restart the car to engage"
+msgstr "LKAS hiba: a bekapcsoláshoz indítsd újra a kocsit"
+
+msgid "Reverse\nGear"
+msgstr "Hátra-\nmenet"
+
+msgid "Reverse Gear"
+msgstr "Hátramenet"
+
+msgid "Cruise Is Off"
+msgstr "A tempomat ki van kapcsolva"
+
+msgid "Harness Relay Malfunction"
+msgstr "Relé hiba a kábelkorbácsban"
+
+msgid "openpilot Canceled"
+msgstr "openpilot megszakítva"
+
+msgid "Speed too low"
+msgstr "Túl kicsi a sebesség"
+
+msgid "Speed Too High"
+msgstr "Túl nagy a sebesség"
+
+msgid "Model uncertain at this speed"
+msgstr "A modell bizonytalan ekkora sebességnél"
+
+msgid "Slow down to engage"
+msgstr "Lassíts a bekapcsoláshoz"
+
+msgid "Vehicle Sensors Invalid"
+msgstr "Érvénytelen jármű-szenzorok"
+
+msgid "Vehicle Sensors Calibrating"
+msgstr "A jármű-szenzorok kalibrálnak"
+
+msgid "Drive to Calibrate"
+msgstr "Vezess a kalibráláshoz"
+
+msgid "Bookmark Saved"
+msgstr "Könyvjelző mentve"
+
+msgid "Press Resume"
+msgstr "Nyomd meg a Resume gombot"
+
+msgid "Steer Left"
+msgstr "Kormányozz balra"
+
+msgid "Confirm Lane Change"
+msgstr "Erősítsd meg a sávváltást"
+
+msgid "Steer Right"
+msgstr "Kormányozz jobbra"
+
+msgid "Car in Blindspot"
+msgstr "Autó a holttérben"
+
+msgid "take control"
+msgstr "vedd át az irányítást"
+
+msgid "turn exceeds limit"
+msgstr "a kanyar túl éles"
+
+msgid "Calibrating"
+msgstr "Kalibrálás"
+
+msgid "Reverse"
+msgstr "Hátramenet"
