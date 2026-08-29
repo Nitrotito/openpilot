@@ -172,6 +172,25 @@ def init_pigeon(pigeon: TTYPigeon) -> bool:
   for _ in range(10):
     try:
 
+      # HU: clear the receiver's stored configuration before writing ours.
+      #
+      # Everything below rewrites ports, rate, NAV5, ODO and message rates on every
+      # init -- but NOT the GNSS constellation selection (UBX-CFG-GNSS, 0x06 0x3E is
+      # never sent anywhere in this file). That selection lives in the receiver's
+      # battery-backed memory, and init()'s power cycle is only 100 ms, far too short
+      # to drain it. So a bad stored value survives every restart, forever.
+      #
+      # Measured on this car 2026-08-29: for three weeks the receiver saw ZERO
+      # satellites on 18 of 21 routes, including a two-hour drive. A CFG-CFG clear
+      # (the same message reset_device uses below) brought it back instantly: 15
+      # satellites, 4.2 m accuracy. The one route that worked during those weeks
+      # followed a full power disconnection, which drains the same memory.
+      #
+      # Clearing first is cheap and self-healing: the block below immediately
+      # restores every setting openpilot actually cares about, and the constellation
+      # selection falls back to the factory default instead of a stuck bad value.
+      pigeon.send_with_ack(b"\xb5\x62\x06\x09\x0d\x00\x1f\x1f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x17\x71\xd7")
+
       # setup port config
       pigeon.send_with_ack(b"\xb5\x62\x06\x00\x14\x00\x03\xFF\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\x00\x1E\x7F")
       pigeon.send_with_ack(b"\xb5\x62\x06\x00\x14\x00\x00\xFF\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19\x35")
