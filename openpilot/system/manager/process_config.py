@@ -36,7 +36,12 @@ def ublox(started: bool, params: Params, CP: car.CarParams) -> bool:
   use_ublox = ublox_available()
   if use_ublox != params.get_bool("UbloxAvailable"):
     params.put_bool("UbloxAvailable", use_ublox, block=True)
-  return started and use_ublox
+  # HU: run offroad too, so the receiver does not lose its fix at every stop.
+  # Upstream gates this on `started`, which means set_power(False) pulls both
+  # GNSS_PWR_EN and UBLOX_RST_N low at every shutdown: nothing survives, so
+  # every ignition is a full cold start. Measured 2026-08-29 on this car: 18 of
+  # 21 routes never got a fix at all. Costs a little standby current.
+  return use_ublox
 
 def joystick(started: bool, params: Params, CP: car.CarParams) -> bool:
   return started and params.get_bool("JoystickDebugMode")
