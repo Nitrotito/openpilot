@@ -191,6 +191,15 @@ def init_pigeon(pigeon: TTYPigeon) -> bool:
       # selection falls back to the factory default instead of a stuck bad value.
       pigeon.send_with_ack(b"\xb5\x62\x06\x09\x0d\x00\x1f\x1f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x17\x71\xd7")
 
+      # HU: write back the constellation configuration explicitly, instead of trusting
+      # whatever is stuck in the receiver's battery-backed memory. Captured from this
+      # car 2026-08-29 while it had a clean 15-satellite fix, so it is a known-good
+      # value rather than a guess: GPS 8-16 ch, GLONASS 8-14, QZSS on, BeiDou off,
+      # 28 tracking channels. UBX-CFG-GNSS (0x06 0x3E) is otherwise never sent from
+      # anywhere in openpilot, which is why a bad stored value could survive for
+      # three weeks. Backup of the raw poll response lives in the repo notes.
+      pigeon.send_with_ack(b"\xb5\x62\x06\x3e\x24\x00\x00\x1c\x1c\x04\x00\x08\x10\x00\x01\x00\x01\x01\x03\x08\x10\x00\x00\x00\x01\x01\x05\x00\x03\x00\x01\x00\x01\x01\x06\x08\x0e\x00\x01\x00\x01\x01\x06\xd0")
+
       # setup port config
       pigeon.send_with_ack(b"\xb5\x62\x06\x00\x14\x00\x03\xFF\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\x00\x1E\x7F")
       pigeon.send_with_ack(b"\xb5\x62\x06\x00\x14\x00\x00\xFF\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19\x35")
