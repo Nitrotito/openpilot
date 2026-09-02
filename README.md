@@ -1,3 +1,43 @@
+# Nitrotito fork: Tesla Model S (AP1 / HW1) + Hungarian UI
+
+**This is not stock sunnypilot.** It is a personal fork, maintained for a single car.
+Live branch: `hw1-magyar-merge-20260816`. This is the one the device actually runs.
+The car-side changes live in a second fork: [Nitrotito/opendbc](https://github.com/Nitrotito/opendbc/tree/hw1), branch `hw1`.
+
+What this fork adds on top of sunnypilot:
+
+- **Tesla Model S with AP1 (HW1)**, based on the xnor-tech port. Neither stock openpilot nor
+  stock sunnypilot supports this hardware generation.
+- **Hungarian UI translation**, with a regenerated font atlas so that ő and ű render correctly.
+- **An extra settings panel** in the UI: speed offset and screen brightness.
+- **Screensaver**: a bouncing Tesla mark instead of the sunnypilot wordmark. The licence plate
+  under it is read from `/data/license_plate` on the device, and is deliberately never committed.
+
+No support, no warranty, and no promise that it works on your car. This is driver assistance
+software: the driver stays responsible at all times.
+
+---
+
+# Nitrotito fork: Tesla Model S (AP1 / HW1) és magyar felület
+
+**Ez nem a gyári sunnypilot.** Személyes fork, egyetlen autóhoz karbantartva.
+Az éles ág: `hw1-magyar-merge-20260816`. A készülék ezt futtatja.
+Az autó-oldali változtatások külön forkban élnek: [Nitrotito/opendbc](https://github.com/Nitrotito/opendbc/tree/hw1), `hw1` ág.
+
+Amit ez a fork hozzátesz a sunnypilothoz:
+
+- **Tesla Model S AP1 (HW1) támogatás**, az xnor-tech port alapján. Ezt a hardver-generációt sem
+  a gyári openpilot, sem a gyári sunnypilot nem ismeri.
+- **Teljes magyar felület**, újragenerált betűatlasszal, hogy az ő és az ű is helyesen jelenjen meg.
+- **Egy saját beállítás-panel** a felületen: sebesség-eltolás és képernyő-fényerő.
+- **Képernyővédő**: pattogó Tesla-jel a sunnypilot felirat helyett. Az alatta lévő rendszámot a
+  készülék `/data/license_plate` fájljából olvassa, és szándékosan sosem kerül be a kódba.
+
+Nincs hozzá támogatás, nincs garancia, és nincs ígéret arra, hogy a te autódon működik. Ez
+vezetéstámogató szoftver: a felelősség végig a vezetőé.
+
+---
+
 ![](https://user-images.githubusercontent.com/47793918/233812617-beab2e71-57b9-479e-8bff-c3931347ca40.png)
 
 ## 🌞 What is sunnypilot?
