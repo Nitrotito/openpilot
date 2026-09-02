@@ -1,7 +1,7 @@
 # Nitrotito fork: Tesla Model S (AP1 / HW1) + Hungarian UI
 
 **This is not stock sunnypilot.** It is a personal fork, maintained for a single car.
-Live branch: `hw1-magyar-merge-20260816`. This is the one the device actually runs.
+Live branch: `hw1-magyar`. This is the one the device actually runs.
 The car-side changes live in a second fork: [Nitrotito/opendbc](https://github.com/Nitrotito/opendbc/tree/hw1), branch `hw1`.
 
 What this fork adds on top of sunnypilot:
@@ -21,7 +21,7 @@ software: the driver stays responsible at all times.
 # Nitrotito fork: Tesla Model S (AP1 / HW1) és magyar felület
 
 **Ez nem a gyári sunnypilot.** Személyes fork, egyetlen autóhoz karbantartva.
-Az éles ág: `hw1-magyar-merge-20260816`. A készülék ezt futtatja.
+Az éles ág: `hw1-magyar`. A készülék ezt futtatja.
 Az autó-oldali változtatások külön forkban élnek: [Nitrotito/opendbc](https://github.com/Nitrotito/opendbc/tree/hw1), `hw1` ág.
 
 Amit ez a fork hozzátesz a sunnypilothoz:
@@ -35,6 +35,56 @@ Amit ez a fork hozzátesz a sunnypilothoz:
 
 Nincs hozzá támogatás, nincs garancia, és nincs ígéret arra, hogy a te autódon működik. Ez
 vezetéstámogató szoftver: a felelősség végig a vezetőé.
+
+---
+
+## Supported hardware / Támogatott eszköz
+
+| | |
+|---|---|
+| Device | comma 4 (`mici`), the only unit this fork is built and tested on |
+| Car | Tesla Model S with **AP1 / Hardware 1** (MCU1) |
+| Base | sunnypilot, which is itself a fork of comma.ai's openpilot |
+| Car support | [Nitrotito/opendbc](https://github.com/Nitrotito/opendbc), branch `hw1` |
+
+Anything else (HW2, HW2.5, HW3, other makes) is out of scope here. Stock sunnypilot supports
+those far better than this branch does.
+
+Eszköz: comma 4 (`mici`), csak ezen épül és ezen van kipróbálva. Autó: Tesla Model S **AP1 /
+Hardware 1** (MCU1). Minden más hardver-generációra és márkára a gyári sunnypilot a jó válasz,
+nem ez az ág.
+
+## Installation / Telepítés
+
+**This fork is not installable from the comma installer URL.** It is set up by hand, because the
+device has to end up on this branch with the submodules pinned to our commits:
+
+1. SSH into the device.
+2. Clone this repository into `/data/openpilot`, branch `hw1-magyar`, with submodules:
+   `git clone --recurse-submodules -b hw1-magyar https://github.com/Nitrotito/sunnypilot.git /data/openpilot`
+3. Tell the updater which branch to follow:
+   `echo -n "hw1-magyar" > /data/params/d/UpdaterTargetBranch`
+4. Optional: put the licence plate shown on the screensaver into `/data/license_plate`.
+   Leave the file out and the screensaver simply shows the mark.
+5. Reboot.
+
+Note for anyone hitting a stalled `git fetch` on the device: git over HTTP/2 stalls there
+(measured: half an hour, zero bytes). Force HTTP/1.1. `~/.gitconfig` does not survive a reboot on
+AGNOS, so the setting belongs on `/data` and has to be exported from `/data/continue.sh`.
+
+**Ez a fork a comma telepítő URL-jéről nem telepíthető.** Kézzel kell felrakni, mert a készüléknek
+erre az ágra kell kerülnie, az almodulokkal együtt:
+
+1. SSH a készülékre.
+2. A repó klónozása a `/data/openpilot` mappába, `hw1-magyar` ágról, almodulokkal.
+3. Az updater ágának beállítása: `UpdaterTargetBranch` értéke `hw1-magyar`.
+4. Nem kötelező: a képernyővédőn megjelenő rendszám a `/data/license_plate` fájlba. Ha nincs ilyen
+   fájl, a képernyővédő csak a jelet mutatja.
+5. Újraindítás.
+
+Ha a készüléken befagy a letöltés: a git HTTP/2-vel ott elakad (mérve: fél óra, nulla bájt).
+HTTP/1.1-re kell kényszeríteni. A `~/.gitconfig` az AGNOS-on nem éli túl az újraindítást, ezért a
+beállítás a `/data`-ra való, és a `/data/continue.sh`-ból kell exportálni.
 
 ---
 
