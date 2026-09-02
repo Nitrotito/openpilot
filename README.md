@@ -1,7 +1,7 @@
 # Tesla Model S AP1 (HW1) + magyar felület
 
 Ez egy **személyes fork**, egyetlen autóhoz: egy Tesla Model S, első generációs Autopilot
-hardverrel (AP1 / HW1, MCU1), egy **comma 4** eszközzel. A gyári openpilot és a gyári sunnypilot
+hardverrel (AP1 / HW1), egy **comma 4** eszközzel. A képernyő mindkét változatával megy, MCU1-gyel és MCU2-vel is. A gyári openpilot és a gyári sunnypilot
 ezt a hardver-generációt nem támogatja, ez az ág igen.
 
 > **Ez vezetéstámogatás, nem önvezetés.** A kormányt nem kell fogni, az utat viszont nézni kell, és
@@ -13,7 +13,7 @@ ezt a hardver-generációt nem támogatja, ez az ág igen.
 | | |
 |---|---|
 | Eszköz | comma 4 (`mici`). Csak ezen épül és ezen van kipróbálva. |
-| Autó | Tesla Model S, **AP1 / Hardware 1** (MCU1) |
+| Autó | Tesla Model S, **AP1 / Hardware 1**, MCU1 és MCU2 |
 | Éles ág | `hw1-magyar` |
 | Autó-oldal | [Nitrotito/opendbc](https://github.com/Nitrotito/opendbc), `hw1` ág |
 
@@ -34,7 +34,11 @@ Minden más hardver-generációra (HW2, HW2.5, HW3) és minden más márkára a
 A készüléket előbb be kell kötni az autóba a comma saját útmutatója szerint. Utána a szoftver:
 
 1. A comma 4 beállításaiban válaszd a **Custom Software** lehetőséget.
-2. Add meg a telepítő címét ehhez az ághoz.
+2. Add meg ezt a címet:
+
+   ```
+   installer.comma.ai/Nitrotito/hw1-magyar
+   ```
 3. A készülék letölti és újraindul.
 
 Kézzel, SSH-n keresztül is megy, ha a fenti út nem elérhető: a repót a `/data/openpilot` mappába
@@ -66,7 +70,7 @@ munkánk. Minden más a fenti projekteké, a saját licenceik szerint.
 # Tesla Model S AP1 (HW1) with a Hungarian UI
 
 A **personal fork**, maintained for a single car: a Tesla Model S with first generation Autopilot
-hardware (AP1 / HW1, MCU1) and a **comma 4** device. Neither stock openpilot nor stock sunnypilot
+hardware (AP1 / HW1) and a **comma 4** device. Both screen generations work, MCU1 and MCU2. Neither stock openpilot nor stock sunnypilot
 supports this hardware generation. This branch does.
 
 > **This is driver assistance, not self driving.** You do not have to hold the wheel, but you do
@@ -78,7 +82,7 @@ supports this hardware generation. This branch does.
 | | |
 |---|---|
 | Device | comma 4 (`mici`), the only unit this is built and tested on |
-| Car | Tesla Model S, **AP1 / Hardware 1** (MCU1) |
+| Car | Tesla Model S, **AP1 / Hardware 1**, both MCU1 and MCU2 |
 | Live branch | `hw1-magyar` |
 | Car side | [Nitrotito/opendbc](https://github.com/Nitrotito/opendbc), branch `hw1` |
 
@@ -99,7 +103,11 @@ For any other hardware generation (HW2, HW2.5, HW3) or any other make,
 Wire the device into the car first, following comma's own guide. Then the software:
 
 1. In the comma 4 settings, pick **Custom Software**.
-2. Enter the installer address for this branch.
+2. Enter this address:
+
+   ```
+   installer.comma.ai/Nitrotito/hw1-magyar
+   ```
 3. The device downloads it and reboots.
 
 It can also be done by hand over SSH: clone the repository into `/data/openpilot` from the
