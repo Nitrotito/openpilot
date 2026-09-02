@@ -10,8 +10,7 @@ What this fork adds on top of sunnypilot:
   stock sunnypilot supports this hardware generation.
 - **Hungarian UI translation**, with a regenerated font atlas so that ő and ű render correctly.
 - **An extra settings panel** in the UI: speed offset and screen brightness.
-- **Screensaver**: a bouncing Tesla mark instead of the sunnypilot wordmark. The licence plate
-  under it is read from `/data/license_plate` on the device, and is deliberately never committed.
+- **Screensaver**: a bouncing Tesla mark instead of the sunnypilot wordmark.
 
 No support, no warranty, and no promise that it works on your car. This is driver assistance
 software: the driver stays responsible at all times.
@@ -30,8 +29,7 @@ Amit ez a fork hozzátesz a sunnypilothoz:
   a gyári openpilot, sem a gyári sunnypilot nem ismeri.
 - **Teljes magyar felület**, újragenerált betűatlasszal, hogy az ő és az ű is helyesen jelenjen meg.
 - **Egy saját beállítás-panel** a felületen: sebesség-eltolás és képernyő-fényerő.
-- **Képernyővédő**: pattogó Tesla-jel a sunnypilot felirat helyett. Az alatta lévő rendszámot a
-  készülék `/data/license_plate` fájljából olvassa, és szándékosan sosem kerül be a kódba.
+- **Képernyővédő**: pattogó Tesla-jel a sunnypilot felirat helyett.
 
 Nincs hozzá támogatás, nincs garancia, és nincs ígéret arra, hogy a te autódon működik. Ez
 vezetéstámogató szoftver: a felelősség végig a vezetőé.
@@ -64,9 +62,7 @@ device has to end up on this branch with the submodules pinned to our commits:
    `git clone --recurse-submodules -b hw1-magyar https://github.com/Nitrotito/sunnypilot.git /data/openpilot`
 3. Tell the updater which branch to follow:
    `echo -n "hw1-magyar" > /data/params/d/UpdaterTargetBranch`
-4. Optional: put the licence plate shown on the screensaver into `/data/license_plate`.
-   Leave the file out and the screensaver simply shows the mark.
-5. Reboot.
+4. Reboot.
 
 Note for anyone hitting a stalled `git fetch` on the device: git over HTTP/2 stalls there
 (measured: half an hour, zero bytes). Force HTTP/1.1. `~/.gitconfig` does not survive a reboot on
@@ -78,9 +74,7 @@ erre az ágra kell kerülnie, az almodulokkal együtt:
 1. SSH a készülékre.
 2. A repó klónozása a `/data/openpilot` mappába, `hw1-magyar` ágról, almodulokkal.
 3. Az updater ágának beállítása: `UpdaterTargetBranch` értéke `hw1-magyar`.
-4. Nem kötelező: a képernyővédőn megjelenő rendszám a `/data/license_plate` fájlba. Ha nincs ilyen
-   fájl, a képernyővédő csak a jelet mutatja.
-5. Újraindítás.
+4. Újraindítás.
 
 Ha a készüléken befagy a letöltés: a git HTTP/2-vel ott elakad (mérve: fél óra, nulla bájt).
 HTTP/1.1-re kell kényszeríteni. A `~/.gitconfig` az AGNOS-on nem éli túl az újraindítást, ezért a
