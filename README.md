@@ -45,10 +45,6 @@ Kézzel, SSH-n keresztül is megy, ha a fenti út nem elérhető: a repót a `/d
 kell klónozni a `hw1-magyar` ágról, almodulokkal együtt, majd az updater ágát beállítani és
 újraindítani.
 
-Ha a készüléken befagy a letöltés: a git ott HTTP/2-vel elakad (mérve: fél óra, nulla bájt).
-HTTP/1.1-re kell kényszeríteni. A `~/.gitconfig` az AGNOS-on nem éli túl az újraindítást, ezért a
-beállítás a `/data`-ra való, és a `/data/continue.sh`-ból kell exportálni.
-
 ## Honnan van
 
 Ez a fork nem a semmiből készült. A rétegek, alulról felfelé:
@@ -112,10 +108,6 @@ Wire the device into the car first, following comma's own guide. Then the softwa
 
 It can also be done by hand over SSH: clone the repository into `/data/openpilot` from the
 `hw1-magyar` branch with submodules, point the updater at that branch, and reboot.
-
-If a download stalls on the device: git over HTTP/2 hangs there (measured: half an hour, zero
-bytes). Force HTTP/1.1. `~/.gitconfig` does not survive a reboot on AGNOS, so the setting belongs
-on `/data` and has to be exported from `/data/continue.sh`.
 
 ## Where this comes from
 
