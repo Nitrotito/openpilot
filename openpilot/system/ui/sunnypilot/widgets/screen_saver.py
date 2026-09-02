@@ -15,6 +15,9 @@ from openpilot.system.ui.lib.application import gui_app, FontWeight
 from openpilot.system.ui.lib.text_measure import measure_text_cached
 from openpilot.system.ui.widgets import Widget
 
+# Device-local, not in git: survives software updates, wiped only by a reflash.
+PLATE_FILE = "/data/license_plate"
+
 
 class ScreenSaverSP(Widget):
   def __init__(self, params: Params | None = None):
@@ -36,8 +39,11 @@ class ScreenSaverSP(Widget):
     self.logo_render_height = 120 if self._is_mici else 400
     self.logo_render_width = round(self.logo_render_height * 401 / 400)
 
-    # license plate under the mark, bounces along with it
-    self.plate_text = "TSLA 520"
+    # license plate under the mark, bounces along with it.
+    # NOTE: kept OUT of the source tree on purpose -- this repo is a public fork,
+    # and a plate baked into the code stays readable in the git history forever.
+    # The value lives in the device's own storage, which survives updates.
+    self.plate_text = self._read_plate()
     self.plate_font_size = 34 if self._is_mici else 80
     self.plate_gap = 10 if self._is_mici else 28
     # fonts are only loaded once the window exists, so resolve them lazily
@@ -48,6 +54,18 @@ class ScreenSaverSP(Widget):
     self._dismiss = False
     self._screensaver_timeout = 300
     self._hit_last_frame = False
+
+  @staticmethod
+  def _read_plate() -> str:
+    """Read the plate from the device, or return '' if it was never set.
+
+    Empty is a valid state: the screensaver then shows only the mark.
+    """
+    try:
+      with open(PLATE_FILE) as f:
+        return f.read().strip()
+    except OSError:
+      return ""
 
   @property
   def is_active(self) -> bool:
@@ -83,11 +101,12 @@ class ScreenSaverSP(Widget):
 
     if self._plate_font is None:
       self._plate_font = gui_app.font(FontWeight.BOLD)
-      self._plate_size = measure_text_cached(self._plate_font, self.plate_text, self.plate_font_size)
+      if self.plate_text:
+        self._plate_size = measure_text_cached(self._plate_font, self.plate_text, self.plate_font_size)
 
     # logo and plate travel together as one block
     self.block_width = max(self.logo_width, self._plate_size.x)
-    self.block_height = self.logo_height + self.plate_gap + self._plate_size.y
+    self.block_height = self.logo_height + (self.plate_gap + self._plate_size.y if self.plate_text else 0)
 
     if self._start_time and time.monotonic() - self._start_time > self._screensaver_timeout:
       self._dismiss = True
@@ -125,7 +144,8 @@ class ScreenSaverSP(Widget):
     logo_x = self.x + (self.block_width - self.logo_width) / 2
     rl.draw_texture(self._logo, int(logo_x), int(self.y), self.color)
 
-    plate_pos = rl.Vector2(self.x + (self.block_width - self._plate_size.x) / 2,
-                           self.y + self.logo_height + self.plate_gap)
-    rl.draw_text_ex(self._plate_font, self.plate_text, plate_pos, self.plate_font_size, 0, self.color)
+    if self.plate_text:
+      plate_pos = rl.Vector2(self.x + (self.block_width - self._plate_size.x) / 2,
+                             self.y + self.logo_height + self.plate_gap)
+      rl.draw_text_ex(self._plate_font, self.plate_text, plate_pos, self.plate_font_size, 0, self.color)
     return -1
