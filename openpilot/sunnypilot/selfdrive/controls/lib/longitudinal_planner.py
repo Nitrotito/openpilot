@@ -15,7 +15,7 @@ from openpilot.selfdrive.car.cruise import V_CRUISE_MAX
 from openpilot.sunnypilot.selfdrive.controls.lib.dec.dec import DynamicExperimentalController
 from openpilot.sunnypilot.selfdrive.controls.lib.e2e_alerts_helper import E2EAlertsHelper
 from openpilot.sunnypilot.selfdrive.controls.lib.smart_cruise_control.smart_cruise_control import SmartCruiseControl
-from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_assist import SpeedLimitAssist
+from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_assist import SpeedLimitAssist, V_CRUISE_UNSET
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_resolver import SpeedLimitResolver
 from openpilot.sunnypilot.selfdrive.selfdrived.events import EventsSP
 from openpilot.sunnypilot.models.helpers import get_active_bundle
@@ -24,9 +24,12 @@ from openpilot.sunnypilot.owner_files import CRUISE_SPEED_OFFSET_PATH, CRUISE_SP
 DecState = custom.LongitudinalPlanSP.DynamicExperimentalControl.DynamicExperimentalControlState
 LongitudinalPlanSource = custom.LongitudinalPlanSP.LongitudinalPlanSource
 
-# Constant offset applied to the MANUALLY set cruise speed only (not to the speed limit
-# assist, which has its own SpeedLimitValueOffset). The set speed shown on screen and on
-# the dash is unchanged; only the speed the car actually holds moves by this much.
+# Constant offset applied to the speed the car actually holds: to the MANUALLY set cruise
+# speed, and to the speed limit assist's output. The set speed shown on screen and on the
+# dash is unchanged, and so is the speed limit the assist reads off the map; only the held
+# speed moves by this much. The assist's own SpeedLimitValueOffset is deliberately NOT used
+# for this, because it rewrites the resolved limit and would drag the assist's own
+# thresholds with it (see update_targets).
 #
 # Read from a plain file instead of a Params key on purpose: params_keys.h is compiled
 # into params_pyx.so, so a new key would need a full rebuild on the device.
@@ -97,11 +100,21 @@ class LongitudinalPlannerSP:
     self.sla.update(long_enabled, long_override, v_ego, a_ego, v_cruise_cluster, self.resolver.speed_limit,
                     self.resolver.speed_limit_final_last, has_speed_limit, self.resolver.distance, self.events_sp)
 
+    # The same manual offset also applies to the speed limit assist, but only to its OUTPUT.
+    # The resolved limit itself is left untouched, so the assist keeps seeing the real sign
+    # value: the 80 km/h confirmation threshold and the 120/130 required set speed derived
+    # from it behave exactly as they do with no offset. Subtracting inside the resolver
+    # instead (SpeedLimitValueOffset) would shift those thresholds too, which would turn
+    # every 80 sign into a 79 and start demanding confirmation on roads that need none.
+    sla_v_target = self.sla.output_v_target
+    if sla_v_target < V_CRUISE_UNSET:
+      sla_v_target = max(0., sla_v_target + self.cruise_speed_offset)
+
     targets = {
       LongitudinalPlanSource.cruise: (max(0., v_cruise + self.cruise_speed_offset), a_ego),
       LongitudinalPlanSource.sccVision: (self.scc.vision.output_v_target, self.scc.vision.output_a_target),
       LongitudinalPlanSource.sccMap: (self.scc.map.output_v_target, self.scc.map.output_a_target),
-      LongitudinalPlanSource.speedLimitAssist: (self.sla.output_v_target, self.sla.output_a_target),
+      LongitudinalPlanSource.speedLimitAssist: (sla_v_target, self.sla.output_a_target),
     }
 
     self.source = min(targets, key=lambda k: targets[k][0])
