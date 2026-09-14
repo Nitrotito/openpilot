@@ -1103,6 +1103,15 @@ msgstr "Automata (sötét)"
 msgid "Clear Cache"
 msgstr "Gyorsítótár törlése"
 
+msgid "clear cache"
+msgstr "gyorsítótár törlése"
+
+msgid "clearing..."
+msgstr "törlés..."
+
+msgid "CLEARING..."
+msgstr "TÖRLÉS..."
+
 msgid "FETCHING..."
 msgstr "LEKÉRÉS..."
 
