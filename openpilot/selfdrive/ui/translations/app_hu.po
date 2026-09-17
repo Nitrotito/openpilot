@@ -1112,6 +1112,12 @@ msgstr "törlés..."
 msgid "CLEARING..."
 msgstr "TÖRLÉS..."
 
+msgid "refresh models"
+msgstr "modellek frissítése"
+
+msgid "fetching..."
+msgstr "lekérés..."
+
 msgid "FETCHING..."
 msgstr "LEKÉRÉS..."
 
