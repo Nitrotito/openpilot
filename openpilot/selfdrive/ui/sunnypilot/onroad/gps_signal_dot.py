@@ -4,10 +4,17 @@ Copyright (c) 2021-, Haibin Wen, sunnypilot, and a number of other contributors.
 This file is part of sunnypilot and is licensed under the MIT License.
 See the LICENSE.md file in the root directory for more details.
 
-A small dot in the top left corner that says, at a glance, whether the GPS fix
-is good enough to trust. The device does not publish a boolean "signal ok", it
-publishes a horizontal accuracy in metres, so the dot has to draw a line
-somewhere: that line is GOOD_ACCURACY / FAIR_ACCURACY below.
+A small dot in the top right corner that says, at a glance, whether the GPS fix
+is good enough to trust. It started in the top left (2026-09-17) and moved on
+2026-09-19: the top left is where the mici HUD draws the MAX set-speed box
+(hud_renderer._draw_set_speed anchors at rect.x, rect.y), so the dot sat on top
+of it. The top right is the only free corner: the steering wheel is bottom left,
+the model-source icon is bottom right, and the right blind-spot icon starts
+100 px below the top edge, well clear of this dot.
+
+The device does not publish a boolean "signal ok", it publishes a horizontal
+accuracy in metres, so the dot has to draw a line somewhere: that line is
+GOOD_ACCURACY / FAIR_ACCURACY below.
 
 The dot is always drawn while onroad. That is deliberate: a dot that disappears
 on a bad fix looks exactly like a dot that is broken, and the owner would have
@@ -18,7 +25,8 @@ import pyray as rl
 from openpilot.selfdrive.ui.ui_state import ui_state
 from openpilot.selfdrive.ui.sunnypilot.onroad.developer_ui.elements import GpsInfoElement
 
-# Distance from the top left corner of the camera view, in pixels.
+# Distance from the top RIGHT corner of the camera view, in pixels.
+# MARGIN_X is measured from the right edge, MARGIN_Y from the top edge.
 MARGIN_X = 28
 MARGIN_Y = 28
 RADIUS = 9
@@ -33,7 +41,7 @@ DARK = rl.Color(70, 70, 70, 180)
 
 
 class GpsSignalDot:
-  """Top left corner dot: green = good fix, amber = usable, dark = do not trust."""
+  """Top right corner dot: green = good fix, amber = usable, dark = do not trust."""
 
   def __init__(self):
     self._color: rl.Color = DARK
@@ -67,7 +75,7 @@ class GpsSignalDot:
     return DARK
 
   def render(self, rect: rl.Rectangle) -> None:
-    center = rl.Vector2(int(rect.x + MARGIN_X + RADIUS), int(rect.y + MARGIN_Y + RADIUS))
+    center = rl.Vector2(int(rect.x + rect.width - MARGIN_X - RADIUS), int(rect.y + MARGIN_Y + RADIUS))
     # A dark ring under the dot keeps it readable over a bright road.
     rl.draw_circle_v(center, RADIUS + 2, rl.Color(0, 0, 0, 120))
     rl.draw_circle_v(center, RADIUS, self._color)
