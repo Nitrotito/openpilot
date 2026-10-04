@@ -243,7 +243,7 @@ class SmartCruiseControlMap:
 
     return enabled, active
 
-  def update(self, long_enabled: bool, long_override: bool, v_ego, a_ego, v_cruise) -> None:
+  def update(self, long_enabled: bool, long_override: bool, v_ego, a_ego, v_cruise, gps_ok: bool = True) -> None:
     self.long_enabled = long_enabled
     self.long_override = long_override
     self.v_ego = v_ego
@@ -252,6 +252,9 @@ class SmartCruiseControlMap:
 
     self.update_params()
     self.update_calculations()
+    if not gps_ok:
+      # stale position: no target, so the state machine falls back to enabled (no slowdown)
+      self.v_target = 0.0
 
     self.is_enabled, self.is_active = self._update_state_machine()
 

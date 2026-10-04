@@ -123,7 +123,12 @@ class SpeedLimitResolver:
     gps_data = sm[self._gps_location_service]
     map_data = sm['liveMapDataSP']
 
-    gps_fix_age = time.monotonic() - gps_data.unixTimestampMillis * 1e-3
+    # HW1 fork: the upstream age check compared time.monotonic() to the GPS unix timestamp, so it
+    # could never expire, and a limit from before a GNSS loss stayed on screen for a whole drive
+    # (measured 2026-10-04: 40 km/h for 55 min on the motorway). Use the receive time and the fix flag.
+    if not (sm.alive[self._gps_location_service] and gps_data.hasFix):
+      return
+    gps_fix_age = time.monotonic() - sm.recv_time[self._gps_location_service]
     if gps_fix_age > LIMIT_MAX_MAP_DATA_AGE:
       return
 
@@ -133,10 +138,9 @@ class SpeedLimitResolver:
     self._calculate_map_data_limits(sm, speed_limit, next_speed_limit)
 
   def _calculate_map_data_limits(self, sm: messaging.SubMaster, speed_limit: float, next_speed_limit: float) -> None:
-    gps_data = sm[self._gps_location_service]
     map_data = sm['liveMapDataSP']
 
-    distance_since_fix = self.v_ego * (time.monotonic() - gps_data.unixTimestampMillis * 1e-3)
+    distance_since_fix = self.v_ego * (time.monotonic() - sm.recv_time[self._gps_location_service])
     distance_to_speed_limit_ahead = max(0., map_data.speedLimitAheadDistance - distance_since_fix)
 
     self.limit_solutions[SpeedLimitSource.map] = speed_limit
