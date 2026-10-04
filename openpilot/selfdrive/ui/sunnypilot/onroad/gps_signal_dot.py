@@ -19,17 +19,34 @@ GOOD_ACCURACY / FAIR_ACCURACY below.
 The dot is always drawn while onroad. That is deliberate: a dot that disappears
 on a bad fix looks exactly like a dot that is broken, and the owner would have
 no way to tell the two apart.
+
+2026-10-04 (Zoltan, tg 10563): while engaged the dot grows into a badge with the
+speed the planner is actually aiming for (longitudinalPlanSP.vTarget) in it, and
+the badge colour is the same GPS colour as before. On that day the map curve
+controller held the car at 96 km/h with the cruise set to 130 and no GPS fix, and
+nothing on the screen said so. A dark badge with a number lower than the set speed
+now says exactly that. Disengaged, it is the plain dot again.
 """
 import pyray as rl
 
+from openpilot.common.constants import CV
 from openpilot.selfdrive.ui.ui_state import ui_state
 from openpilot.selfdrive.ui.sunnypilot.onroad.developer_ui.elements import GpsInfoElement
+from openpilot.system.ui.lib.application import gui_app, FontWeight
+from openpilot.system.ui.lib.text_measure import measure_text_cached
 
 # Distance from the top RIGHT corner of the camera view, in pixels.
 # MARGIN_X is measured from the right edge, MARGIN_Y from the top edge.
 MARGIN_X = 28
 MARGIN_Y = 28
 RADIUS = 9
+
+# Target speed badge (engaged only). Its top edge stays at MARGIN_Y and it ends
+# well above the right blind-spot icon, which starts 100 px below the top.
+BADGE_RADIUS = 30
+BADGE_FONT_SIZE = 36
+# Above this the planner has no target of its own (V_CRUISE_UNSET is 255 km/h).
+MAX_SHOWN_KPH = 200.
 
 # Horizontal accuracy thresholds, in metres (Zoltan's call, 2026-09-17).
 GOOD_ACCURACY = 5.0
@@ -45,15 +62,36 @@ class GpsSignalDot:
 
   def __init__(self):
     self._color: rl.Color = DARK
+    self._target_text: str = ""
+    self._font: rl.Font | None = None
 
   def update(self) -> None:
     self._color = self._color_for(self._accuracy())
+    self._target_text = self._target_speed_text()
+
+  @staticmethod
+  def _target_speed_text() -> str:
+    """The planner's target speed while engaged, or "" when there is nothing to show."""
+    sm = ui_state.sm
+    try:
+      if not sm['selfdriveState'].enabled:
+        return ""
+      v_target = float(sm['longitudinalPlanSP'].vTarget)
+    except (KeyError, AttributeError):
+      return ""
+    kph = v_target * CV.MS_TO_KPH
+    if not 0. < kph < MAX_SHOWN_KPH:
+      return ""
+    return str(round(kph if ui_state.is_metric else kph * CV.KPH_TO_MPH))
 
   def _accuracy(self) -> float:
     """Horizontal accuracy in metres, or -1.0 when there is no usable fix."""
     sm = ui_state.sm
     gps_data, valid = GpsInfoElement.get_gps_data(sm)
     if not valid or gps_data is None:
+      return -1.0
+    if not getattr(gps_data, 'hasFix', True):
+      # a valid packet without a fix still carries a stale accuracy; do not show it as usable
       return -1.0
 
     accuracy = float(getattr(gps_data, 'horizontalAccuracy', 0.0) or 0.0)
@@ -75,7 +113,16 @@ class GpsSignalDot:
     return DARK
 
   def render(self, rect: rl.Rectangle) -> None:
-    center = rl.Vector2(int(rect.x + rect.width - MARGIN_X - RADIUS), int(rect.y + MARGIN_Y + RADIUS))
+    radius = BADGE_RADIUS if self._target_text else RADIUS
+    center = rl.Vector2(int(rect.x + rect.width - MARGIN_X - radius), int(rect.y + MARGIN_Y + radius))
     # A dark ring under the dot keeps it readable over a bright road.
-    rl.draw_circle_v(center, RADIUS + 2, rl.Color(0, 0, 0, 120))
-    rl.draw_circle_v(center, RADIUS, self._color)
+    rl.draw_circle_v(center, radius + 2, rl.Color(0, 0, 0, 120))
+    rl.draw_circle_v(center, radius, self._color)
+    if not self._target_text:
+      return
+
+    if self._font is None:
+      self._font = gui_app.font(FontWeight.BOLD)
+    size = measure_text_cached(self._font, self._target_text, BADGE_FONT_SIZE)
+    pos = rl.Vector2(center.x - size.x / 2, center.y - size.y / 2)
+    rl.draw_text_ex(self._font, self._target_text, pos, BADGE_FONT_SIZE, 0, rl.WHITE)
