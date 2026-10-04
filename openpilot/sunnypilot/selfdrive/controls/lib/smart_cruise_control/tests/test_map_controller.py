@@ -49,6 +49,15 @@ class TestSmartCruiseControlMap(OpenpilotTestCase):
     assert self.scc_m.state == VisionState.disabled
     assert not self.scc_m.is_active
 
+  def test_no_gps_fix_never_turning(self):
+    # HW1 fork: without a live fix the stale position must not produce a curve target
+    for _ in range(int(10. / DT_MDL)):
+      self.scc_m.update(True, False, 30., 0., 36., gps_ok=False)
+    assert self.scc_m.v_target == 0.
+    assert self.scc_m.state == MapState.enabled
+    assert not self.scc_m.is_active
+    assert self.scc_m.output_v_target == V_CRUISE_UNSET
+
   def test_disabled(self):
     for _ in range(int(10. / DT_MDL)):
       self.scc_m.update(False, False, 0., 0., 0.)
