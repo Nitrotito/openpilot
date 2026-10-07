@@ -26,6 +26,12 @@ the badge colour is the same GPS colour as before. On that day the map curve
 controller held the car at 96 km/h with the cruise set to 130 and no GPS fix, and
 nothing on the screen said so. A dark badge with a number lower than the set speed
 now says exactly that. Disengaged, it is the plain dot again.
+
+2026-10-07 (Zoltan, tg 11772): on the road the badge was too small and the white
+number on green/amber was unreadable. It is now drawn like a speed limit sign:
+a white disc with a thick ring in the GPS colour and a bold black number, half
+again as large. The top margin shrinks so the badge still ends at y = 100, above
+the right blind-spot icon.
 """
 import pyray as rl
 
@@ -41,10 +47,12 @@ MARGIN_X = 28
 MARGIN_Y = 28
 RADIUS = 9
 
-# Target speed badge (engaged only). Its top edge stays at MARGIN_Y and it ends
-# well above the right blind-spot icon, which starts 100 px below the top.
-BADGE_RADIUS = 30
-BADGE_FONT_SIZE = 36
+# Target speed badge (engaged only), drawn like a speed limit sign. It ends at
+# y = BADGE_MARGIN_Y + 2 * BADGE_RADIUS + 2 = 100, where the right blind-spot icon starts.
+BADGE_RADIUS = 44
+BADGE_MARGIN_Y = 10
+BADGE_RING = 8
+BADGE_FONT_SIZE = 50
 # Above this the planner has no target of its own (V_CRUISE_UNSET is 255 km/h).
 MAX_SHOWN_KPH = 200.
 
@@ -113,16 +121,27 @@ class GpsSignalDot:
     return DARK
 
   def render(self, rect: rl.Rectangle) -> None:
-    radius = BADGE_RADIUS if self._target_text else RADIUS
-    center = rl.Vector2(int(rect.x + rect.width - MARGIN_X - radius), int(rect.y + MARGIN_Y + radius))
+    badge = bool(self._target_text)
+    radius = BADGE_RADIUS if badge else RADIUS
+    margin_y = BADGE_MARGIN_Y if badge else MARGIN_Y
+    center = rl.Vector2(int(rect.x + rect.width - MARGIN_X - radius), int(rect.y + margin_y + radius))
     # A dark ring under the dot keeps it readable over a bright road.
     rl.draw_circle_v(center, radius + 2, rl.Color(0, 0, 0, 120))
     rl.draw_circle_v(center, radius, self._color)
-    if not self._target_text:
+    if not badge:
       return
+
+    # Speed limit sign: the GPS colour stays as the ring, the inside is white.
+    rl.draw_circle_v(center, radius - BADGE_RING, rl.WHITE)
 
     if self._font is None:
       self._font = gui_app.font(FontWeight.BOLD)
-    size = measure_text_cached(self._font, self._target_text, BADGE_FONT_SIZE)
+    font_size = BADGE_FONT_SIZE
+    size = measure_text_cached(self._font, self._target_text, font_size)
+    # Three digits (100+) do not fit the white inside at full size; shrink just enough.
+    max_width = 2 * (BADGE_RADIUS - BADGE_RING) - 8
+    if size.x > max_width:
+      font_size = int(font_size * max_width / size.x)
+      size = measure_text_cached(self._font, self._target_text, font_size)
     pos = rl.Vector2(center.x - size.x / 2, center.y - size.y / 2)
-    rl.draw_text_ex(self._font, self._target_text, pos, BADGE_FONT_SIZE, 0, rl.WHITE)
+    rl.draw_text_ex(self._font, self._target_text, pos, font_size, 0, rl.BLACK)
