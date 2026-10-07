@@ -2632,3 +2632,138 @@ msgstr "Kalibrálás"
 
 msgid "Reverse"
 msgstr "Hátramenet"
+
+msgid "small model"
+msgstr "kis modell"
+
+msgid "big model"
+msgstr "nagy modell"
+
+msgid "unavailable"
+msgstr "nem elérhető"
+
+msgid "getting ready"
+msgstr "előkészítés"
+
+msgid "small models"
+msgstr "kis modellek"
+
+msgid "big models"
+msgstr "nagy modellek"
+
+msgid "active"
+msgstr "aktív"
+
+msgid "No models available"
+msgstr "Nincs elérhető modell"
+
+msgid "No models are available for this hardware yet. Connect to the internet and refresh the model list."
+msgstr "Ehhez a hardverhez még nincs elérhető modell. Csatlakozz az internetre, és frissítsd a modell-listát."
+
+msgid "slide to"
+msgstr "csúsztasd:"
+
+msgid "verifying"
+msgstr "ellenőrzés"
+
+msgid "cancel verification"
+msgstr "ellenőrzés megszakítása"
+
+msgid "downloaded"
+msgstr "letöltve"
+
+msgid "queued"
+msgstr "sorban áll"
+
+msgid "Big model unavailable until the next drive."
+msgstr "A nagy modell a következő útig nem elérhető."
+
+msgid "Getting the big model ready."
+msgstr "A nagy modell előkészítése folyamatban."
+
+msgid "Small Model"
+msgstr "Kis modell"
+
+msgid "Big Model"
+msgstr "Nagy modell"
+
+msgid "small"
+msgstr "kicsi"
+
+msgid "big"
+msgstr "nagy"
+
+msgid "{} will drive when the chestnut is ready."
+msgstr "{} vezet, amint a chestnut készen áll."
+
+msgid "Cancel Verification"
+msgstr "Ellenőrzés megszakítása"
+
+msgid "{} will drive. If it fails during a drive, {} takes over until the next drive."
+msgstr "{} vezet. Ha út közben hibázik, a következő útig {} veszi át."
+
+msgid "Big model unavailable, {} is driving until the next drive."
+msgstr "A nagy modell nem elérhető, a következő útig {} vezet."
+
+msgid "{} drives until the big model is ready."
+msgstr "{} vezet, amíg a nagy modell elkészül."
+
+msgid "Mount the device within 4° left or right and 5° up or 9° down. openpilot calibrates continuously; resetting is rarely needed. Resetting clears learned calibration."
+msgstr "Az eszközt balra vagy jobbra 4°-on, felfelé 5°-on, lefelé 9°-on belül szereld fel. A kalibráció folyamatos, visszaállításra ritkán van szükség. A visszaállítás törli a tanult kalibrációt."
+
+msgid "Preview the cabin camera to check driver monitoring visibility. The vehicle must be off."
+msgstr "A belső kamera előnézete, hogy lásd, jól látja-e a vezetőt. Az autónak kikapcsolva kell lennie."
+
+msgid "Standard is recommended.\nAggressive follows closer, with firmer gas and braking.\nRelaxed leaves more space.\nUse the steering wheel distance button on supported cars."
+msgstr "A Normál ajánlott.\nA Dinamikus közelebb követ, határozottabban gázol és fékez.\nA Nyugodt nagyobb követési távolságot hagy.\nTámogatott autókon a kormány távolság-gombjával is állíthatod."
+
+msgid "Let the driving model control gas and brakes.\nIncludes stopping for red lights and stop signs.\nSet speed is a maximum, not a target.\nThese are alpha features. Expect mistakes.\nThe path colors show acceleration and braking."
+msgstr "A vezetési modell kezeli a gázt és a féket.\nMegáll a piros lámpánál és a stoptáblánál is.\nA beállított sebesség felső határ, nem cél.\nEzek alfa funkciók, hibázhatnak.\nAz útvonal színe mutatja a gyorsítást és a fékezést."
+
+msgid "Warn when you drift across a detected lane line.\nOnly above 31 mph (50 km/h), with no turn signal."
+msgstr "Figyelmeztet, ha irányjelző nélkül átsodródsz egy felismert sávjelzésen.\nCsak 50 km/h felett."
+
+msgid "Monitor the driver even when sunnypilot is not engaged."
+msgstr "A vezető figyelése akkor is, ha a sunnypilot nincs bekapcsolva."
+
+msgid "Upload cabin camera data to help improve driver monitoring."
+msgstr "A belső kamera felvételeinek feltöltése a vezetőfigyelés fejlesztéséhez."
+
+msgid "Record microphone audio while driving.\nAudio is included in dashcam videos in sunnylink."
+msgstr "Mikrofonhang rögzítése vezetés közben.\nA hang a sunnylink menetrögzítő videóiban is benne lesz."
+
+msgid "Enable to use sunnypilot driver assistance.\nDisable to use your car's stock driver assistance."
+msgstr "Bekapcsolva a sunnypilot vezetéstámogatása működik.\nKikapcsolva az autó gyári rendszere."
+
+msgid "Use Android Debug Bridge (ADB) over USB or the network."
+msgstr "Android Debug Bridge (ADB) USB-n vagy hálózaton keresztül."
+
+msgid "enable ADB"
+msgstr "ADB engedélyezése"
+
+msgid "Access the device remotely using your SSH keys."
+msgstr "Távoli hozzáférés az eszközhöz az SSH-kulcsaiddal."
+
+msgid "enable SSH"
+msgstr "SSH engedélyezése"
+
+msgid "Control the car with a joystick for debugging."
+msgstr "Az autó irányítása joystickkal, hibakereséshez."
+
+msgid "Run longitudinal maneuvers for testing gas and brake control."
+msgstr "Hosszirányú manőverek a gáz- és fékvezérlés teszteléséhez."
+
+msgid "Run lateral maneuvers for testing steering control."
+msgstr "Oldalirányú manőverek a kormányvezérlés teszteléséhez."
+
+msgid "Use alpha openpilot longitudinal control instead of stock ACC. This may disable Automatic Emergency Braking (AEB)."
+msgstr "Az openpilot alfa hosszirányú vezérlése a gyári ACC helyett. Ez kikapcsolhatja az automatikus vészfékezést (AEB)."
+
+msgid "Show touch locations and the UI frame rate."
+msgstr "Az érintések helyének és a képfrissítési sebességnek a megjelenítése."
+
+msgid "Failed to get available branches. Ensure you're connected to the internet and try again."
+msgstr "Nem sikerült lekérni az elérhető ágakat. Ellenőrizd az internetkapcsolatot, és próbáld újra."
+
+msgid "Ensure you're connected to the internet and try again."
+msgstr "Ellenőrizd az internetkapcsolatot, és próbáld újra."
