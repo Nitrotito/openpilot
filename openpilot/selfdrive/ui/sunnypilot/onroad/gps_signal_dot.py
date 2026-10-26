@@ -32,6 +32,12 @@ number on green/amber was unreadable. It is now drawn like a speed limit sign:
 a white disc with a thick ring in the GPS colour and a bold black number, half
 again as large. The top margin shrinks so the badge still ends at y = 100, above
 the right blind-spot icon.
+
+2026-10-26 (Zoltan, tg 17313): the badge showed 49 while the dash showed 50. The
+planner target already carries the owner's cruise speed offset (/data/cruise_speed_offset,
+-1 km/h, because the Tesla dash reads about 1 km/h above true speed), so vTarget is
+the true speed and the dash the true speed plus one. The badge now takes the offset
+back out and shows the number the dash will show at that speed.
 """
 import pyray as rl
 
@@ -40,6 +46,7 @@ from openpilot.selfdrive.ui.ui_state import ui_state
 from openpilot.selfdrive.ui.sunnypilot.onroad.developer_ui.elements import GpsInfoElement
 from openpilot.system.ui.lib.application import gui_app, FontWeight
 from openpilot.system.ui.lib.text_measure import measure_text_cached
+from openpilot.sunnypilot.owner_files import CRUISE_SPEED_OFFSET_PATH, CRUISE_SPEED_OFFSET_LIMIT
 
 # Distance from the top RIGHT corner of the camera view, in pixels.
 # MARGIN_X is measured from the right edge, MARGIN_Y from the top edge.
@@ -55,6 +62,8 @@ BADGE_RING = 8
 BADGE_FONT_SIZE = 50
 # Above this the planner has no target of its own (V_CRUISE_UNSET is 255 km/h).
 MAX_SHOWN_KPH = 200.
+# The offset file is re-read this often (UI frames); the planner reads it every few seconds too.
+OFFSET_REFRESH_FRAMES = 100
 
 # Horizontal accuracy thresholds, in metres (Zoltan's call, 2026-09-17).
 GOOD_ACCURACY = 5.0
@@ -72,13 +81,28 @@ class GpsSignalDot:
     self._color: rl.Color = DARK
     self._target_text: str = ""
     self._font: rl.Font | None = None
+    self._offset: float = 0.
+    self._frame: int = 0
 
   def update(self) -> None:
+    if self._frame % OFFSET_REFRESH_FRAMES == 0:
+      self._offset = self._read_offset()
+    self._frame += 1
     self._color = self._color_for(self._accuracy())
-    self._target_text = self._target_speed_text()
+    self._target_text = self._target_speed_text(self._offset)
 
   @staticmethod
-  def _target_speed_text() -> str:
+  def _read_offset() -> float:
+    """The owner's cruise speed offset in display units, clamped like the planner does. 0 on any problem."""
+    try:
+      with open(CRUISE_SPEED_OFFSET_PATH) as f:
+        raw = float(f.read().strip())
+    except (OSError, ValueError):
+      return 0.
+    return max(-CRUISE_SPEED_OFFSET_LIMIT, min(CRUISE_SPEED_OFFSET_LIMIT, raw))
+
+  @staticmethod
+  def _target_speed_text(offset: float = 0.) -> str:
     """The planner's target speed while engaged, or "" when there is nothing to show."""
     sm = ui_state.sm
     try:
@@ -90,7 +114,9 @@ class GpsSignalDot:
     kph = v_target * CV.MS_TO_KPH
     if not 0. < kph < MAX_SHOWN_KPH:
       return ""
-    return str(round(kph if ui_state.is_metric else kph * CV.KPH_TO_MPH))
+    # The offset is in display units, so it comes out after the unit conversion.
+    shown = (kph if ui_state.is_metric else kph * CV.KPH_TO_MPH) - offset
+    return str(round(shown)) if shown > 0. else ""
 
   def _accuracy(self) -> float:
     """Horizontal accuracy in metres, or -1.0 when there is no usable fix."""
