@@ -43,9 +43,12 @@ back out and shows the number the dash will show at that speed.
 second, smaller sign with a red ring (a real speed limit sign) that sits in the lower
 left edge of the badge. The mici HUD has no speed limit sign of its own (the tici
 SpeedLimitRenderer is not on this screen), and there is no room for one more full size
-icon. The small sign only shows while the speed limit resolver has a valid limit, and
-it shows engaged or not, in the same place. It is the legal limit as the map has it,
-so the cruise speed offset is NOT taken out of it. It ends at y = 100 like the badge.
+icon. The small sign only shows while the speed limit resolver has a valid limit and
+the planner is alive (a dead plannerd must not leave a stale limit on screen), and it
+shows engaged or not, in the same place. It is the limit the resolver settled on
+(SpeedLimitPolicy combined on this car: the lower of car and map, and the car gives
+none, so in practice the map), a legal limit, so the cruise speed offset is NOT taken
+out of it. It ends at y = 100 like the badge.
 """
 import pyray as rl
 
@@ -80,11 +83,11 @@ FAIR_ACCURACY = 20.0
 # Map speed limit sign: a smaller real sign in the lower left edge of the badge.
 # Its centre is measured from the badge centre; its bottom is at
 # BADGE_MARGIN_Y + BADGE_RADIUS + LIMIT_DY + LIMIT_RADIUS + 2 = 100, above the blind-spot icon.
-LIMIT_RADIUS = 24
-LIMIT_RING = 5
+LIMIT_RADIUS = 25
+LIMIT_RING = 4
 LIMIT_FONT_SIZE = 26
 LIMIT_DX = -52
-LIMIT_DY = 20
+LIMIT_DY = 19
 
 GREEN = rl.Color(0, 200, 90, 255)
 AMBER = rl.Color(235, 170, 0, 255)
@@ -115,11 +118,13 @@ class GpsSignalDot:
   def _speed_limit_text() -> str:
     """The map speed limit in display units while the resolver has a valid one, or ""."""
     try:
+      if not ui_state.sm.alive['longitudinalPlanSP']:
+        return ""
       resolver = ui_state.sm['longitudinalPlanSP'].speedLimit.resolver
       if not resolver.speedLimitValid:
         return ""
       limit_ms = float(resolver.speedLimit)
-    except (KeyError, AttributeError):
+    except (KeyError, AttributeError, TypeError):
       return ""
     kph = limit_ms * CV.MS_TO_KPH
     if not 0. < kph < MAX_SHOWN_KPH:
