@@ -138,13 +138,16 @@ class TestMapFollow:
     run(mf, 3 * STABLE, cluster=40, limit=90)
     assert mf.override and not mf.active  # the ceiling stays with the stalk (40)
 
-  def test_p1b_a_different_limit_after_the_gap_takes_over_once_stable(self):
+  def test_x2_a_different_limit_after_the_gap_becomes_the_base_and_keeps_the_stalk(self):
+    # lektor 5104 X2: override made in a gap; the first limit to return is its base, whatever it is
     mf = make_map_follow()
     engage(mf, cluster=80, limit=90)
     run(mf, int(MAP_FOLLOW_HOLD_TIME / DT_MDL) + 5, cluster=80, valid=False, limit=0)
     run(mf, 1, cluster=40, valid=False, limit=0)
-    run(mf, STABLE, cluster=40, limit=50)
-    assert mf.active and mf.ceiling == pytest.approx(kph(50))
+    run(mf, 3 * STABLE, cluster=40, limit=50)
+    assert mf.override and not mf.active
+    run(mf, STABLE, cluster=40, limit=70)  # a later, different limit that holds clears it
+    assert mf.active and mf.ceiling == pytest.approx(kph(70))
 
   def test_p2_stalk_move_shortly_after_engagement_is_an_override(self):
     # lektor 5102 K1: stalk 80 -> 40 0.4 s after engagement
@@ -163,13 +166,28 @@ class TestMapFollow:
     run(mf, 3 * STABLE, cluster=40, limit=50)
     assert mf.override and not mf.active
 
-  def test_override_without_any_map_yields_to_a_map_that_appears(self):
+  def test_x1_override_with_no_limit_ever_seen_keeps_the_stalk_when_a_limit_arrives(self):
+    # lektor 5104 X1: stalk 80 -> 60 with no limit, then 90 arrives: must stay at 60
     mf = make_map_follow()
-    run(mf, 20, cluster=60, valid=False, limit=0)
-    run(mf, 1, cluster=50, valid=False, limit=0)
+    run(mf, 20, cluster=80, valid=False, limit=0)
+    run(mf, 1, cluster=60, valid=False, limit=0)
     assert mf.override
-    run(mf, STABLE, cluster=50, limit=70)
-    assert mf.active and mf.ceiling == pytest.approx(kph(70))
+    run(mf, 3 * STABLE, cluster=60, limit=90)
+    assert mf.override and not mf.active
+    run(mf, STABLE - 1, cluster=60, limit=50)  # a later, different limit, not yet held
+    assert mf.override
+    run(mf, 1, cluster=60, limit=50)
+    assert mf.active and mf.ceiling == pytest.approx(kph(50))
+
+  def test_x3_unset_cluster_value_is_not_a_stalk_move(self):
+    # lektor 5104 X3: 255 (unset) must not count as a set speed, neither for the guard nor as a change
+    mf = make_map_follow()
+    run(mf, 10, cluster=255, limit=90)  # engaged, set speed not shown yet: guard not used up
+    run(mf, ENGAGE_GUARD_FRAMES + 2, cluster=80, limit=90)
+    assert mf.active and not mf.override
+    run(mf, 3, cluster=255, limit=90)  # unset value flickers in
+    run(mf, 3, cluster=80, limit=90)
+    assert mf.active and not mf.override
 
   def test_reengagement_clears_override(self):
     mf = make_map_follow()
@@ -179,6 +197,44 @@ class TestMapFollow:
     run(mf, 1, long_enabled=False)
     engage(mf, cluster=60)
     assert mf.active and not mf.override
+
+
+class TestMapFollowThroughThePlanner:
+  """LongitudinalPlannerSP.update_targets with stubbed neighbours: the cluster value MapFollow sees."""
+
+  @staticmethod
+  def planner():
+    from openpilot.sunnypilot.selfdrive.controls.lib.longitudinal_planner import LongitudinalPlannerSP
+    from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_assist import V_CRUISE_UNSET
+    lp = LongitudinalPlannerSP.__new__(LongitudinalPlannerSP)
+    lp.frame = 1  # skip the offset file read
+    lp.params = Params()
+    lp.cruise_speed_offset = 0.
+    lp.map_follow = make_map_follow()
+    lp.resolver = SimpleNamespace(update=lambda v, sm: None, speed_limit_valid=True, speed_limit_last_valid=True,
+                                  source=SpeedLimitSource.map, speed_limit=kph(90), speed_limit_final=kph(90),
+                                  speed_limit_final_last=kph(90), distance=0., distance_to_line=0.)
+    unset = SimpleNamespace(output_v_target=V_CRUISE_UNSET, output_a_target=0.)
+    lp.scc = SimpleNamespace(update=lambda *a: None, vision=unset, map=unset)
+    lp.sla = SimpleNamespace(update=lambda *a: None, output_v_target=V_CRUISE_UNSET, output_a_target=0., map_follow_active=False)
+    lp.events_sp = None
+    return lp
+
+  @staticmethod
+  def sm(cluster_kph):
+    return {'carState': SimpleNamespace(vCruiseCluster=cluster_kph),
+            'carControl': SimpleNamespace(enabled=True, cruiseControl=SimpleNamespace(override=False)),
+            'controlsState': SimpleNamespace(forceDecel=False)}
+
+  def test_x3_unset_255_is_not_clipped_into_a_valid_set_speed(self):
+    lp = self.planner()
+    for _ in range(10):
+      lp.update_targets(self.sm(255.), kph(60), 0., kph(80))
+    for _ in range(ENGAGE_GUARD_FRAMES + 3):
+      lp.update_targets(self.sm(80.), kph(60), 0., kph(80))
+    # clipped to 145, the unset value would have looked like a set speed and 145 -> 80 like a stalk move
+    assert lp.map_follow.active and not lp.map_follow.override
+    assert lp.output_v_target == pytest.approx(kph(90))
 
 
 def resolver_sm(mocker, v_limit, ahead, ahead_dist, gps_age=0.):

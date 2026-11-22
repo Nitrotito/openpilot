@@ -110,7 +110,8 @@ class LongitudinalPlannerSP:
 
     # HW1 fork, map follow: with a map limit the map is the ceiling instead of the stalk (see map_follow.py)
     map_limit_valid = self.resolver.speed_limit_valid and self.resolver.source == SpeedLimitSource.map
-    self.map_follow.update(long_enabled, sm['controlsState'].forceDecel, v_cruise_cluster,
+    # the unclipped cluster value: clipped to V_CRUISE_MAX, the unset 255 would look like a valid 145
+    self.map_follow.update(long_enabled, sm['controlsState'].forceDecel, CS.vCruiseCluster * CV.KPH_TO_MS,
                            self.resolver.speed_limit_final, map_limit_valid)
     self.sla.map_follow_active = self.map_follow.active
 

@@ -34,6 +34,8 @@ from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.common import Mode
 # Measured on 0000049c (2026-11-22): at both engagements the cluster already showed the set
 # speed before the enable edge and did not change in the next 3 s, so the guard is short.
 ENGAGE_GUARD_FRAMES = 3
+# The caller passes the UNCLIPPED carState.vCruiseCluster: the planner clips it to V_CRUISE_MAX
+# (145), which would turn the unset value 255 into a valid-looking 145 (lektor 5104 X3).
 V_CRUISE_CLUSTER_VALID_KPH = (1, 254)
 # An override is cleared by a limit change only once the new limit has held this long, so a
 # one-frame map flicker (50 -> 70 -> 50) does not hand the ceiling back to the map.
@@ -68,6 +70,7 @@ class MapFollow:
     self._guard_armed = False  # waiting for the first valid cluster value after engagement
     self._clear_candidate_kph = 0
     self._clear_stable_frames = 0
+    self._override_base_pending = False  # override made with no limit: the first limit to arrive becomes its base
 
   def update_params(self) -> None:
     if self.frame % int(PARAMS_UPDATE_PERIOD / DT_MDL) == 0:
@@ -96,15 +99,26 @@ class MapFollow:
 
   def _set_override(self) -> None:
     self.override = True
-    # B1 (lektor 5102): with no map limit right now (gap longer than the hold), the override
-    # still counts, tied to the last limit seen before the gap: the same limit coming back must
-    # not take the ceiling away from the stalk.
-    self._override_limit_kph = self._limit_kph if self._limit_kph > 0 else self._last_seen_limit_kph
+    # B1 (lektor 5102) and X1/X2 (lektor 5104): a stalk move with no map limit right now (no map
+    # yet, or a gap longer than the hold) still counts. Its base is the first limit that arrives
+    # afterwards, whatever it is, so a returning or newly appearing limit never takes the ceiling
+    # away from the stalk by itself; only a later, different limit that holds does.
+    if self._limit_kph > 0:
+      self._override_limit_kph = self._limit_kph
+      self._override_base_pending = False
+    else:
+      self._override_limit_kph = 0
+      self._override_base_pending = True
     self._clear_candidate_kph = 0
     self._clear_stable_frames = 0
 
   def _update_override_clear(self, raw_limit_kph: int) -> None:
     if not self.override:
+      return
+    if self._override_base_pending:
+      if raw_limit_kph > 0:
+        self._override_limit_kph = raw_limit_kph
+        self._override_base_pending = False
       return
     if raw_limit_kph <= 0 or raw_limit_kph == self._override_limit_kph:
       self._clear_candidate_kph = 0
