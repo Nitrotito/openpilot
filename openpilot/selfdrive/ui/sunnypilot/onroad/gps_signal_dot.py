@@ -38,6 +38,14 @@ planner target already carries the owner's cruise speed offset (/data/cruise_spe
 -1 km/h, because the Tesla dash reads about 1 km/h above true speed), so vTarget is
 the true speed and the dash the true speed plus one. The badge now takes the offset
 back out and shows the number the dash will show at that speed.
+
+2026-11-22 (Zoltan, tg 23718/23720, variant A): the map speed limit is shown as a
+second, smaller sign with a red ring (a real speed limit sign) that sits in the lower
+left edge of the badge. The mici HUD has no speed limit sign of its own (the tici
+SpeedLimitRenderer is not on this screen), and there is no room for one more full size
+icon. The small sign only shows while the speed limit resolver has a valid limit, and
+it shows engaged or not, in the same place. It is the legal limit as the map has it,
+so the cruise speed offset is NOT taken out of it. It ends at y = 100 like the badge.
 """
 import pyray as rl
 
@@ -69,9 +77,19 @@ OFFSET_REFRESH_FRAMES = 100
 GOOD_ACCURACY = 5.0
 FAIR_ACCURACY = 20.0
 
+# Map speed limit sign: a smaller real sign in the lower left edge of the badge.
+# Its centre is measured from the badge centre; its bottom is at
+# BADGE_MARGIN_Y + BADGE_RADIUS + LIMIT_DY + LIMIT_RADIUS + 2 = 100, above the blind-spot icon.
+LIMIT_RADIUS = 24
+LIMIT_RING = 5
+LIMIT_FONT_SIZE = 26
+LIMIT_DX = -52
+LIMIT_DY = 20
+
 GREEN = rl.Color(0, 200, 90, 255)
 AMBER = rl.Color(235, 170, 0, 255)
 DARK = rl.Color(70, 70, 70, 180)
+LIMIT_RED = rl.Color(220, 20, 20, 255)
 
 
 class GpsSignalDot:
@@ -80,6 +98,7 @@ class GpsSignalDot:
   def __init__(self):
     self._color: rl.Color = DARK
     self._target_text: str = ""
+    self._limit_text: str = ""
     self._font: rl.Font | None = None
     self._offset: float = 0.
     self._frame: int = 0
@@ -90,6 +109,23 @@ class GpsSignalDot:
     self._frame += 1
     self._color = self._color_for(self._accuracy())
     self._target_text = self._target_speed_text(self._offset)
+    self._limit_text = self._speed_limit_text()
+
+  @staticmethod
+  def _speed_limit_text() -> str:
+    """The map speed limit in display units while the resolver has a valid one, or ""."""
+    try:
+      resolver = ui_state.sm['longitudinalPlanSP'].speedLimit.resolver
+      if not resolver.speedLimitValid:
+        return ""
+      limit_ms = float(resolver.speedLimit)
+    except (KeyError, AttributeError):
+      return ""
+    kph = limit_ms * CV.MS_TO_KPH
+    if not 0. < kph < MAX_SHOWN_KPH:
+      return ""
+    shown = kph if ui_state.is_metric else kph * CV.KPH_TO_MPH
+    return str(round(shown))
 
   @staticmethod
   def _read_offset() -> float:
@@ -151,23 +187,34 @@ class GpsSignalDot:
     radius = BADGE_RADIUS if badge else RADIUS
     margin_y = BADGE_MARGIN_Y if badge else MARGIN_Y
     center = rl.Vector2(int(rect.x + rect.width - MARGIN_X - radius), int(rect.y + margin_y + radius))
-    # A dark ring under the dot keeps it readable over a bright road.
-    rl.draw_circle_v(center, radius + 2, rl.Color(0, 0, 0, 120))
-    rl.draw_circle_v(center, radius, self._color)
-    if not badge:
-      return
+    if badge:
+      # Speed limit sign look: the GPS colour stays as the ring, the inside is white.
+      self._draw_sign(center, radius, BADGE_RING, self._color, self._target_text, BADGE_FONT_SIZE)
+    else:
+      # A dark ring under the dot keeps it readable over a bright road.
+      rl.draw_circle_v(center, radius + 2, rl.Color(0, 0, 0, 120))
+      rl.draw_circle_v(center, radius, self._color)
 
-    # Speed limit sign: the GPS colour stays as the ring, the inside is white.
-    rl.draw_circle_v(center, radius - BADGE_RING, rl.WHITE)
+    if self._limit_text:
+      # Placed from the badge centre, so it stays put when the badge shrinks back to the dot.
+      badge_center_x = rect.x + rect.width - MARGIN_X - BADGE_RADIUS
+      badge_center_y = rect.y + BADGE_MARGIN_Y + BADGE_RADIUS
+      limit_center = rl.Vector2(int(badge_center_x + LIMIT_DX), int(badge_center_y + LIMIT_DY))
+      self._draw_sign(limit_center, LIMIT_RADIUS, LIMIT_RING, LIMIT_RED, self._limit_text, LIMIT_FONT_SIZE)
+
+  def _draw_sign(self, center: rl.Vector2, radius: int, ring: int, ring_color: rl.Color, text: str, font_size: int) -> None:
+    """A round sign: dark outline, coloured ring, white inside, bold black number."""
+    rl.draw_circle_v(center, radius + 2, rl.Color(0, 0, 0, 120))
+    rl.draw_circle_v(center, radius, ring_color)
+    rl.draw_circle_v(center, radius - ring, rl.WHITE)
 
     if self._font is None:
       self._font = gui_app.font(FontWeight.BOLD)
-    font_size = BADGE_FONT_SIZE
-    size = measure_text_cached(self._font, self._target_text, font_size)
+    size = measure_text_cached(self._font, text, font_size)
     # Three digits (100+) do not fit the white inside at full size; shrink just enough.
-    max_width = 2 * (BADGE_RADIUS - BADGE_RING) - 8
+    max_width = 2 * (radius - ring) - 8
     if size.x > max_width:
       font_size = int(font_size * max_width / size.x)
-      size = measure_text_cached(self._font, self._target_text, font_size)
+      size = measure_text_cached(self._font, text, font_size)
     pos = rl.Vector2(center.x - size.x / 2, center.y - size.y / 2)
-    rl.draw_text_ex(self._font, self._target_text, pos, font_size, 0, rl.BLACK)
+    rl.draw_text_ex(self._font, text, pos, font_size, 0, rl.BLACK)
