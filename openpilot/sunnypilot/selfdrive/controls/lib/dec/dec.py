@@ -384,5 +384,6 @@ class DynamicExperimentalController:
       self._radar_mode()
 
     self._mode_manager.update()
-    self._active = sm['selfdriveState'].experimentalMode and self._enabled
+    # selfdriveState.experimentalMode is deprecated upstream (#39097): it was openpilot longitudinal.
+    self._active = self._CP.openpilotLongitudinalControl and self._enabled
     self._frame += 1

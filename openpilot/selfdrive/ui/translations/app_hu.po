@@ -2767,3 +2767,18 @@ msgstr "Nem sikerült lekérni az elérhető ágakat. Ellenőrizd az internetkap
 
 msgid "Ensure you're connected to the internet and try again."
 msgstr "Ellenőrizd az internetkapcsolatot, és próbáld újra."
+
+msgid "following distance"
+msgstr "követési távolság"
+
+msgid "navigation (alpha)"
+msgstr "navigáció (alfa)"
+
+msgid "Turn-by-turn navigation with a route map. Set a destination from comma connect."
+msgstr "Navigáció útvonaltérképpel. Az úti célt a comma connectben állítsd be."
+
+msgid "pair to connect"
+msgstr "párosítás"
+
+msgid "claim prime trial"
+msgstr "prime próba igénylése"
