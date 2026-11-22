@@ -27,6 +27,7 @@ from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_assist 
   PRE_ACTIVE_GUARD_PERIOD, ACTIVE_STATES, CRUISE_BUTTON_CONFIRM_HOLD
 from openpilot.sunnypilot.selfdrive.selfdrived.button_state_tracker import ButtonStateTracker
 from openpilot.sunnypilot.selfdrive.selfdrived.events import EventsSP
+from openpilot.sunnypilot.selfdrive.selfdrived.events import EventNameSP
 from openpilot.common.test import OpenpilotTestCase
 
 ButtonEvent = car.CarState.ButtonEvent
@@ -132,6 +133,16 @@ class TestSpeedLimitAssist(OpenpilotTestCase):
       self.sla.update(True, False, SPEED_LIMITS['city'], 0, SPEED_LIMITS['highway'], SPEED_LIMITS['city'], SPEED_LIMITS['city'], True, 0, self.events_sp)
     assert self.sla.state == SpeedLimitAssistState.preActive
     assert self.sla.is_enabled and not self.sla.is_active
+
+  def test_map_follow_needs_no_max_set_speed_and_raises_no_pre_active(self):
+    # HW1 fork, map follow: the map is the ceiling, so the stalk is not asked to go to 120/130
+    self.sla.map_follow_active = True
+    for _ in range(int(3. / DT_MDL)):
+      self.events_sp.clear()
+      self.sla.update(True, False, SPEED_LIMITS['city'], 0, SPEED_LIMITS['highway'], SPEED_LIMITS['city'], SPEED_LIMITS['city'], True, 0, self.events_sp)
+      assert not self.events_sp.has(EventNameSP.speedLimitPreActive)
+    assert self.sla.state in (SpeedLimitAssistState.active, SpeedLimitAssistState.adapting)
+    assert self.sla.output_v_target == SPEED_LIMITS['city']
 
   def test_transition_disabled_to_pending_no_speed_limit_not_max_initial_set_speed(self):
     for _ in range(int(3. / DT_MDL)):

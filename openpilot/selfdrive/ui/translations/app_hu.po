@@ -2237,6 +2237,15 @@ msgstr "eltérés a korláttól"
 msgid "Assist adjusts the set speed to the sign, by the offset. Show and warn only tell you."
 msgstr "Az asszisztens a táblához igazítja a beállított sebességet, az eltéréssel együtt. A jelzés és a figyelmeztetés csak szól."
 
+msgid "follow the map limit"
+msgstr "térkép-követés"
+
+msgid "map follow top speed"
+msgstr "felső határ"
+
+msgid "With assist on: where the map knows the limit, it sets the speed, up and down, no stalk needed. Moving the stalk overrides it until the next sign."
+msgstr "Asszisztens módban: ahol a térkép tudja a korlátot, az adja a sebességet, felfelé és lefelé is, kar nélkül. A kar állítása a következő tábláig felülbírálja."
+
 msgid "steering without the pedals"
 msgstr "kormányzás pedál nélkül"
 

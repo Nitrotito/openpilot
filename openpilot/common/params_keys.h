@@ -288,6 +288,9 @@ inline static std::unordered_map<std::string, ParamKeyAttributes> keys = {
     {"SpeedLimitOffsetType", {PERSISTENT | BACKUP, INT, "0"}},
     {"SpeedLimitPolicy", {PERSISTENT | BACKUP, INT, "3"}},
     {"SpeedLimitValueOffset", {PERSISTENT | BACKUP, INT, "0"}},
+    // HW1 fork, map follow: the map limit is the ceiling instead of the stalk (map_follow.py)
+    {"MapFollowEnabled", {PERSISTENT | BACKUP, BOOL, "1"}},
+    {"MapFollowMaxKph", {PERSISTENT | BACKUP, INT, "130"}},
 
     // Smart Cruise Control
     {"MapTargetVelocities", {CLEAR_ON_ONROAD_TRANSITION, STRING}},

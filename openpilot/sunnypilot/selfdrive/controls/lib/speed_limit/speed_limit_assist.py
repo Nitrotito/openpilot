@@ -88,6 +88,10 @@ class SpeedLimitAssist:
     self.state = SpeedLimitAssistState.disabled
     self._state_prev = SpeedLimitAssistState.disabled
     self.pcm_op_long = CP.openpilotLongitudinalControl and CP.pcmCruise
+    # HW1 fork (map follow, 2026-11-22): set by the planner each cycle. While the map is in
+    # charge of the ceiling there is nothing for the driver to confirm, so the required set
+    # speed counts as met and the "set to X to engage" pre-active alert is not raised.
+    self.map_follow_active = False
 
     self._plus_hold = 0.
     self._minus_hold = 0.
@@ -189,6 +193,8 @@ class SpeedLimitAssist:
     pcm_long_required_max_set_speed_conv = round(pcm_long_required_max * speed_conv)
 
     self.target_set_speed_conv = pcm_long_required_max_set_speed_conv if self.pcm_op_long else self.speed_limit_final_last_conv
+    if self.map_follow_active:
+      self.target_set_speed_conv = self.v_cruise_cluster_conv
 
   @property
   def apply_confirm_speed_threshold(self) -> bool:
@@ -361,7 +367,7 @@ class SpeedLimitAssist:
     return enabled, active
 
   def update_events(self, events_sp: EventsSP) -> None:
-    if self.state == SpeedLimitAssistState.preActive:
+    if self.state == SpeedLimitAssistState.preActive and not self.map_follow_active:
       events_sp.add(EventNameSP.speedLimitPreActive)
 
     if self.state == SpeedLimitAssistState.pending and self._state_prev != SpeedLimitAssistState.pending:

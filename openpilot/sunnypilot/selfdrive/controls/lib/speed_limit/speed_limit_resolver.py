@@ -13,7 +13,8 @@ from openpilot.common.gps import get_gps_location_service
 from openpilot.common.params import Params
 from openpilot.common.realtime import DT_MDL
 from openpilot.sunnypilot import PARAMS_UPDATE_PERIOD, get_sanitize_int_param
-from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit import LIMIT_MAX_MAP_DATA_AGE, LIMIT_ADAPT_ACC
+from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit import LIMIT_MAX_MAP_DATA_AGE, LIMIT_ADAPT_ACC, \
+  LIMIT_AHEAD_MARGIN_TIME, LIMIT_AHEAD_MARGIN_MIN
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.common import Policy, OffsetType
 
 SpeedLimitSource = custom.LongitudinalPlanSP.SpeedLimit.Source
@@ -68,6 +69,11 @@ class SpeedLimitResolver:
     )
     self.offset_value = self.params.get("SpeedLimitValueOffset", return_default=True)
 
+    # HW1 fork: the lower limit ahead the resolver already switched to, and until when it holds it
+    self._ahead_latch_limit = 0.
+    self._ahead_latch_until = 0.
+    self.distance_to_line = 0.  # m to the latched limit's sign line, 0 when nothing is latched
+
     self.speed_limit = 0.
     self.speed_limit_last = 0.
     self.speed_limit_final = 0.
@@ -117,6 +123,7 @@ class SpeedLimitResolver:
 
   def _get_from_map_data(self, sm: messaging.SubMaster) -> None:
     self._reset_limit_sources(SpeedLimitSource.map)
+    self.distance_to_line = 0.
     self._process_map_data(sm)
 
   def _process_map_data(self, sm: messaging.SubMaster) -> None:
@@ -145,15 +152,37 @@ class SpeedLimitResolver:
 
     self.limit_solutions[SpeedLimitSource.map] = speed_limit
     self.distance_solutions[SpeedLimitSource.map] = 0.
+    self.distance_to_line = 0.
 
-    # FIXME-SP: this is not working as expected
-    if 0. < next_speed_limit < self.v_ego:
-      adapt_time = (next_speed_limit - self.v_ego) / LIMIT_ADAPT_ACC
-      adapt_distance = self.v_ego * adapt_time + 0.5 * LIMIT_ADAPT_ACC * adapt_time ** 2
+    # HW1 fork (2026-11-22, replaces the FIXME-SP block): in Hungary the new limit applies from
+    # the sign's line, so a LOWER limit ahead takes over early enough to be reached
+    # LIMIT_AHEAD_MARGIN_TIME (at least LIMIT_AHEAD_MARGIN_MIN) before the line, braking at
+    # LIMIT_ADAPT_ACC. Two faults of the old block are fixed here:
+    # - it aimed at the line itself, so with any lag the car crossed the line still too fast;
+    # - it compared the new limit with v_ego, so as soon as the car had slowed to it the
+    #   condition flipped and the old, higher limit came back before the line. Once switched,
+    #   the new limit is now latched until the sign is passed (the map's current limit becomes
+    #   it), a different limit is announced, or the trip to the line plus a few seconds is over.
+    now = time.monotonic()
+    if self._ahead_latch_limit > 0.:
+      passed = 0. < speed_limit <= self._ahead_latch_limit + 0.1
+      replaced = 0. < next_speed_limit and abs(next_speed_limit - self._ahead_latch_limit) > 0.1
+      if passed or replaced or now > self._ahead_latch_until:
+        self._ahead_latch_limit = 0.
 
-      if distance_to_speed_limit_ahead <= adapt_distance:
-        self.limit_solutions[SpeedLimitSource.map] = next_speed_limit
-        self.distance_solutions[SpeedLimitSource.map] = distance_to_speed_limit_ahead
+    if self._ahead_latch_limit == 0. and 0. < next_speed_limit < self.v_ego and (speed_limit == 0. or next_speed_limit < speed_limit):
+      braking_distance = (self.v_ego ** 2 - next_speed_limit ** 2) / (2. * -LIMIT_ADAPT_ACC)
+      margin = max(LIMIT_AHEAD_MARGIN_TIME * self.v_ego, LIMIT_AHEAD_MARGIN_MIN)
+      if distance_to_speed_limit_ahead <= braking_distance + margin:
+        self._ahead_latch_limit = next_speed_limit
+        self._ahead_latch_until = now + distance_to_speed_limit_ahead / max(self.v_ego, 1.) + 5.
+
+    if self._ahead_latch_limit > 0.:
+      self.limit_solutions[SpeedLimitSource.map] = self._ahead_latch_limit
+      # distance to the point the limit has to be reached by, not to the line
+      margin = max(LIMIT_AHEAD_MARGIN_TIME * self.v_ego, LIMIT_AHEAD_MARGIN_MIN)
+      self.distance_solutions[SpeedLimitSource.map] = max(distance_to_speed_limit_ahead - margin, 0.)
+      self.distance_to_line = distance_to_speed_limit_ahead
 
   def _get_source_solution_according_to_policy(self) -> custom.LongitudinalPlanSP.SpeedLimit.Source:
     sources_for_policy = self._policy_to_sources_map[Policy(self.policy)]

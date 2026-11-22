@@ -110,6 +110,11 @@ class OwnSettingsLayoutMici(NavScroller):
       tr("speed limit offset"), "SpeedLimitValueOffset",
       ["0", "-1", "-2", "-3", "-5"], [0, -1, -2, -3, -5],
     )
+    map_follow = BigParamControl(tr("follow the map limit"), "MapFollowEnabled")
+    map_follow_max = BigMultiParamValueToggle(
+      tr("map follow top speed"), "MapFollowMaxKph",
+      ["90", "110", "120", "130", "140"], [90, 110, 120, 130, 140],
+    )
 
     mads = BigParamControl(tr("steering without the pedals"), "Mads")
     mads_brake = BigMultiParamValueToggle(
@@ -135,6 +140,10 @@ class OwnSettingsLayoutMici(NavScroller):
       speed_limit_mode,
       speed_limit_offset,
       GreyBigButton("", tr("Assist adjusts the set speed to the sign, by the offset. Show and warn only tell you.")),
+      map_follow,
+      map_follow_max,
+      GreyBigButton("", tr("With assist on: where the map knows the limit, it sets the speed, up and down, no stalk needed. "
+                           "Moving the stalk overrides it until the next sign.")),
       mads,
       mads_brake,
       GreyBigButton("", tr("Steering can stay on without cruise control. This is what happens to it when you brake.")),

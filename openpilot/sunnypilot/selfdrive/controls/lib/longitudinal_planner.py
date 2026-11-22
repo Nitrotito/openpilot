@@ -19,12 +19,20 @@ from openpilot.sunnypilot.selfdrive.controls.lib.e2e_alerts_helper import E2EAle
 from openpilot.sunnypilot.selfdrive.controls.lib.smart_cruise_control.smart_cruise_control import SmartCruiseControl
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_assist import SpeedLimitAssist, V_CRUISE_UNSET
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_resolver import SpeedLimitResolver
+from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.map_follow import MapFollow
+from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit import LIMIT_ADAPT_ACC, LIMIT_MIN_ACC
 from openpilot.sunnypilot.selfdrive.selfdrived.events import EventsSP
 from openpilot.sunnypilot.models.helpers import get_active_bundle
 from openpilot.sunnypilot.owner_files import CRUISE_SPEED_OFFSET_PATH, CRUISE_SPEED_OFFSET_LIMIT
 
 DecState = custom.LongitudinalPlanSP.DynamicExperimentalControl.DynamicExperimentalControlState
 LongitudinalPlanSource = custom.LongitudinalPlanSP.LongitudinalPlanSource
+SpeedLimitSource = custom.LongitudinalPlanSP.SpeedLimit.Source
+
+# The cruise candidate's braking floor when the lowered target does NOT come from a speed
+# limit (a manual set speed reduction). Same value as the main planner's A_CRUISE_MIN; kept
+# here so the SP side can hand the planner a floor without importing the planner module.
+CRUISE_ACCEL_MIN_MANUAL = -0.5
 
 # Constant offset applied to the speed the car actually holds: to the MANUALLY set cruise
 # speed, and to the speed limit assist's output. The set speed shown on screen and on the
@@ -48,6 +56,9 @@ class LongitudinalPlannerSP:
     self.scc = SmartCruiseControl()
     self.resolver = SpeedLimitResolver()
     self.sla = SpeedLimitAssist(CP, CP_SP)
+    self.map_follow = MapFollow()
+    # HW1 fork: braking floor for the main planner's cruise candidate, set in update_targets
+    self.cruise_accel_min = CRUISE_ACCEL_MIN_MANUAL
     self.generation = int(model_bundle.generation) if (model_bundle := get_active_bundle()) else None
     self.source = LongitudinalPlanSource.cruise
     self.e2e_alerts_helper = E2EAlertsHelper()
@@ -101,6 +112,12 @@ class LongitudinalPlannerSP:
     # Speed Limit Resolver
     self.resolver.update(v_ego, sm)
 
+    # HW1 fork, map follow: with a map limit the map is the ceiling instead of the stalk (see map_follow.py)
+    map_limit_valid = self.resolver.speed_limit_valid and self.resolver.source == SpeedLimitSource.map
+    self.map_follow.update(long_enabled, sm['controlsState'].forceDecel, v_cruise_cluster,
+                           self.resolver.speed_limit_final, map_limit_valid)
+    self.sla.map_follow_active = self.map_follow.active
+
     # Speed Limit Assist
     has_speed_limit = self.resolver.speed_limit_valid or self.resolver.speed_limit_last_valid
     self.sla.update(long_enabled, long_override, v_ego, a_ego, v_cruise_cluster, self.resolver.speed_limit,
@@ -116,8 +133,11 @@ class LongitudinalPlannerSP:
     if sla_v_target < V_CRUISE_UNSET:
       sla_v_target = max(0., sla_v_target + self.cruise_speed_offset)
 
+    # While the map follows, its ceiling replaces the stalk value as the cruise target, with
+    # the same manual offset the stalk value gets. forceDecel (v_cruise 0) is never replaced.
+    cruise_ceiling = self.map_follow.ceiling if self.map_follow.active else v_cruise
     targets = {
-      LongitudinalPlanSource.cruise: (max(0., v_cruise + self.cruise_speed_offset), a_ego),
+      LongitudinalPlanSource.cruise: (max(0., cruise_ceiling + self.cruise_speed_offset), a_ego),
       LongitudinalPlanSource.sccVision: (self.scc.vision.output_v_target, self.scc.vision.output_a_target),
       LongitudinalPlanSource.sccMap: (self.scc.map.output_v_target, self.scc.map.output_a_target),
       LongitudinalPlanSource.speedLimitAssist: (sla_v_target, self.sla.output_a_target),
@@ -125,7 +145,33 @@ class LongitudinalPlannerSP:
 
     self.source = min(targets, key=lambda k: targets[k][0])
     self.output_v_target, self.output_a_target = targets[self.source]
+    self.cruise_accel_min = self._cruise_accel_min(v_ego)
     return self.output_v_target, self.output_a_target
+
+  def _cruise_accel_min(self, v_ego: float) -> float:
+    """HW1 fork: how hard the cruise candidate may brake towards the current target.
+
+    A manual set speed reduction keeps the gentle upstream floor (-0.5, the owner's choice,
+    tg 23743). A target lowered by a speed limit (the assist, or the map follow ceiling) may
+    brake at LIMIT_ADAPT_ACC (-1.0), because the new limit has to be reached before the sign's
+    line; when the announcement came too late for that, up to LIMIT_MIN_ACC (-1.5), so the
+    overrun past the line stays small instead of growing with a gentle floor.
+    """
+    from_limit = self.source == LongitudinalPlanSource.speedLimitAssist or \
+      (self.source == LongitudinalPlanSource.cruise and self.map_follow.active)
+    if not from_limit or self.output_v_target >= v_ego:
+      return CRUISE_ACCEL_MIN_MANUAL
+
+    floor = LIMIT_ADAPT_ACC
+    # resolver.distance runs to the point the limit should be reached by (the line minus the
+    # margin); once inside the margin, aim at the line itself
+    distance = self.resolver.distance
+    if distance < 1. and self.resolver.source == SpeedLimitSource.map:
+      distance = self.resolver.distance_to_line
+    if distance > 0.:
+      needed = (self.output_v_target ** 2 - v_ego ** 2) / (2. * distance)
+      floor = min(floor, needed)
+    return max(floor, LIMIT_MIN_ACC)
 
   def update(self, sm: messaging.SubMaster) -> None:
     if self.accel_boost_sp.update_params():
