@@ -41,6 +41,7 @@ def default_sm():
 def mock_cp():
   class CP:
     radarUnavailable = False
+    openpilotLongitudinalControl = True
   return CP()
 
 def mock_mpc():

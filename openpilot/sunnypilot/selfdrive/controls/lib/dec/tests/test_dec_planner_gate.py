@@ -46,7 +46,7 @@ class MockSubMaster(dict):
     return True
 
 
-def build_sm(experimental_mode: bool) -> MockSubMaster:
+def build_sm() -> MockSubMaster:
   services = {}
   for service in ("radarState", "controlsState", "vehicleParameters", "carStateSP",
                   "liveMapDataSP", "gpsLocationExternal", "gpsLocation"):
@@ -59,7 +59,6 @@ def build_sm(experimental_mode: bool) -> MockSubMaster:
   services['carState'] = car_state.carState.as_reader()
 
   selfdrive_state = messaging.new_message('selfdriveState')
-  selfdrive_state.selfdriveState.experimentalMode = experimental_mode
   selfdrive_state.selfdriveState.enabled = True
   services['selfdriveState'] = selfdrive_state.selfdriveState.as_reader()
 
@@ -77,8 +76,10 @@ def build_sm(experimental_mode: bool) -> MockSubMaster:
   return MockSubMaster(services)
 
 
-def build_planner(dec_active: bool, dec_mode: str) -> LongitudinalPlanner:
+def build_planner(long_control: bool, dec_active: bool, dec_mode: str) -> LongitudinalPlanner:
   CP = structs.CarParams()
+  # selfdriveState.experimentalMode is deprecated upstream (#39097); it was openpilot longitudinal
+  CP.openpilotLongitudinalControl = long_control
   CP.steerRatio = 15.0
   CP.wheelbase = 2.7
   CP.longitudinalActuatorDelay = 0.2
@@ -90,14 +91,14 @@ def build_planner(dec_active: bool, dec_mode: str) -> LongitudinalPlanner:
 
 
 class TestDecPlannerGate(OpenpilotTestCase):
-  """The e2e candidate must be gated on is_e2e(), not raw experimentalMode."""
+  """The e2e candidate must be gated on is_e2e(), not on openpilot longitudinal alone."""
 
-  def _source(self, experimental_mode: bool, dec_active: bool, dec_mode: str) -> LongitudinalPlanSource:
-    planner = build_planner(dec_active, dec_mode)
-    planner.update(build_sm(experimental_mode))
+  def _source(self, long_control: bool, dec_active: bool, dec_mode: str) -> LongitudinalPlanSource:
+    planner = build_planner(long_control, dec_active, dec_mode)
+    planner.update(build_sm())
     return planner.mpc.source
 
-  def test_no_e2e_when_experimental_mode_off(self):
+  def test_no_e2e_without_openpilot_long(self):
     assert self._source(False, False, 'acc') != LongitudinalPlanSource.e2e
 
   def test_e2e_when_dec_inactive(self):
