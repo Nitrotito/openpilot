@@ -29,9 +29,19 @@ from openpilot.sunnypilot import PARAMS_UPDATE_PERIOD
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit import MAP_FOLLOW_HOLD_TIME, MAP_FOLLOW_MAX_KPH_DEFAULT
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.common import Mode
 
-# The stalk moves the cluster set speed during engagement itself; changes in this window
-# after the long control turns on are the engagement, not an override.
-ENGAGE_GUARD_TIME = 0.5  # s
+# After engagement the stalk value counts as the driver's only once the cluster shows a valid
+# set speed (not unset/255, not -1, not 0), plus a few frames for the car's own settling.
+# Measured on 0000049c (2026-11-22): at both engagements the cluster already showed the set
+# speed before the enable edge and did not change in the next 3 s, so the guard is short.
+ENGAGE_GUARD_FRAMES = 3
+V_CRUISE_CLUSTER_VALID_KPH = (1, 254)
+# An override is cleared by a limit change only once the new limit has held this long, so a
+# one-frame map flicker (50 -> 70 -> 50) does not hand the ceiling back to the map.
+OVERRIDE_CLEAR_STABLE_TIME = 1.5  # s
+# Measured on 0000049c (2026-11-22): 67641 engaged carState frames, vCruiseCluster changed 8
+# times, all 5 km/h stalk steps, no drift by itself; the HW1 carState carries no buttonEvents,
+# so a stalk move is recognised as a change of at least this much.
+STALK_CHANGE_MIN_KPH = 1
 MAX_KPH_MIN = 30
 MAX_KPH_MAX = 150
 
@@ -47,13 +57,17 @@ class MapFollow:
     self.active = False
     self.ceiling = 0.  # m/s, valid while active
     self.override = False
-    self._override_limit_kph = 0
+    self._override_limit_kph = 0  # the limit the driver overrode (the last one seen, even before a map gap)
     self._limit = 0.  # m/s, last map limit seen (held through short gaps)
     self._limit_kph = 0
+    self._last_seen_limit_kph = 0  # last valid map limit, NOT cleared by a gap
     self._hold_frames = 0
     self._prev_cluster_kph: int | None = None
     self._long_enabled_prev = False
     self._guard_frames = 0
+    self._guard_armed = False  # waiting for the first valid cluster value after engagement
+    self._clear_candidate_kph = 0
+    self._clear_stable_frames = 0
 
   def update_params(self) -> None:
     if self.frame % int(PARAMS_UPDATE_PERIOD / DT_MDL) == 0:
@@ -65,37 +79,74 @@ class MapFollow:
         max_kph = MAP_FOLLOW_MAX_KPH_DEFAULT
       self.max_kph = max(MAX_KPH_MIN, min(MAX_KPH_MAX, max_kph))
 
-  def _update_map_limit(self, map_limit: float, map_limit_valid: bool) -> None:
+  def _update_map_limit(self, map_limit: float, map_limit_valid: bool) -> int:
+    """Updates the held limit; returns the raw (unheld) valid limit in km/h, 0 when there is none."""
     if map_limit_valid and map_limit > 0.:
       self._limit = map_limit
       self._limit_kph = round(map_limit * CV.MS_TO_KPH)
+      self._last_seen_limit_kph = self._limit_kph
       self._hold_frames = int(MAP_FOLLOW_HOLD_TIME / DT_MDL)
-    elif self._hold_frames > 0:
+      return self._limit_kph
+    if self._hold_frames > 0:
       self._hold_frames -= 1
     else:
       self._limit = 0.
       self._limit_kph = 0
+    return 0
 
-  def _update_override(self, long_enabled: bool, cluster_kph: int) -> None:
+  def _set_override(self) -> None:
+    self.override = True
+    # B1 (lektor 5102): with no map limit right now (gap longer than the hold), the override
+    # still counts, tied to the last limit seen before the gap: the same limit coming back must
+    # not take the ceiling away from the stalk.
+    self._override_limit_kph = self._limit_kph if self._limit_kph > 0 else self._last_seen_limit_kph
+    self._clear_candidate_kph = 0
+    self._clear_stable_frames = 0
+
+  def _update_override_clear(self, raw_limit_kph: int) -> None:
+    if not self.override:
+      return
+    if raw_limit_kph <= 0 or raw_limit_kph == self._override_limit_kph:
+      self._clear_candidate_kph = 0
+      self._clear_stable_frames = 0
+      return
+    if raw_limit_kph == self._clear_candidate_kph:
+      self._clear_stable_frames += 1
+    else:
+      self._clear_candidate_kph = raw_limit_kph
+      self._clear_stable_frames = 1
+    if self._clear_stable_frames * DT_MDL >= OVERRIDE_CLEAR_STABLE_TIME:
+      # a new limit (a new sign, or a different one after a gap) that has held: the map takes over again
+      self.override = False
+
+  def _update_override(self, long_enabled: bool, cluster_kph: int, raw_limit_kph: int) -> None:
+    cluster_valid = V_CRUISE_CLUSTER_VALID_KPH[0] <= cluster_kph <= V_CRUISE_CLUSTER_VALID_KPH[1]
     if long_enabled and not self._long_enabled_prev:
       # a fresh engagement starts on the map
       self.override = False
-      self._guard_frames = int(ENGAGE_GUARD_TIME / DT_MDL)
-      self._prev_cluster_kph = cluster_kph
+      self._guard_armed = True
+      self._guard_frames = ENGAGE_GUARD_FRAMES
+      self._prev_cluster_kph = None
     elif not long_enabled:
       self.override = False
+      self._guard_armed = False
       self._prev_cluster_kph = None
-    else:
-      if self._guard_frames > 0:
-        self._guard_frames -= 1
-      elif self._prev_cluster_kph is not None and cluster_kph != self._prev_cluster_kph and self._limit_kph > 0:
-        # the driver moved the stalk while the map was in charge: the stalk rules until the next limit
-        self.override = True
-        self._override_limit_kph = self._limit_kph
-      self._prev_cluster_kph = cluster_kph
 
-      if self.override and self._limit_kph > 0 and self._limit_kph != self._override_limit_kph:
-        self.override = False
+    if long_enabled:
+      if self._guard_armed:
+        # K1 (lektor 5102): no fixed time window; wait for the first valid cluster value, then a few frames
+        if cluster_valid:
+          self._guard_frames -= 1
+          if self._guard_frames <= 0:
+            self._guard_armed = False
+          self._prev_cluster_kph = cluster_kph
+      elif cluster_valid:
+        if self._prev_cluster_kph is not None and abs(cluster_kph - self._prev_cluster_kph) >= STALK_CHANGE_MIN_KPH:
+          # the driver moved the stalk: the stalk rules until a new limit (see _update_override_clear)
+          self._set_override()
+        self._prev_cluster_kph = cluster_kph
+
+      self._update_override_clear(raw_limit_kph)
 
     self._long_enabled_prev = long_enabled
 
@@ -105,8 +156,8 @@ class MapFollow:
     self.update_params()
 
     cluster_kph = round(v_cruise_cluster * CV.MS_TO_KPH)
-    self._update_map_limit(map_limit, map_limit_valid)
-    self._update_override(long_enabled, cluster_kph)
+    raw_limit_kph = self._update_map_limit(map_limit, map_limit_valid)
+    self._update_override(long_enabled, cluster_kph, raw_limit_kph)
 
     cap = self.max_kph * CV.KPH_TO_MS  # the cap is always km/h, whatever the display unit
     self.active = bool(self.enabled and self.sla_mode_assist and long_enabled and not force_decel

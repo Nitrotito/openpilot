@@ -60,7 +60,7 @@ def get_cruise_accel(e2e, v_cruise, v_ego, a_cruise_prev, angle_steers, CP, dt, 
       max_accel = min(max_accel, coast_limit)
 
   # HW1 fork: a_cruise_min is A_CRUISE_MIN unless the target was lowered by a speed limit
-  # (LongitudinalPlannerSP._cruise_accel_min: -1.0, up to -1.5 for a late announcement)
+  # (LongitudinalPlannerSP._speed_limit_accel_min: -1.0, up to -1.5 for a late announcement)
   target_accel = np.clip(v_cruise - v_ego, a_cruise_min, max_accel)
   j_cruise = np.interp(v_ego, J_CRUISE_BP, J_CRUISE_VALS)
   target_accel = float(np.clip(target_accel, a_cruise_prev - j_cruise * dt, a_cruise_prev + j_cruise * dt))
@@ -159,7 +159,9 @@ class LongitudinalPlanner(LongitudinalPlannerSP):
 
     self.a_cruise = get_cruise_accel(is_e2e, v_cruise, v_ego,
                                      self.a_cruise, steer_angle_without_offset, self.CP, self.dt,
-                                     accel_coast, self.allow_throttle, a_cruise_min=self.cruise_accel_min)
+                                     accel_coast, self.allow_throttle,
+                                     a_cruise_min=A_CRUISE_MIN if self.speed_limit_accel_min is None
+                                     else min(A_CRUISE_MIN, self.speed_limit_accel_min))
     cruise_should_stop = should_stop(v_ego, self.a_cruise)
 
     output_a_target_e2e = self.accel_boost.update(sm, output_a_target_e2e, output_a_target_mpc, self.a_cruise)

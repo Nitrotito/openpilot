@@ -14,7 +14,8 @@ from openpilot.common.realtime import DT_MDL
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit import LIMIT_ADAPT_ACC, LIMIT_MIN_ACC, \
   LIMIT_AHEAD_MARGIN_TIME, LIMIT_AHEAD_MARGIN_MIN, MAP_FOLLOW_HOLD_TIME
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.common import Mode, Policy
-from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.map_follow import MapFollow, ENGAGE_GUARD_TIME
+from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.map_follow import MapFollow, ENGAGE_GUARD_FRAMES, \
+  OVERRIDE_CLEAR_STABLE_TIME
 from openpilot.sunnypilot.selfdrive.controls.lib.speed_limit.speed_limit_resolver import SpeedLimitResolver
 
 SpeedLimitSource = custom.LongitudinalPlanSP.SpeedLimit.Source
@@ -42,7 +43,10 @@ def run(mf, frames, long_enabled=True, cluster=50, limit=90, valid=True, force_d
 
 
 def engage(mf, cluster=50, limit=90):
-  run(mf, int(ENGAGE_GUARD_TIME / DT_MDL) + 2, cluster=cluster, limit=limit)
+  run(mf, ENGAGE_GUARD_FRAMES + 2, cluster=cluster, limit=limit)
+
+
+STABLE = int(OVERRIDE_CLEAR_STABLE_TIME / DT_MDL)
 
 
 class TestMapFollow:
@@ -103,15 +107,69 @@ class TestMapFollow:
     assert mf.override and not mf.active
     run(mf, 50, cluster=60, limit=90)  # same limit: the stalk still rules
     assert not mf.active
-    run(mf, 1, cluster=60, limit=70)  # next sign
+    run(mf, STABLE - 1, cluster=60, limit=70)  # next sign, not yet held long enough
+    assert not mf.active
+    run(mf, 1, cluster=60, limit=70)
     assert mf.active and mf.ceiling == pytest.approx(kph(70))
 
   def test_engagement_itself_is_not_an_override(self):
     mf = make_map_follow()
     run(mf, 1, cluster=40, limit=90)
-    run(mf, 2, cluster=55, limit=90)  # stalk value settles inside the guard window
+    run(mf, 2, cluster=55, limit=90)  # stalk value settles inside the guard frames
     run(mf, 10, cluster=55, limit=90)
     assert mf.active and not mf.override
+
+  def test_guard_waits_for_a_valid_cluster_value(self):
+    mf = make_map_follow()
+    run(mf, 10, cluster=0, limit=90)  # set speed not shown yet: no guard frame used up
+    run(mf, 1, cluster=255, limit=90)
+    run(mf, ENGAGE_GUARD_FRAMES, cluster=72, limit=90)
+    run(mf, 5, cluster=72, limit=90)
+    assert mf.active and not mf.override
+
+  def test_p1_stalk_down_during_a_long_map_gap_is_kept_when_the_same_limit_returns(self):
+    # lektor 5102 B1: stalk 80, limit 90, map gone > hold, stalk to 40, map back with 90
+    mf = make_map_follow()
+    engage(mf, cluster=80, limit=90)
+    run(mf, int(MAP_FOLLOW_HOLD_TIME / DT_MDL) + 5, cluster=80, valid=False, limit=0)
+    assert not mf.active
+    run(mf, 1, cluster=40, valid=False, limit=0)
+    assert mf.override
+    run(mf, 3 * STABLE, cluster=40, limit=90)
+    assert mf.override and not mf.active  # the ceiling stays with the stalk (40)
+
+  def test_p1b_a_different_limit_after_the_gap_takes_over_once_stable(self):
+    mf = make_map_follow()
+    engage(mf, cluster=80, limit=90)
+    run(mf, int(MAP_FOLLOW_HOLD_TIME / DT_MDL) + 5, cluster=80, valid=False, limit=0)
+    run(mf, 1, cluster=40, valid=False, limit=0)
+    run(mf, STABLE, cluster=40, limit=50)
+    assert mf.active and mf.ceiling == pytest.approx(kph(50))
+
+  def test_p2_stalk_move_shortly_after_engagement_is_an_override(self):
+    # lektor 5102 K1: stalk 80 -> 40 0.4 s after engagement
+    mf = make_map_follow()
+    run(mf, int(0.4 / DT_MDL), cluster=80, limit=90)
+    run(mf, 1, cluster=40, limit=90)
+    assert mf.override and not mf.active
+
+  def test_p3_one_frame_map_flicker_does_not_clear_the_override(self):
+    # lektor 5102 K2: stalk to 40 in a 50 zone, map flickers 70 for a frame, back to 50
+    mf = make_map_follow()
+    engage(mf, cluster=50, limit=50)
+    run(mf, 1, cluster=40, limit=50)
+    assert mf.override
+    run(mf, 1, cluster=40, limit=70)
+    run(mf, 3 * STABLE, cluster=40, limit=50)
+    assert mf.override and not mf.active
+
+  def test_override_without_any_map_yields_to_a_map_that_appears(self):
+    mf = make_map_follow()
+    run(mf, 20, cluster=60, valid=False, limit=0)
+    run(mf, 1, cluster=50, valid=False, limit=0)
+    assert mf.override
+    run(mf, STABLE, cluster=50, limit=70)
+    assert mf.active and mf.ceiling == pytest.approx(kph(70))
 
   def test_reengagement_clears_override(self):
     mf = make_map_follow()
@@ -186,19 +244,19 @@ class TestResolverAhead:
 
 
 class TestBrakingFloor:
-  """LongitudinalPlannerSP._cruise_accel_min, called on a minimal stand-in for the planner."""
+  """LongitudinalPlannerSP._speed_limit_accel_min, called on a minimal stand-in for the planner."""
 
   @staticmethod
   def floor(source, v_target, v_ego, map_follow_active=False, distance=0., distance_to_line=0., resolver_source=None):
-    from openpilot.sunnypilot.selfdrive.controls.lib.longitudinal_planner import LongitudinalPlannerSP, CRUISE_ACCEL_MIN_MANUAL
+    from openpilot.sunnypilot.selfdrive.controls.lib.longitudinal_planner import LongitudinalPlannerSP
     me = SimpleNamespace(source=source, output_v_target=v_target, map_follow=SimpleNamespace(active=map_follow_active),
                          resolver=SimpleNamespace(distance=distance, distance_to_line=distance_to_line,
                                                   source=resolver_source if resolver_source is not None else SpeedLimitSource.map))
-    return LongitudinalPlannerSP._cruise_accel_min(me, v_ego), CRUISE_ACCEL_MIN_MANUAL
+    return LongitudinalPlannerSP._speed_limit_accel_min(me, v_ego), None
 
   def test_manual_reduction_keeps_the_gentle_floor(self):
     got, manual = self.floor(LongitudinalPlanSource.cruise, kph(50), kph(90))
-    assert got == manual == -0.5
+    assert got is None  # the main planner then keeps its own A_CRUISE_MIN (-0.5)
 
   def test_speed_limit_target_brakes_at_minus_one(self):
     got, _ = self.floor(LongitudinalPlanSource.cruise, kph(50), kph(90), map_follow_active=True, distance=400.)
@@ -221,4 +279,4 @@ class TestBrakingFloor:
 
   def test_no_floor_change_when_not_braking(self):
     got, manual = self.floor(LongitudinalPlanSource.cruise, kph(90), kph(50), map_follow_active=True)
-    assert got == manual
+    assert got is None

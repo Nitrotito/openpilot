@@ -29,11 +29,6 @@ DecState = custom.LongitudinalPlanSP.DynamicExperimentalControl.DynamicExperimen
 LongitudinalPlanSource = custom.LongitudinalPlanSP.LongitudinalPlanSource
 SpeedLimitSource = custom.LongitudinalPlanSP.SpeedLimit.Source
 
-# The cruise candidate's braking floor when the lowered target does NOT come from a speed
-# limit (a manual set speed reduction). Same value as the main planner's A_CRUISE_MIN; kept
-# here so the SP side can hand the planner a floor without importing the planner module.
-CRUISE_ACCEL_MIN_MANUAL = -0.5
-
 # Constant offset applied to the speed the car actually holds: to the MANUALLY set cruise
 # speed, and to the speed limit assist's output. The set speed shown on screen and on the
 # dash is unchanged, and so is the speed limit the assist reads off the map; only the held
@@ -57,8 +52,9 @@ class LongitudinalPlannerSP:
     self.resolver = SpeedLimitResolver()
     self.sla = SpeedLimitAssist(CP, CP_SP)
     self.map_follow = MapFollow()
-    # HW1 fork: braking floor for the main planner's cruise candidate, set in update_targets
-    self.cruise_accel_min = CRUISE_ACCEL_MIN_MANUAL
+    # HW1 fork: braking floor for the main planner's cruise candidate when the target was lowered
+    # by a speed limit, None otherwise (then the planner's own A_CRUISE_MIN applies); set in update_targets
+    self.speed_limit_accel_min: float | None = None
     self.generation = int(model_bundle.generation) if (model_bundle := get_active_bundle()) else None
     self.source = LongitudinalPlanSource.cruise
     self.e2e_alerts_helper = E2EAlertsHelper()
@@ -145,22 +141,23 @@ class LongitudinalPlannerSP:
 
     self.source = min(targets, key=lambda k: targets[k][0])
     self.output_v_target, self.output_a_target = targets[self.source]
-    self.cruise_accel_min = self._cruise_accel_min(v_ego)
+    self.speed_limit_accel_min = self._speed_limit_accel_min(v_ego)
     return self.output_v_target, self.output_a_target
 
-  def _cruise_accel_min(self, v_ego: float) -> float:
-    """HW1 fork: how hard the cruise candidate may brake towards the current target.
+  def _speed_limit_accel_min(self, v_ego: float) -> float | None:
+    """HW1 fork: how hard the cruise candidate may brake towards a target lowered by a speed limit.
 
-    A manual set speed reduction keeps the gentle upstream floor (-0.5, the owner's choice,
-    tg 23743). A target lowered by a speed limit (the assist, or the map follow ceiling) may
-    brake at LIMIT_ADAPT_ACC (-1.0), because the new limit has to be reached before the sign's
-    line; when the announcement came too late for that, up to LIMIT_MIN_ACC (-1.5), so the
-    overrun past the line stays small instead of growing with a gentle floor.
+    None when the target does not come from a speed limit: then the main planner keeps its own
+    gentle A_CRUISE_MIN (-0.5, the owner's choice for manual reductions, tg 23743). A target
+    lowered by a speed limit (the assist, or the map follow ceiling) may brake at LIMIT_ADAPT_ACC
+    (-1.0), because the new limit has to be reached before the sign's line; when the
+    announcement came too late for that, up to LIMIT_MIN_ACC (-1.5), so the overrun past the
+    line stays small instead of growing with a gentle floor.
     """
     from_limit = self.source == LongitudinalPlanSource.speedLimitAssist or \
       (self.source == LongitudinalPlanSource.cruise and self.map_follow.active)
     if not from_limit or self.output_v_target >= v_ego:
-      return CRUISE_ACCEL_MIN_MANUAL
+      return None
 
     floor = LIMIT_ADAPT_ACC
     # resolver.distance runs to the point the limit should be reached by (the line minus the
